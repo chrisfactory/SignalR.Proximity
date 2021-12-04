@@ -5,6 +5,7 @@ using System.IO;
 using System.Runtime.Serialization;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
+using System.Text.Json;
 
 namespace SignalR.Proximity.Common
 {
@@ -49,15 +50,7 @@ namespace SignalR.Proximity.Common
             {
                 return default(TConfig);
             }
-
-            IFormatter formatter = new BinaryFormatter();
-            Stream stream = new MemoryStream();
-            using (stream)
-            {
-                formatter.Serialize(stream, source);
-                stream.Seek(0, SeekOrigin.Begin);
-                return (TConfig)formatter.Deserialize(stream);
-            }
+            return JsonSerializer.Deserialize<TConfig>(JsonSerializer.Serialize(source)); 
         }
 
 
