@@ -1,0 +1,46 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.31911.260
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{D9F32C61-E4A9-4F6C-AD35-EDB7D941CF44}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{500F5E07-51E6-47EA-8235-0E375FB2B8C5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SignalR.Proximity.Common", "src\SignalR.Proximity.Common\SignalR.Proximity.Common.csproj", "{3F9EB13D-007B-4465-8CF4-8FD3AB8BFE47}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SignalR.Proximity.Client", "src\SignalR.Proximity.Client\SignalR.Proximity.Client.csproj", "{79F2729A-3ECD-404B-9B1D-A4AE2F408421}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SignalR.Proximity.Notifier", "src\SignalR.Proximity.Notifier\SignalR.Proximity.Notifier.csproj", "{EBEEE015-621F-424E-907B-6A0A2054A2E5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3F9EB13D-007B-4465-8CF4-8FD3AB8BFE47}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F9EB13D-007B-4465-8CF4-8FD3AB8BFE47}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F9EB13D-007B-4465-8CF4-8FD3AB8BFE47}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F9EB13D-007B-4465-8CF4-8FD3AB8BFE47}.Release|Any CPU.Build.0 = Release|Any CPU
+		{79F2729A-3ECD-404B-9B1D-A4AE2F408421}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{79F2729A-3ECD-404B-9B1D-A4AE2F408421}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{79F2729A-3ECD-404B-9B1D-A4AE2F408421}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{79F2729A-3ECD-404B-9B1D-A4AE2F408421}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EBEEE015-621F-424E-907B-6A0A2054A2E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EBEEE015-621F-424E-907B-6A0A2054A2E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EBEEE015-621F-424E-907B-6A0A2054A2E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EBEEE015-621F-424E-907B-6A0A2054A2E5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3F9EB13D-007B-4465-8CF4-8FD3AB8BFE47} = {D9F32C61-E4A9-4F6C-AD35-EDB7D941CF44}
+		{79F2729A-3ECD-404B-9B1D-A4AE2F408421} = {D9F32C61-E4A9-4F6C-AD35-EDB7D941CF44}
+		{EBEEE015-621F-424E-907B-6A0A2054A2E5} = {D9F32C61-E4A9-4F6C-AD35-EDB7D941CF44}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2EFECE82-2320-4B9D-A2B5-1CDFC7773AF1}
+	EndGlobalSection
+EndGlobal
