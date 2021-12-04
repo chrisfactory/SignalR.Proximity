@@ -9,7 +9,7 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <PackageId>SignalR.Proximity.Client</PackageId>
-    <Version>1.0.2</Version>
+    <Version>1.0.3</Version>
     <Authors>Chrisfactory</Authors>
     <Company>Chrisfactory</Company>
     <PackageDescription>.Net SignalR Without Hub Implementations</PackageDescription>
@@ -19,7 +19,7 @@
     <Optimize>true</Optimize>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="SignalR.Proximity.Common" Version="1.0.2" />
+    <PackageReference Include="SignalR.Proximity.Common" Version="1.0.3" />
   </ItemGroup>
  
 

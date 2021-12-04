@@ -9,7 +9,7 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <PackageId>SignalR.Proximity.Notifier</PackageId>
-    <Version>1.0.2</Version>
+    <Version>1.0.3</Version>
     <Authors>Chrisfactory</Authors>
     <Company>Chrisfactory</Company>
     <PackageDescription>.Net SignalR Without Hub Implementations</PackageDescription>
@@ -17,7 +17,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="SignalR.Proximity.Common" Version="1.0.2" />
+    <PackageReference Include="SignalR.Proximity.Common" Version="1.0.3" />
     <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="3.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.SignalR.Client.Core" Version="3.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.SignalR.Common" Version="3.0.0" />
