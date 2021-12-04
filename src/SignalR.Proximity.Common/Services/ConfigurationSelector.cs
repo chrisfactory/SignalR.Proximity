@@ -50,7 +50,7 @@ namespace SignalR.Proximity.Common
             {
                 return default(TConfig);
             }
-            return JsonSerializer.Deserialize<TConfig>(JsonSerializer.Serialize(source)); 
+            return (TConfig)JsonSerializer.Deserialize(JsonSerializer.Serialize(source), source.GetType()); 
         }
 
 
