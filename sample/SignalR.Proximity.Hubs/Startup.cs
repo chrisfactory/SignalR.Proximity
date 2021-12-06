@@ -7,9 +7,9 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using System.Text;
-using NotifyR.Hubs.Middleware;
+using SignalR.Proximity.Hubs.Middleware;
 
-namespace NotifyR.Hubs
+namespace SignalR.Proximity.Hubs
 {
     /// <summary>
     /// Définition standard du startup web pour Startup
@@ -31,10 +31,9 @@ namespace NotifyR.Hubs
                 .AddNewtonsoftJson();
 
             services.AddSignalR();
-
-         
+             
             services.AddControllersWithViews(); 
-            services.AddDynamicHubFactory<GenericHubBase>();
+            services.AddDynamicHubFactory<ProximityHubBase>();
         }
 
 
@@ -68,11 +67,11 @@ namespace NotifyR.Hubs
             });
 
 
-            app.UseDynamicMapHub<GenericHubBase>("/hubs/bearer/", (runtimeBuilder) =>
+            app.UseDynamicMapHub<ProximityHubBase>("/hubs/", (runtimeBuilder) =>
            {
                runtimeBuilder.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().AllowCredentials());
                runtimeBuilder.UseRouting();
-               //Si tu inverse ces deux prochaines lignes, ça ne marche plus en .netcore3.0...
+           
                runtimeBuilder.UseAuthentication();
                runtimeBuilder.UseAuthorization();
            });

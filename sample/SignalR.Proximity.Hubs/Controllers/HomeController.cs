@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using NotifyR.Hubs.Models;
+using SignalR.Proximity.Hubs.Models;
 
-namespace NotifyR.Hubs
+namespace SignalR.Proximity.Hubs
 {
    
     public class HomeController : Controller

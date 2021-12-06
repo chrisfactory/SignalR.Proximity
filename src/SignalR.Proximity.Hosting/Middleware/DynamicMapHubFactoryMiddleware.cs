@@ -13,11 +13,11 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.Loader;
-using System.Threading.Tasks;
+using System.Threading.Tasks; 
 
-namespace NotifyR.Hubs.Middleware
+namespace SignalR.Proximity.Hosting
 {
-    public class DynamicMapHubFactoryMiddleware<THub> : IMiddleware
+    internal class DynamicMapHubFactoryMiddleware<THub> : IMiddleware
         where THub : Hub
     {
         private object _sync = new object();
@@ -60,6 +60,7 @@ namespace NotifyR.Hubs.Middleware
             action(app);
             _middleware = next => app.Use(_ => next).Build();
         }
+
         private static Dictionary<string, MethodInfo> maps = new Dictionary<string, MethodInfo>();
         public async Task InvokeAsync(HttpContext context, RequestDelegate next)
         {
@@ -76,7 +77,7 @@ namespace NotifyR.Hubs.Middleware
                         Configure(runtimeApp =>
                         {
                             try
-                            { 
+                            {
                                 Type T1;
                                 hubsBucket.TryTake(out T1);
 
@@ -97,7 +98,7 @@ namespace NotifyR.Hubs.Middleware
                         });
                         return success;
                     }
-                
+
                 });
 
             }
@@ -150,13 +151,13 @@ namespace NotifyR.Hubs.Middleware
                     references.Add(MetadataReference.CreateFromFile(item.Location));
             }
             CSharpCompilation compilation = CSharpCompilation.Create(
-            assemblyName,
+                assemblyName,
                 syntaxTrees: new[] { syntaxTree },
                 references: references,
                 options: new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary)
                 );
 
-             
+
 
             using (var ms = new MemoryStream())
             {
@@ -174,7 +175,7 @@ namespace NotifyR.Hubs.Middleware
                     }
                 }
                 else
-                { 
+                {
                     ms.Seek(0, SeekOrigin.Begin);
                     Assembly assembly = AssemblyLoadContext.Default.LoadFromStream(ms);
                     return assembly;

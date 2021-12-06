@@ -1,17 +1,14 @@
 ﻿using Microsoft.AspNetCore.SignalR;
-using NotifyR.Common;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using SignalR.Proximity.Common;
 using System.Threading.Tasks;
 
-namespace NotifyR.Hubs
+namespace SignalR.Proximity
 {
 
 
     public static class HubExtensions
     {
-        public static async Task ResolveInteractAsync(this Hub hub, NotifyRRequest request, object[] data)
+        public static async Task ResolveInteractAsync(this Hub hub, SignalRProximityRequest request, object[] data)
         {
             if (request == null)
                 return;

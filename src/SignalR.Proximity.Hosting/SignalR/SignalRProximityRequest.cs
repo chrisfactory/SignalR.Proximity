@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 
-namespace NotifyR.Common
+namespace SignalR.Proximity.Common
 {
-    public class NotifyRRequest
+    public class SignalRProximityRequest
     {
 
         public string Argument { get; set; }

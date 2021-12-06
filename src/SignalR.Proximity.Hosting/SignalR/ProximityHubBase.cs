@@ -1,19 +1,15 @@
-﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.SignalR;
-using Microsoft.Extensions.Logging;
-using NotifyR.Common;
+﻿using Microsoft.AspNetCore.SignalR;
+using SignalR.Proximity;
+using SignalR.Proximity.Common;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
-namespace NotifyR.Hubs
-{ 
-    [Authorize(AuthenticationSchemes = "Bearer")]
-    public abstract class BearerGenericHubBase : Hub
+namespace SignalR.Proximity.Hubs
+{  
+    public abstract class ProximityHubBase : Hub
     { 
 
-        public async void Interact(NotifyRRequest request, object[] metaArgs)
+        public async void Interact(SignalRProximityRequest request, object[] metaArgs)
         {
             await this.ResolveInteractAsync(request, metaArgs);
         }

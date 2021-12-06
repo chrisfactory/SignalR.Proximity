@@ -15,9 +15,9 @@
     <PackageDescription>.Net SignalR Without Hub Implementations</PackageDescription>
     <RepositoryUrl>https://github.com/chrisfactory/SignalR.Proximity</RepositoryUrl>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net472|AnyCPU'">
+  <!--<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net472|AnyCPU'">
     <Optimize>true</Optimize>
-  </PropertyGroup>
+  </PropertyGroup>-->
   <ItemGroup>
     <ProjectReference Include="..\SignalR.Proximity.Common\SignalR.Proximity.Common.csproj" />
   </ItemGroup>

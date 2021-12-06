@@ -1,12 +1,10 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.DependencyInjection;
+using SignalR.Proximity.Hosting;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace NotifyR.Hubs.Middleware
+namespace SignalR.Proximity.Hubs.Middleware
 {
     public static class DynamicMapHubFactoryExtensions
     {

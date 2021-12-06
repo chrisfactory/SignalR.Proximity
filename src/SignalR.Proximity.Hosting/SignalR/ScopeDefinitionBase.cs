@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic; 
 
-namespace NotifyR.Common
+namespace SignalR.Proximity.Common
 {
-
     public class ScopeDefinitionBase
     {
         public ScopeDefinitionBase()

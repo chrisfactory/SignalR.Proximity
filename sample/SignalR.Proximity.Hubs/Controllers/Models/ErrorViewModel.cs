@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace NotifyR.Hubs.Models
+namespace SignalR.Proximity.Hubs.Models
 {
     public class ErrorViewModel
     {

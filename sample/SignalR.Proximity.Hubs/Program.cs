@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 
-namespace NotifyR.Hubs
+namespace SignalR.Proximity.Hubs
 {
     public class Program
     {
