@@ -1,10 +1,6 @@
-﻿using SignalR.Proximity.Common;
-using System; 
-
+﻿using SignalR.Proximity.Common; 
 namespace SignalR.Proximity.Notifier
-{  
-
-    [Serializable]
+{   
     public class SignalRProximityNotifierConfiguration : SignalRProximityConfiguration
     {
     }

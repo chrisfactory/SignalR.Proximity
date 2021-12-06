@@ -5,8 +5,7 @@ namespace SignalR.Proximity.Client
 {
     /// <summary>
     ///    Represents a type used to configure the <see cref="ClientProxy"/>.
-    /// </summary>
-    [Serializable]
+    /// </summary> 
     public class SignalRProximityClientConfiguration : SignalRProximityConfiguration
     {
         /// <summary>

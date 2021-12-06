@@ -24,10 +24,7 @@ namespace SignalR.Proximity.Common
             var tokenProvider = config.TokenProvider;
             var userProvider = config.UserProvider;
 
-            string scheme = string.Empty;
-            //if (tokenProvider != null)
-            //    scheme = tokenProvider.Scheme;
-            var hubUri = config.HubNamespaceProvider.GetHubUrl<TContract>(urlBase, scheme);
+            var hubUri = config.HubNamespaceProvider.GetHubUrl<TContract>(urlBase);
 
             var connection = hubBuilder
                 .WithAutomaticReconnect(config.RetryPolicy)

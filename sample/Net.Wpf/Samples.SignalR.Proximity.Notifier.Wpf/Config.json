@@ -1,0 +1,27 @@
+{
+  "SignalRProximityNotifierConfiguration": {
+    "DisplayName": "default",
+    "UrlBase": "https://localhost:5001"
+  },
+
+  "SignalRProximityNotifierConfiguration:dev": {
+    "DisplayName": "dev",
+    "UrlBase": "http://dev.com",
+    "HubNamespaceProvider": {
+      "Postfix": "TestPostFix_DEV",
+      "UseMachineNamePostfix": true
+    }
+  },
+  "SignalRProximityNotifierConfiguration:prod": {
+    "DisplayName": "prod",
+    "IsActivated": false, //         <
+    "UrlBase": "http://prod.com",
+    "HubNamespaceProvider": {
+      "Postfix": "TestPostFix_PROD"
+    }
+  }
+
+
+}
+ 
+  

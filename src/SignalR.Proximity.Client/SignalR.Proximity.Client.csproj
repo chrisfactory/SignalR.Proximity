@@ -19,7 +19,7 @@
     <Optimize>true</Optimize>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="SignalR.Proximity.Common" Version="1.0.3" />
+    <ProjectReference Include="..\SignalR.Proximity.Common\SignalR.Proximity.Common.csproj" />
   </ItemGroup>
  
 

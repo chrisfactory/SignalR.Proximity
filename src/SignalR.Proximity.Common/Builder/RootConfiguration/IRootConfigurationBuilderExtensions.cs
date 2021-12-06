@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using SignalR.Proximity.Common;
 using System;
 
@@ -57,19 +56,19 @@ namespace Microsoft.Extensions.DependencyInjection
 
         public static IRootConfigurationBuilder<TConfig> Configure<TConfig>(this IRootConfigurationBuilder<TConfig> source, Action<IConfigurationBuilder<TConfig>> conFigue)
        where TConfig : SignalRProximityConfiguration, new()
-        { 
+        {
             source.Services.Configure<TConfig>(o =>
             {
                 var builder = new SignalRProximityConfigurationBuilder<TConfig>(o);
                 conFigue(builder);
-                builder.Build(); 
+                builder.Build();
             });
             return source;
 
         }
         public static IRootConfigurationBuilder<TConfig> Configure<TConfig>(this IRootConfigurationBuilder<TConfig> source, string name, Action<IConfigurationBuilder<TConfig>> conFigue)
          where TConfig : SignalRProximityConfiguration, new()
-        { 
+        {
             source.Services.Configure<TConfig>(name, o =>
             {
 

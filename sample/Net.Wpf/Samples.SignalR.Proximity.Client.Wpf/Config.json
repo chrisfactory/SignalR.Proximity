@@ -1,0 +1,29 @@
+{
+  "SignalRProximityClientConfiguration": {
+    "DisplayName": "default",
+    "UrlBase": "https://localhost:5001",
+    "AutoRestoreGroups": true
+  },
+
+
+  "SignalRProximityClientConfiguration:dev": {
+    "DisplayName": "dev",
+    "UrlBase": "http://dev.com",
+    "HubNamespaceProvider": {
+      "Postfix": "TestPostFix_DEV",
+      "UseMachineNamePostfix": true
+    }
+  },
+
+
+  "SignalRProximityClientConfiguration:prod": {
+    "DisplayName": "prod",
+    "IsActivated": false, //         <
+    "UrlBase": "http://prod.com",
+    "HubNamespaceProvider": {
+      "Postfix": "TestPostFix_PROD"
+    }
+  }
+
+
+}
