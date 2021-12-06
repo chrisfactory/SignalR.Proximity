@@ -34,7 +34,7 @@ namespace NotifyR.Hubs
 
          
             services.AddControllersWithViews(); 
-            services.AddDynamicHubFactory<BearerGenericHubBase>();
+            services.AddDynamicHubFactory<GenericHubBase>();
         }
 
 
@@ -68,7 +68,7 @@ namespace NotifyR.Hubs
             });
 
 
-            app.UseDynamicMapHub<BearerGenericHubBase>("/hubs/bearer/", (runtimeBuilder) =>
+            app.UseDynamicMapHub<GenericHubBase>("/hubs/bearer/", (runtimeBuilder) =>
            {
                runtimeBuilder.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().AllowCredentials());
                runtimeBuilder.UseRouting();
