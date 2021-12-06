@@ -33,7 +33,8 @@ namespace SignalR.Proximity.Common
         }
 
         private TConfig Clone(TConfig source)
-        {  
+        {
+            return source;
             // Don't serialize a null object, simply return the default for that object
             if (Object.ReferenceEquals(source, null))
             {

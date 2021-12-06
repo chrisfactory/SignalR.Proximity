@@ -9,7 +9,7 @@ namespace SignalR.Proximity.Common
 
         public Task<string> AccessTokenProviderAsync(Uri baseAddress, IUserProvider userProvider)
         {
-            throw new NotImplementedException();
+         return Task.FromResult(string.Empty);  
         }
     }
 }
