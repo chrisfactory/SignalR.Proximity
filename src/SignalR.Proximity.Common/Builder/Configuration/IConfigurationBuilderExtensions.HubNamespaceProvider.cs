@@ -22,12 +22,12 @@ namespace SignalR.Proximity.Common
         ///     The same instance of the <see cref="IConfigurationBuilder{TConfig}"/> Instance
         ///     for chaining.
         /// </returns>
-        public static IConfigurationBuilder<TConfig> WithNamespaceProvider<TConfig>(this IConfigurationBuilder<TConfig> source, Action<IHubNamespaceProvider> configureNamespace)
+        public static IConfigurationBuilder<TConfig> ConfigureNamespace<TConfig>(this IConfigurationBuilder<TConfig> source, Action<IHubNamespaceConfig> configureNamespace)
           where TConfig : SignalRProximityConfiguration, new()
         {
             source.Services.Configure<ConfigurationSelector<TConfig>>(c =>
             {
-                configureNamespace(c.Current.HubNamespaceProvider);
+                configureNamespace(c.Current.HubNamespace);
             });
             return source;
         }
@@ -46,15 +46,13 @@ namespace SignalR.Proximity.Common
         ///     The same instance of the <see cref="IConfigurationBuilder{TConfig}"/> Instance
         ///     for chaining.
         /// </returns>
-        public static IConfigurationBuilder<TConfig> WithNamespaceProvider<TConfig>(this IConfigurationBuilder<TConfig> source, IHubNamespaceProvider namespaceProvider)
+        public static IRootConfigurationBuilder<TConfig> WithNamespaceProvider<TConfig, THubNamespaceProvider>(this IRootConfigurationBuilder<TConfig> source)
          where TConfig : SignalRProximityConfiguration, new()
+            where THubNamespaceProvider :class, IHubNamespaceProvider
         {
-            source.Services.Configure<ConfigurationSelector<TConfig>>(c =>
-            {
-                c.Current.HubNamespaceProvider = namespaceProvider ?? new DefaultHubNamespaceProvider();
-            });
+            source.Services.AddTransient<IHubNamespaceProvider, THubNamespaceProvider>();
             return source;
         }
-
+        
     }
 }

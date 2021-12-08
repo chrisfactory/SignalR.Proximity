@@ -1,7 +1,7 @@
 {
   "SignalRProximityNotifierConfiguration": {
     "DisplayName": "default",
-    "UrlBase": "https://localhost:5001"
+    "UrlBase": "https://localhost:5011"
   },
 
   "SignalRProximityNotifierConfiguration:dev": {

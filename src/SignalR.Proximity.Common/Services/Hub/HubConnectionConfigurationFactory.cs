@@ -15,7 +15,7 @@ namespace SignalR.Proximity.Common
     internal class HubConnectionConfigurationFactory<TConfig, TContract> : IHubConnectionConfigurationFactory
            where TConfig : SignalRProximityConfiguration, new()
     {
-        public HubConnectionConfigurationFactory(IOptions<ConfigurationSelector<TConfig>> configOptions, IHubConnectionBuilder hubBuilder)
+        public HubConnectionConfigurationFactory(IOptions<ConfigurationSelector<TConfig>> configOptions, IHubConnectionBuilder hubBuilder ,IHubNamespaceProvider nsProvider)
         {
 
             var config = configOptions.Value.Current;
@@ -24,7 +24,7 @@ namespace SignalR.Proximity.Common
             var tokenProvider = config.TokenProvider;
             var userProvider = config.UserProvider;
 
-            var hubUri = config.HubNamespaceProvider.GetHubUrl<TContract>(urlBase);
+            var hubUri = nsProvider.GetHubUrl<TContract>(urlBase);
 
             var connection = hubBuilder
                 .WithAutomaticReconnect(config.RetryPolicy)

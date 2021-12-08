@@ -5,15 +5,15 @@ using System;
 using System.Threading.Tasks;
 
 namespace SignalR.Proximity.Hubs
-{  
+{
     public abstract class ProximityHubBase : Hub
-    { 
+    {
 
-        public async void Interact(SignalRProximityRequest request, object[] metaArgs)
+        public virtual async void Interact(SignalRProximityRequest request, object[] metaArgs)
         {
             await this.ResolveInteractAsync(request, metaArgs);
         }
-          
+
         public override Task OnConnectedAsync()
         {
             //var underlyingHttpContext = Context.GetHttpContext().Request.Path;

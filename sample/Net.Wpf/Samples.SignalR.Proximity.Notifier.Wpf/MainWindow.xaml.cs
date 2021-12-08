@@ -50,14 +50,15 @@ namespace Samples.SignalR.Proximity.Notifier.Wpf
         private void SendInformation(object sender, RoutedEventArgs e)
         {
             var notifier = SignalRProximityNotifierFactory.Create<IToastNotificationsContract>()
-                //.UseConfiguration(c =>
-                //    {
-                //        c.WithUserProvider(u =>
-                //        {
-                //            u.UserId = "Cohl";
-                //        });
-                //    })
-               //.UseScopeUsers("chris")
+                .UseConfiguration(c =>
+                    {
+                        c.WithUrl("https://localhost:5031");
+                        c.WithUserProvider(u =>
+                        {
+                            u.UserId = "Cohl";
+                        });
+                    })
+              //.UseScopeUsers("chris")
               .UseScopeGroups(TOASTER_GROUP)
                 .CallAsync(c =>
                        c.ShowInformation(new ToasterRequest()
@@ -74,7 +75,7 @@ namespace Samples.SignalR.Proximity.Notifier.Wpf
         private void SendSuccess(object sender, RoutedEventArgs e)
         {
             var notifier = SignalRProximityNotifierFactory.Create<IToastNotificationsContract>()
-                //  .UseScopeUsers("cohl")
+              .UseScopeUsers("cohl")
                 //.UseScopeGroups("Samples.Group.name")
                 .CallAsync(c =>
                         c.ShowSuccess(new ToasterRequest()
@@ -117,7 +118,7 @@ namespace Samples.SignalR.Proximity.Notifier.Wpf
 
 
         #region INotifyPropertyChanged
-        private void Notify([CallerMemberName]string propertyName = null)
+        private void Notify([CallerMemberName] string propertyName = null)
         {
             var handler = PropertyChanged;
             if (handler != null)

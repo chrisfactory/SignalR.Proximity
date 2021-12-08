@@ -1,7 +1,8 @@
 ﻿using Microsoft.AspNetCore.SignalR.Client;
 using System; 
 namespace SignalR.Proximity.Common
-{ 
+{
+    [Serializable]
     internal class DefaultRetryPolicy : IRetryPolicy
     {
         private static TimeSpan?[] DEFAULT_RETRY_DELAYS_IN_MILLISECONDS = new TimeSpan?[] { null };

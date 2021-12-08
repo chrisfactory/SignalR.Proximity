@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 namespace SignalR.Proximity
 {
 
-
     public static class HubExtensions
     {
         public static async Task ResolveInteractAsync(this Hub hub, SignalRProximityRequest request, object[] data)
@@ -41,11 +40,6 @@ namespace SignalR.Proximity
                 }
             }
         }
-
-
-
-
-
 
 
         private static IClientProxy ResolveInteractWithClientsProxy(Hub hub, ScopeDefinitionBase scope)

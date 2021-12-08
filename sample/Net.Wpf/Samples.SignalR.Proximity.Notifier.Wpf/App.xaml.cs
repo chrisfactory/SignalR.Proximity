@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using SignalR.Proximity.Common;
 using SignalR.Proximity.Notifier;
 using System.IO;
 using System.Windows;
@@ -31,10 +32,10 @@ namespace Samples.SignalR.Proximity.Notifier.Wpf
             serviceCollection.AddSignalRProximity(builder =>
             {
                 builder.UseNotifier(notifier =>
-                { 
-                    notifier.Configure(rootConfig.GetSection("SignalRProximityNotifierConfiguration"));
-                    notifier.Configure("dev", rootConfig.GetSection("SignalRProximityNotifierConfiguration:dev"));
-                    notifier.Configure("prod", rootConfig.GetSection("SignalRProximityNotifierConfiguration:prod"));
+                {
+                    //notifier.Configure(rootConfig.GetSection("SignalRProximityNotifierConfiguration"), c => { c.});
+                    //notifier.Configure("dev", rootConfig.GetSection("SignalRProximityNotifierConfiguration:dev"));
+                    //notifier.Configure("prod", rootConfig.GetSection("SignalRProximityNotifierConfiguration:prod"));
                 });
             });
         }

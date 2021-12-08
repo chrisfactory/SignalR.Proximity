@@ -27,6 +27,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SignalR.Proximity.Hubs", "s
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SignalR.Proximity.Hosting", "src\SignalR.Proximity.Hosting\SignalR.Proximity.Hosting.csproj", "{B1B65E1D-A17A-4A83-AC09-9ED09BFC4DD5}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SignalR.Proximity", "src\SignalR.Proximity\SignalR.Proximity.csproj", "{29335B45-4C6F-4ABF-8CE1-DD33CA488EA5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -61,6 +63,10 @@ Global
 		{B1B65E1D-A17A-4A83-AC09-9ED09BFC4DD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B1B65E1D-A17A-4A83-AC09-9ED09BFC4DD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B1B65E1D-A17A-4A83-AC09-9ED09BFC4DD5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{29335B45-4C6F-4ABF-8CE1-DD33CA488EA5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29335B45-4C6F-4ABF-8CE1-DD33CA488EA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29335B45-4C6F-4ABF-8CE1-DD33CA488EA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29335B45-4C6F-4ABF-8CE1-DD33CA488EA5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -76,6 +82,7 @@ Global
 		{86E0A823-2035-4ABD-A472-5A04D7D66105} = {F0C44466-D92D-483A-81FB-7A51C0A214BD}
 		{AED5FBBB-27ED-4E06-92EE-9ABBBA16835A} = {500F5E07-51E6-47EA-8235-0E375FB2B8C5}
 		{B1B65E1D-A17A-4A83-AC09-9ED09BFC4DD5} = {D9F32C61-E4A9-4F6C-AD35-EDB7D941CF44}
+		{29335B45-4C6F-4ABF-8CE1-DD33CA488EA5} = {D9F32C61-E4A9-4F6C-AD35-EDB7D941CF44}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2EFECE82-2320-4B9D-A2B5-1CDFC7773AF1}

@@ -18,6 +18,8 @@ namespace SignalR.Proximity.Notifier
             _rootLoggerFactory = loggerFactory;
             Services = new ServiceCollection();
             Services.AddSingleton<IHubConnectionBuilder, HubConnectionBuilder>();
+
+
             Services.Configure<ConfigurationSelector<SignalRProximityNotifierConfiguration>>(c => { c.UseConfigs(configs, true); });
 
             this.UseScopeAll();

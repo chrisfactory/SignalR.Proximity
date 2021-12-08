@@ -171,13 +171,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\src\SignalR.Proximity.Client\SignalR.Proximity.Client.csproj">
-      <Project>{79f2729a-3ecd-404b-9b1d-a4ae2f408421}</Project>
-      <Name>SignalR.Proximity.Client</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\..\src\SignalR.Proximity.Common\SignalR.Proximity.Common.csproj">
-      <Project>{3f9eb13d-007b-4465-8cf4-8fd3ab8bfe47}</Project>
-      <Name>SignalR.Proximity.Common</Name>
+    <ProjectReference Include="..\..\..\src\SignalR.Proximity\SignalR.Proximity.csproj">
+      <Project>{29335b45-4c6f-4abf-8ce1-dd33ca488ea5}</Project>
+      <Name>SignalR.Proximity</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

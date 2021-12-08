@@ -2,8 +2,6 @@
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
-using SignalR.Proximity.Client;
-using SignalR.Proximity.Common;
 using Sample.SignalR.Proximity.Toaster;
 
 namespace Samples.SignalR.Proximity.Client.Wpf
@@ -23,13 +21,13 @@ namespace Samples.SignalR.Proximity.Client.Wpf
 
 
 
-            var TaskDeClientProxy = SignalRProximityClientFactory.Create<IToastNotificationsContract>()
-                .UseConfiguration(c =>
-                                {
-                                    c.WithGroupsAutoRestored();
-                                })
-                .WithGroups(TOASTER_GROUP)
-                .AttachStartAsync(this);
+            //var TaskDeClientProxy = SignalRProximityClientFactory.Create<IToastNotificationsContract>()
+            //    .UseConfiguration(c =>
+            //                    {
+            //                        c.WithGroupsAutoRestored();
+            //                    })
+            //    .WithGroups(TOASTER_GROUP)
+            //    .AttachStartAsync(this);
 
         }
 

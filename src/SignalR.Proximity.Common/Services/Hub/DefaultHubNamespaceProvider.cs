@@ -4,6 +4,7 @@ using System.Text;
 
 namespace SignalR.Proximity.Common
 { 
+    [Serializable]
     public class DefaultHubNamespaceProvider : IHubNamespaceProvider
     {
 

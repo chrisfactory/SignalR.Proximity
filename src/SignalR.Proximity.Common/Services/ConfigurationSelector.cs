@@ -1,5 +1,8 @@
 ﻿using Microsoft.Extensions.Options;
-using System; 
+using System;
+using System.IO;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text.Json;
 
 namespace SignalR.Proximity.Common
@@ -34,14 +37,25 @@ namespace SignalR.Proximity.Common
 
         private TConfig Clone(TConfig source)
         {
-            return source;
+            if (!typeof(TConfig).IsSerializable)
+            {
+                throw new ArgumentException("The type must be serializable.", "source");
+            }
+
             // Don't serialize a null object, simply return the default for that object
             if (Object.ReferenceEquals(source, null))
             {
                 return default(TConfig);
             }
-            var targetType = source.GetType();
-            return (TConfig)JsonSerializer.Deserialize(JsonSerializer.Serialize(source, targetType), targetType); 
+
+            IFormatter formatter = new BinaryFormatter();
+            Stream stream = new MemoryStream();
+            using (stream)
+            {
+                formatter.Serialize(stream, source);
+                stream.Seek(0, SeekOrigin.Begin);
+                return (TConfig)formatter.Deserialize(stream);
+            }
         }
     }
 }

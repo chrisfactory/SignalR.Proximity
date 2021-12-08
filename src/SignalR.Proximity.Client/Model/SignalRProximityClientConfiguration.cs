@@ -3,6 +3,7 @@ using System;
 
 namespace SignalR.Proximity.Client
 {
+    [Serializable]
     /// <summary>
     ///    Represents a type used to configure the <see cref="ClientProxy"/>.
     /// </summary> 

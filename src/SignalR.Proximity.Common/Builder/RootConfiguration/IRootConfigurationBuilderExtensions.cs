@@ -19,14 +19,14 @@ namespace Microsoft.Extensions.DependencyInjection
         }
 
         public static IRootConfigurationBuilder<TConfig> Configure<TConfig>(this IRootConfigurationBuilder<TConfig> source, string name, IConfiguration config)
-         where TConfig : SignalRProximityConfiguration, new()
+            where TConfig : SignalRProximityConfiguration, new()
         {
             source.Services.Configure<TConfig>(name, config);
             return source;
         }
 
         public static IRootConfigurationBuilder<TConfig> Configure<TConfig>(this IRootConfigurationBuilder<TConfig> source, IConfiguration config, Action<IConfigurationBuilder<TConfig>> conFigue)
-        where TConfig : SignalRProximityConfiguration, new()
+            where TConfig : SignalRProximityConfiguration, new()
         {
             var src = source.Configure<TConfig>(config);
             source.Services.Configure<TConfig>(o =>
@@ -39,7 +39,7 @@ namespace Microsoft.Extensions.DependencyInjection
 
         }
         public static IRootConfigurationBuilder<TConfig> Configure<TConfig>(this IRootConfigurationBuilder<TConfig> source, string name, IConfiguration config, Action<IConfigurationBuilder<TConfig>> conFigue)
-         where TConfig : SignalRProximityConfiguration, new()
+            where TConfig : SignalRProximityConfiguration, new()
         {
             source.Services.Configure<TConfig>(name, config);
             source.Services.Configure<TConfig>(name, o =>
@@ -55,7 +55,7 @@ namespace Microsoft.Extensions.DependencyInjection
 
 
         public static IRootConfigurationBuilder<TConfig> Configure<TConfig>(this IRootConfigurationBuilder<TConfig> source, Action<IConfigurationBuilder<TConfig>> conFigue)
-       where TConfig : SignalRProximityConfiguration, new()
+            where TConfig : SignalRProximityConfiguration, new()
         {
             source.Services.Configure<TConfig>(o =>
             {
@@ -67,7 +67,7 @@ namespace Microsoft.Extensions.DependencyInjection
 
         }
         public static IRootConfigurationBuilder<TConfig> Configure<TConfig>(this IRootConfigurationBuilder<TConfig> source, string name, Action<IConfigurationBuilder<TConfig>> conFigue)
-         where TConfig : SignalRProximityConfiguration, new()
+            where TConfig : SignalRProximityConfiguration, new()
         {
             source.Services.Configure<TConfig>(name, o =>
             {
