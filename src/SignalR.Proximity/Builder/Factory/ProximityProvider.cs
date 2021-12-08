@@ -1,14 +1,15 @@
 ﻿namespace SignalR.Proximity
 {
-    internal class ProximityFactory : IProximityFactory
+    internal class ProximityProvider : IProximityProvider
     {
+        public const string DefaultContainerName = "Default";
         private readonly IProximityContainer _container;
-        public ProximityFactory(IProximityContainer container)
+        public ProximityProvider(IProximityContainer container)
         {
             _container = container;
         }
         
-        public const string DefaultContainerName = "Default";
+      
         public void Get()
         {
             Get(DefaultContainerName);

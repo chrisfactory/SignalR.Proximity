@@ -1,6 +1,6 @@
 ﻿namespace SignalR.Proximity
 {
-    public interface IProximityFactory
+    public interface IProximityProvider
     {
 
         void Get();

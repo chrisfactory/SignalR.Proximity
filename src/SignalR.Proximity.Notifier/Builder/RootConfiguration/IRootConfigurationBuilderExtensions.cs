@@ -20,7 +20,7 @@ namespace Microsoft.Extensions.DependencyInjection
         ///     The action used to configure the options.
         /// </param>
         public static void UseNotifier(this ISignalRProximityBuilder source, Action<IRootConfigurationBuilder<SignalRProximityNotifierConfiguration>> configBuilder)
-        {
+        { 
             source.Services.TryAddSingleton<ISignalRProximityNotifierFactory, SignalRProximityNotifierFactory>();
             source.Services.TryAddTransient(typeof(INotifierBuilder<>), typeof(NotifierBuilder<>));
             var builder = new RootConfigurationBuilder<SignalRProximityNotifierConfiguration>(source.Services);

@@ -2,16 +2,11 @@
 
 namespace SignalR.Proximity
 {
-    internal class ContainerKeyValue<TValue>
-    {
-        public ContainerKeyValue(string key, TValue value) { Key = key; Value = value; }
-        public string Key { get; }
-        public TValue Value { get; }
-    }
+   
     internal class ProximityContainer : IProximityContainer
     {
         private readonly Dictionary<string, IProximityBuilder> container = new Dictionary<string, IProximityBuilder>();
-        public ProximityContainer(IEnumerable<ContainerKeyValue<IProximityBuilder>> values)
+        public ProximityContainer(IEnumerable<ContainerKeyValue> values)
         {
             foreach (var builderKV in values)
             {

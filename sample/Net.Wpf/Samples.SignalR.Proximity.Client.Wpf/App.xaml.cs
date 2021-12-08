@@ -28,28 +28,32 @@ namespace Samples.SignalR.Proximity.Client.Wpf
 
             var _serviceProvider = serviceCollection.BuildServiceProvider();
             //   _serviceProvider.GetService<ISignalRProximityClientFactory>();//Force to resolve
-            _serviceProvider.GetService<IProximityFactory>();//Force to resolve
+            _serviceProvider.GetService<IProximityProvider>();//Force to resolve
         }
 
         private void ConfigureServices(IServiceCollection serviceCollection, IConfigurationRoot rootConfig)
         {
-            serviceCollection.AddProximity();
-            serviceCollection.AddProximity("toaster.container");
-            serviceCollection.AddProximity("chat.container");
+
+            //serviceCollection.AddProximity((b) => { });
+            //serviceCollection.AddProximity("dd", (b) => { });
+            serviceCollection.AddProximity("dddd", rootConfig.GetSection("Proximity"));
+            serviceCollection.AddProximity("chat.container", rootConfig.GetSection("Proximity:dev"));
+            serviceCollection.AddProximity("toaster.container", rootConfig.GetSection("Proximity:prod"), (b) => { });
+          
 
             //serviceCollection.AddProximity(builder =>
             //{
-                //builder.UseClient(notifier =>
-                //{
-                //    notifier.Configure(rootConfig.GetSection("SignalRProximityClientConfiguration"), c =>
-                //       {
-                //           c.WithUserProvider(u => u.UserId = "chris");
-                //           c.WithAutomaticReconnect();
-                //           c.WithGroupsAutoRestored();
-                //       });
-                //    notifier.Configure("dev", rootConfig.GetSection("SignalRProximityClientConfiguration:dev"));
-                //    notifier.Configure("prod", rootConfig.GetSection("SignalRProximityClientConfiguration:prod"));
-                //});
+            //builder.UseClient(notifier =>
+            //{
+            //    notifier.Configure(rootConfig.GetSection("SignalRProximityClientConfiguration"), c =>
+            //       {
+            //           c.WithUserProvider(u => u.UserId = "chris");
+            //           c.WithAutomaticReconnect();
+            //           c.WithGroupsAutoRestored();
+            //       });
+            //    notifier.Configure("dev", rootConfig.GetSection("SignalRProximityClientConfiguration:dev"));
+            //    notifier.Configure("prod", rootConfig.GetSection("SignalRProximityClientConfiguration:prod"));
+            //});
             //});
         }
     }
