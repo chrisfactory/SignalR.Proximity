@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace SignalR.Proximity
@@ -11,9 +12,14 @@ namespace SignalR.Proximity
         {
             Services = new ServiceCollection();
             Services.AddOptions<ProximityConfig>();
-            Services.AddTransient<IHubUrlPathProvider, DefaultHubUrlPathProvider>();
+
+            Services.AddTransient<IUrlProvider, UrlProvider>();
             Services.AddTransient<Microsoft.AspNetCore.SignalR.Client.IRetryPolicy, DefaultRetryPolicy>();
-            Services.AddTransient<ITokenProvider, DefaultTokenProvider>();
+            Services.AddTransient<ITokenProvider, TokenProvider>();
+           
+            Services.AddSingleton(Services.Copy());
+            Services.AddTransient<IProximityClientBuilder, FFClient>();
+            Services.AddTransient<IProximityNotifierBuilder, FFNotifier>();
            
         }
 
@@ -21,8 +27,43 @@ namespace SignalR.Proximity
 
         public void Build()
         {
-            var opt = Services.BuildServiceProvider().GetRequiredService<IOptions<ProximityConfig>>().Value;
+           var c=Services.BuildServiceProvider().GetRequiredService<IProximityClientBuilder>();
         }
     }
+    public interface IProximityClientBuilder: IProximityBuilder
+    {
 
+    }
+    internal class FFClient: IProximityClientBuilder
+    {
+        public FFClient(IServiceCollection services)
+        {
+            Services =services;
+        }
+
+        public IServiceCollection Services { get; }
+
+        public void Build()
+        {
+           
+        }
+    }
+    public interface IProximityNotifierBuilder : IProximityBuilder
+    {
+
+    }
+    internal class FFNotifier : IProximityNotifierBuilder
+    {
+        public FFNotifier(IServiceCollection services)
+        {
+            Services = services;
+        }
+
+        public IServiceCollection Services { get; }
+
+        public void Build()
+        {
+
+        }
+    }
 }

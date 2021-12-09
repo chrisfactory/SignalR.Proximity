@@ -1,7 +1,7 @@
 ﻿using System;
 namespace SignalR.Proximity
 {  
-    public class DefaultHubUrlPathProvider : IHubUrlPathProvider
+    public class UrlProvider : IUrlProvider
     { 
         public string Postfix { get; set; }
         public bool UseMachineNamePostfix { get; set; }

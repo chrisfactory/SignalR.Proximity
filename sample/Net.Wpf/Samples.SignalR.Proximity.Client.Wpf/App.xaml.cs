@@ -37,8 +37,8 @@ namespace Samples.SignalR.Proximity.Client.Wpf
             //serviceCollection.AddProximity((b) => { });
             //serviceCollection.AddProximity("dd", (b) => { });
             serviceCollection.AddProximity("dddd", rootConfig.GetSection("Proximity"));
-            serviceCollection.AddProximity("chat.container", rootConfig.GetSection("Proximity:dev"));
-            serviceCollection.AddProximity("toaster.container", rootConfig.GetSection("Proximity:prod"), (b) => { });
+            //serviceCollection.AddProximity("chat.container", rootConfig.GetSection("Proximity:dev"));
+            //serviceCollection.AddProximity("toaster.container", rootConfig.GetSection("Proximity:prod"), (b) => { });
           
 
             //serviceCollection.AddProximity(builder =>

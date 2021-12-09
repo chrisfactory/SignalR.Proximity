@@ -2,7 +2,6 @@
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using SignalR.Proximity;
 using System;
-
 namespace Microsoft.Extensions.DependencyInjection
 {
     public static partial class IServiceCollectionExtensions
@@ -28,9 +27,9 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             if (string.IsNullOrWhiteSpace(name))
                 throw new ArgumentNullException(nameof(name));
-            source.TryAddSingleton<IProximityProvider, ProximityProvider>();
-            source.TryAddSingleton<IProximityContainer, ProximityContainer>();
+
             source.TryAddTransient<IProximityBuilder, ProximityBuilder>();
+            source.TryAddSingleton<IProximityProvider, ProximityProvider>();
             source.AddSingleton(p =>
             {
                 var builder = p.GetRequiredService<IProximityBuilder>((c) =>
@@ -39,7 +38,6 @@ namespace Microsoft.Extensions.DependencyInjection
                         c.Services.Configure<ProximityConfig>(config);
                     configure?.Invoke(c);
                 });
-                builder.Build();
                 return new ContainerKeyValue(name, builder);
             });
             return source;

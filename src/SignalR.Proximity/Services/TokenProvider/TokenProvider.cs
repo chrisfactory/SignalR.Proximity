@@ -3,11 +3,11 @@ using System.Threading.Tasks;
 
 namespace SignalR.Proximity
 { 
-    internal class DefaultTokenProvider : ITokenProvider
+    internal class TokenProvider : ITokenProvider
     {
         public DateTimeOffset? AbsoluteExpiration { get; set; }
 
-        public Task<string> AccessTokenProviderAsync(Uri baseAddress)
+        public Task<string> GetTokenAsync(Uri baseAddress)
         {
             return Task.FromResult(string.Empty);
         }
