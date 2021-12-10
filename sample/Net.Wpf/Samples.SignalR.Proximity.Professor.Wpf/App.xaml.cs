@@ -13,25 +13,22 @@ namespace Samples.SignalR.Proximity.Professor.Wpf
 
         public App()
         {
-
-            var serviceCollection = new ServiceCollection();
-
+            var services = new ServiceCollection();
             var config = new ConfigurationBuilder()
                             .SetBasePath(Directory.GetCurrentDirectory())
                             .AddJsonFile("Config.json", optional: false, reloadOnChange: false)
                              //.AddXmlFile("Config.xml", optional: false, reloadOnChange: false)
                              .Build();
-            serviceCollection.AddSingleton<MainWindow>();
 
-            ConfigureServices(serviceCollection, config);
+            ConfigureServices(services, config);
+            services.AddSingleton<MainWindow>();
 
-            this.MainWindow = serviceCollection.BuildServiceProvider().GetRequiredService<MainWindow>();
+            this.MainWindow  = services.BuildServiceProvider().GetRequiredService<MainWindow>();
+            this.MainWindow.Show();
         }
 
         private void ConfigureServices(IServiceCollection serviceCollection, IConfigurationRoot rootConfig)
         {
- 
-
             serviceCollection.AddProximity((b) =>
             {
                 b.UseUrlBase("https://default.context");
