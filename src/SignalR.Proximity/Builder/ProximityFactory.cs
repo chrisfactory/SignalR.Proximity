@@ -21,8 +21,8 @@ namespace SignalR.Proximity
             this.AddNotifierRetryPolicy();
 
             Services.AddSingleton(Services.Copy());
-            Services.AddTransient<IProximityClientBuilder, FFClient>();
-            Services.AddTransient<IProximityNotifierBuilder, FFNotifier>();
+            Services.AddTransient<IProximityClientBuilder, ProximityClientBuilder>();
+            Services.AddTransient<IProximityNotifierBuilder, ProximityNotifierBuilder>();
             Services.AddSingleton<IProximityContext, ProximityContext>();
             _lazyProvider = new Lazy<IServiceProvider>(() => this.Services.BuildServiceProvider());
         }
@@ -33,59 +33,5 @@ namespace SignalR.Proximity
         {
             return _lazyProvider.Value.GetRequiredService<IProximityContext>();
         }
-    }
-
-    public interface IProximityContext
-    {
-        IProximityClientBuilder Client();
-        IProximityNotifierBuilder Notifier();
-    }
-    internal class ProximityContext : IProximityContext
-    {
-        private readonly IServiceProvider _provider;
-        public ProximityContext(IServiceProvider provider)
-        {
-             this._provider = provider;
-        }
-        public IProximityClientBuilder Client()
-        {
-            return _provider.GetRequiredService<IProximityClientBuilder>();
-        }
-
-        public IProximityNotifierBuilder Notifier()
-        {
-            return _provider.GetRequiredService<IProximityNotifierBuilder>();
-        }
-    }
-    public interface IProximityClientBuilder : IProximityConfigure
-    {
-
-    }
-    internal class FFClient : IProximityClientBuilder
-    {
-        public FFClient(IServiceCollection services)
-        {
-            Services = services;
-        }
-
-        public IServiceCollection Services { get; }
-
-        
-       
-    }
-    public interface IProximityNotifierBuilder : IProximityConfigure
-    {
-
-    }
-    internal class FFNotifier : IProximityNotifierBuilder
-    {
-        public FFNotifier(IServiceCollection services)
-        {
-            Services = services;
-        }
-
-        public IServiceCollection Services { get; }
-
-     
     }
 }

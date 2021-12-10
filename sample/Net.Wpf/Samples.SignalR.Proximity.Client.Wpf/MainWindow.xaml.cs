@@ -23,9 +23,9 @@ namespace Samples.SignalR.Proximity.Client.Wpf
 
             var builderFromCode = _proximityProvider.Get("From.Code");
             var builderFromConfigFile = _proximityProvider.Get("From.ConfigFile");
-            var c1 = builderFromCode.Client();
-            var c2 = builderFromCode.Client();
-
+            var c1 = builderFromCode.Client;
+            var c2 = builderFromCode.Notifier;
+      
 
             ToastManager = new ToastManager();
             DataContext = this;
