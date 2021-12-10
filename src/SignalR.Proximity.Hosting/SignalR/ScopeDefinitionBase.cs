@@ -1,6 +1,6 @@
-﻿using System.Collections.Generic; 
+﻿using System.Collections.Generic;
 
-namespace SignalR.Proximity.Common
+namespace SignalR.Proximity
 {
     public class ScopeDefinitionBase
     {

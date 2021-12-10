@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
 
-namespace SignalR.Proximity.Common
+namespace SignalR.Proximity
 {
-    public class SignalRProximityRequest
+    public class ProximityHubRequest
     {
-
         public string Argument { get; set; }
         public IReadOnlyList<string> Arguments { get; set; }
 

@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.SignalR;
-using SignalR.Proximity;
-using SignalR.Proximity.Common;
+﻿using Microsoft.AspNetCore.SignalR; 
 using System;
 using System.Threading.Tasks;
 
@@ -9,7 +7,7 @@ namespace SignalR.Proximity.Hubs
     public abstract class ProximityHubBase : Hub
     {
 
-        public virtual async void Interact(SignalRProximityRequest request, object[] metaArgs)
+        public virtual async void Interact(ProximityHubRequest request, object[] metaArgs)
         {
             await this.ResolveInteractAsync(request, metaArgs);
         }

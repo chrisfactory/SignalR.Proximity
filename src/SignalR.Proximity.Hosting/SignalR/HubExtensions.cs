@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.SignalR;
-using SignalR.Proximity.Common;
+﻿using Microsoft.AspNetCore.SignalR; 
 using System.Threading.Tasks;
 
 namespace SignalR.Proximity
@@ -7,7 +6,7 @@ namespace SignalR.Proximity
 
     public static class HubExtensions
     {
-        public static async Task ResolveInteractAsync(this Hub hub, SignalRProximityRequest request, object[] data)
+        public static async Task ResolveInteractAsync(this Hub hub, ProximityHubRequest request, object[] data)
         {
             if (request == null)
                 return;

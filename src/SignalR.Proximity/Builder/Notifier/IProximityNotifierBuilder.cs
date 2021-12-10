@@ -2,6 +2,6 @@
 {
     public interface IProximityNotifierBuilder<TContract> : IProximityConfigure
     {
-
+        INotifierProxy<TContract>  Build();
     }
 }

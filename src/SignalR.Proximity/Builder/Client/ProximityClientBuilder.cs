@@ -10,7 +10,7 @@ namespace SignalR.Proximity
         public ProximityClientBuilder(IServiceCollection services, IHubConnectionBuilder cnxBuilder)
         {
             _cnxBuilder = cnxBuilder;
-            Services = services.Copy();
+            Services = services;
             Services.AddOptions<ScopeOptions>();
         }
 
