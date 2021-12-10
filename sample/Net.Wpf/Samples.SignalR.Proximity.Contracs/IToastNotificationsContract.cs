@@ -1,5 +1,4 @@
-﻿
-namespace Sample.SignalR.Proximity.Toaster
+﻿namespace Sample.SignalR.Proximity.Toaster
 {
     public class ToasterRequest
     {

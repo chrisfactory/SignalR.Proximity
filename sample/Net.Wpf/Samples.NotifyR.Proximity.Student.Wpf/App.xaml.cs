@@ -5,7 +5,7 @@ using SignalR.Proximity.Notifier;
 using System.IO;
 using System.Windows;
 
-namespace Samples.SignalR.Proximity.Notifier.Wpf
+namespace Samples.SignalR.Proximity.Student.Wpf
 {
     public partial class App : Application
     {

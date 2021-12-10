@@ -1,9 +1,9 @@
-﻿<Window x:Class="Samples.SignalR.Proximity.Client.Wpf.MainWindow"
+﻿<Window x:Class="Samples.SignalR.Proximity.Professor.Wpf.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Samples.SignalR.Proximity.Client.Wpf"
+        xmlns:local="clr-namespace:Samples.SignalR.Proximity.Professor.Wpf"
         xmlns:ui="clr-namespace:Samples.Ui"
         mc:Ignorable="d"
          Title=".Net 4.7.2 (Client)" Height="550" Width="800" Background="#30FFFFFF">

@@ -3,7 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using SignalR.Proximity;
 using System.IO;
 using System.Windows;
-namespace Samples.SignalR.Proximity.Client.Wpf
+namespace Samples.SignalR.Proximity.Professor.Wpf
 {
     /// <summary>
     /// Logique d'interaction pour App.xaml

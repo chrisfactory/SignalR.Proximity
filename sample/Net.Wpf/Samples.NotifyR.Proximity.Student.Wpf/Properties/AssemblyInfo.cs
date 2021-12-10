@@ -7,11 +7,11 @@ using System.Windows;
 // Les informations générales relatives à un assembly dépendent de
 // l'ensemble d'attributs suivant. Pour modifier les informations
 // associées à un assembly.
-[assembly: AssemblyTitle("Samples.SignalR.Proximity.Notifier.Wpf")]
+[assembly: AssemblyTitle("Samples.SignalR.Proximity.Student.Wpf")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Samples.SignalR.Proximity.Notifier.Wpf")]
+[assembly: AssemblyProduct("Samples.SignalR.Proximity.Student.Wpf")]
 [assembly: AssemblyCopyright("Copyright ©  2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

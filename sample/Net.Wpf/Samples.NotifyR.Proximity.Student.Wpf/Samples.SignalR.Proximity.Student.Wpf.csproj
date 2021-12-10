@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{6FD25EA5-A591-402E-9CD0-FBA5CC1325F7}</ProjectGuid>
+    <ProjectGuid>{86E0A823-2035-4ABD-A472-5A04D7D66105}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>Samples.SignalR.Proximity.Client.Wpf</RootNamespace>
-    <AssemblyName>Samples.SignalR.Proximity.Client.Wpf</AssemblyName>
+    <RootNamespace>Samples.SignalR.Proximity.Student.Wpf</RootNamespace>
+    <AssemblyName>Samples.SignalR.Proximity.Student.Wpf</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -68,9 +68,6 @@
     <Reference Include="Microsoft.Extensions.Primitives, Version=3.0.0.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\Microsoft.Extensions.Primitives.3.0.0\lib\netstandard2.0\Microsoft.Extensions.Primitives.dll</HintPath>
     </Reference>
-    <Reference Include="Prism, Version=7.2.0.1367, Culture=neutral, PublicKeyToken=40ee6c3a2184dc59, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\Prism.Core.7.2.0.1367\lib\net45\Prism.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\System.Buffers.4.5.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
@@ -98,7 +95,6 @@
     <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
     </Reference>
-    <Reference Include="System.Web.Services" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -117,14 +113,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="IToastNotificationsContract.cs" />
-    <Compile Include="Toaster\ToasterManagerView.xaml.cs">
-      <DependentUpon>ToasterManagerView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Toaster\ToastInfo.cs" />
-    <Compile Include="Toaster\ToastManager.cs" />
-    <Compile Include="Toaster\ToastTypes.cs" />
-    <Compile Include="Toaster\ToastViewModel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -162,18 +150,22 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
-    <Page Include="Toaster\ToasterManagerView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\src\SignalR.Proximity\SignalR.Proximity.csproj">
-      <Project>{29335b45-4c6f-4abf-8ce1-dd33ca488ea5}</Project>
-      <Name>SignalR.Proximity</Name>
+    <ProjectReference Include="..\..\..\src\SignalR.Proximity.Common\SignalR.Proximity.Common.csproj">
+      <Project>{3f9eb13d-007b-4465-8cf4-8fd3ab8bfe47}</Project>
+      <Name>SignalR.Proximity.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\..\src\SignalR.Proximity.Notifier\SignalR.Proximity.Notifier.csproj">
+      <Project>{ebeee015-621f-424e-907b-6a0a2054a2e5}</Project>
+      <Name>SignalR.Proximity.Notifier</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Samples.SignalR.Proximity.Contracs\Samples.SignalR.Proximity.Contracs.csproj">
+      <Project>{f24e09d5-e86e-4a8c-8e69-65d7934365a8}</Project>
+      <Name>Samples.SignalR.Proximity.Contracs</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

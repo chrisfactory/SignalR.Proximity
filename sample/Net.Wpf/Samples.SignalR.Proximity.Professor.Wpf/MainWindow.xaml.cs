@@ -5,7 +5,7 @@ using System.Windows;
 using Sample.SignalR.Proximity.Toaster;
 using SignalR.Proximity;
 
-namespace Samples.SignalR.Proximity.Client.Wpf
+namespace Samples.SignalR.Proximity.Professor.Wpf
 {
     /// <summary>
     /// Logique d'interaction pour MainWindow.xaml

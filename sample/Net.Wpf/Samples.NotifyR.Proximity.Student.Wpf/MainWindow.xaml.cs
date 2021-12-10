@@ -5,7 +5,7 @@ using SignalR.Proximity.Notifier;
 using Sample.SignalR.Proximity.Toaster;
 using SignalR.Proximity.Common;
 
-namespace Samples.SignalR.Proximity.Notifier.Wpf
+namespace Samples.SignalR.Proximity.Student.Wpf
 {
     /// <summary>
     /// Logique d'interaction pour MainWindow.xaml
