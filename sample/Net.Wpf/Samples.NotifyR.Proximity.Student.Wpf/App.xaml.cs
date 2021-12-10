@@ -1,7 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using SignalR.Proximity.Common;
-using SignalR.Proximity.Notifier;
+using Microsoft.Extensions.DependencyInjection; 
 using System.IO;
 using System.Windows;
 
@@ -23,21 +21,12 @@ namespace Samples.SignalR.Proximity.Student.Wpf
 
             ConfigureServices(serviceCollection, config);
 
-            var _serviceProvider = serviceCollection.BuildServiceProvider();
-            _serviceProvider.GetService<ISignalRProximityNotifierFactory>();//Force to resolve
+            var _serviceProvider = serviceCollection.BuildServiceProvider(); 
         }
 
         private void ConfigureServices(IServiceCollection serviceCollection, IConfigurationRoot rootConfig)
         {
-            serviceCollection.AddSignalRProximity(builder =>
-            {
-                builder.UseNotifier(notifier =>
-                {
-                    //notifier.Configure(rootConfig.GetSection("SignalRProximityNotifierConfiguration"), c => { c.});
-                    //notifier.Configure("dev", rootConfig.GetSection("SignalRProximityNotifierConfiguration:dev"));
-                    //notifier.Configure("prod", rootConfig.GetSection("SignalRProximityNotifierConfiguration:prod"));
-                });
-            });
+            
         }
     }
 }
