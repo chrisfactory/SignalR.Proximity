@@ -13,6 +13,7 @@ namespace Samples.SignalR.Proximity.Professor.Wpf
     public partial class MainWindow : Window, INotifyPropertyChanged, IToastNotificationsContract
     {
         protected readonly IProximityProvider _proximityProvider;
+    
         public MainWindow(IProximityProvider proximityProvider, IProximityContext defaultContext)
         {
             InitializeComponent();
@@ -23,24 +24,13 @@ namespace Samples.SignalR.Proximity.Professor.Wpf
             var builderFromCode = _proximityProvider.Get("From.Code");
             var builderFromConfigFile = _proximityProvider.Get("From.ConfigFile");
 
-             
-            var toasterClient = builderFromCode.Client<IToastNotificationsContract>().WithGroups("C1", "C2").AttachStart(this); 
-       
-             
+
+            var toasterClient = builderFromCode.Client<IToastNotificationsContract>().AttachStart(this);
+
+            //  toasterClient.StartAsync();
 
             ToastManager = new ToastManager();
-            DataContext = this;
-
-
-
-            //var TaskDeClientProxy = SignalRProximityClientFactory.Create<IToastNotificationsContract>()
-            //    .UseConfiguration(c =>
-            //                    {
-            //                        c.WithGroupsAutoRestored();
-            //                    })
-            //    .WithGroups(TOASTER_GROUP)
-            //    .AttachStartAsync(this);
-
+            DataContext = this; 
         }
 
         public ToastManager ToastManager { get; set; }

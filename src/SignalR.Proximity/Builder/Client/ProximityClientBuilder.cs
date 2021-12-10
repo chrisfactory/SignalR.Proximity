@@ -6,26 +6,24 @@ namespace SignalR.Proximity
 {
     internal class ProximityClientBuilder<TContract> : IProximityClientBuilder<TContract>
     {
-        public ProximityClientBuilder(IServiceCollection services)
+        private readonly IHubConnectionBuilder _cnxBuilder;
+        public ProximityClientBuilder(IServiceCollection services, IHubConnectionBuilder cnxBuilder)
         {
+            _cnxBuilder = cnxBuilder;
             Services = services.Copy();
             Services.AddOptions<ScopeOptions>();
-            Services.AddSingleton(p => p.GetRequiredService<IOptions<ScopeOptions>>().Value.Scope);
-
-            //Services.AddSingleton<IHubConnectionBuilder, HubConnectionBuilder>();
-            Services.AddSingleton<HubConnectionBuilderConfigure<TContract>>();
-            Services.AddSingleton<HubConnectionAttacher<TContract>>();
-
-            Services.AddSingleton(p => p.GetRequiredService<HubConnectionBuilderConfigure<TContract>>().Configure(new HubConnectionBuilder()));
-            Services.AddSingleton(p => p.GetRequiredService<HubConnectionAttacher<TContract>>().Attach(p.GetRequiredService<IHubConnectionBuilder>().Build()));
-
-            Services.AddSingleton<IClientProxy<TContract>, ClientProxy<TContract>>();
         }
 
         public IServiceCollection Services { get; }
 
         public IClientProxy<TContract> Build()
         {
+            Services.AddSingleton<HubConnectionBuilderConfigure<TContract>>();
+            Services.AddSingleton<HubConnectionAttacher<TContract>>();
+            Services.AddSingleton(p => p.GetRequiredService<IOptions<ScopeOptions>>().Value.Scope);
+            Services.AddSingleton(p => p.GetRequiredService<HubConnectionBuilderConfigure<TContract>>().Configure(_cnxBuilder));
+            Services.AddSingleton(p => p.GetRequiredService<HubConnectionAttacher<TContract>>().Build());
+            Services.AddSingleton<IClientProxy<TContract>, ClientProxy<TContract>>();
             return Services.BuildServiceProvider().GetRequiredService<IClientProxy<TContract>>();
         }
     }
@@ -40,16 +38,18 @@ namespace SignalR.Proximity
     internal class HubConnectionAttacher<TContract>
     {
         private readonly InstanceValue<TContract> _instanceValue;
-        public HubConnectionAttacher(InstanceValue<TContract> instanceValue)
+        private readonly IHubConnectionBuilder _connectionBuilder;
+        public HubConnectionAttacher(IHubConnectionBuilder builder, InstanceValue<TContract> instanceValue)
         {
+            _connectionBuilder = builder;
             _instanceValue = instanceValue;
         }
 
-        public HubConnection Attach(HubConnection cnx)
+        public HubConnection Build()
         {
+            HubConnection cnx = _connectionBuilder.Build();
             foreach (var item in MethodContractDescriptor.Create(_instanceValue.Value))
                 cnx.On(item.Key, item.GetArgsTypes(), item.ReceiveAsync);
-
             return cnx;
         }
     }
@@ -77,14 +77,14 @@ namespace SignalR.Proximity
 
             var hubUri = _urlProvider.GetHubUrl(_config.UrlBase);
 
-            var connection = builder
-                .WithAutomaticReconnect(_retryPolicy)
-                .WithUrl(hubUri, options =>
-                {
-                    options.AccessTokenProvider = () => _tokenProvider.GetTokenAsync(_config.UrlBase);
-                    options.UseDefaultCredentials = true;
 
-                });
+            builder.WithAutomaticReconnect(_retryPolicy)
+            .WithUrl(hubUri, options =>
+            {
+                options.AccessTokenProvider = () => _tokenProvider.GetTokenAsync(_config.UrlBase);
+                options.UseDefaultCredentials = true;
+
+            });
             return builder;
         }
     }

@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.AspNetCore.SignalR.Client;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
@@ -29,6 +30,7 @@ namespace SignalR.Proximity
         public IProximityContext Build()
         {
             Services.AddSingleton(Services.Copy());
+            Services.AddTransient<IHubConnectionBuilder, HubConnectionBuilder>();
             Services.AddTransient(typeof(IProximityClientBuilder<>), typeof(ProximityClientBuilder<>));
             Services.AddTransient(typeof(IProximityNotifierBuilder<>), typeof(ProximityNotifierBuilder<>));
             Services.AddSingleton<IProximityContext, ProximityContext>();
