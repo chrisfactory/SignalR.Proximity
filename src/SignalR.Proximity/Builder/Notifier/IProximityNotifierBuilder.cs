@@ -1,6 +1,6 @@
 ﻿namespace SignalR.Proximity
 {
-    public interface IProximityNotifierBuilder : IProximityConfigure
+    public interface IProximityNotifierBuilder<TContract> : IProximityConfigure
     {
 
     }

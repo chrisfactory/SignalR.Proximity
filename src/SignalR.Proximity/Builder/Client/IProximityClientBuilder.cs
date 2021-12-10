@@ -1,6 +1,6 @@
 ﻿namespace SignalR.Proximity
 {
-    public interface IProximityClientBuilder : IProximityConfigure
+    public interface IProximityClientBuilder<TContract> : IProximityConfigure
     {
         IClientProxy Build();
     }

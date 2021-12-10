@@ -9,7 +9,8 @@ namespace SignalR.Proximity
         {
             this._provider = provider;
         }
-        public IProximityClientBuilder Client => _provider.GetRequiredService<IProximityClientBuilder>();
-        public IProximityNotifierBuilder Notifier => _provider.GetRequiredService<IProximityNotifierBuilder>();
+        public IProximityClientBuilder<TContract> Client<TContract>() => _provider.GetRequiredService<IProximityClientBuilder<TContract>>();
+
+        public IProximityNotifierBuilder<TContract> Notifier<TContract>() => _provider.GetRequiredService<IProximityNotifierBuilder<TContract>>();
     }
 }

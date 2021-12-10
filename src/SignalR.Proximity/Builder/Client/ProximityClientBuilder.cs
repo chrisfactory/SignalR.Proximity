@@ -4,34 +4,33 @@ using Microsoft.Extensions.Options;
 
 namespace SignalR.Proximity
 {
-    internal class ProximityClientBuilder: IProximityClientBuilder
+    internal class ProximityClientBuilder<TContract> : IProximityClientBuilder<TContract>
     {
         public ProximityClientBuilder(IServiceCollection services)
         {
             Services = services;
             Services.AddOptions<ScopeOptions>();
-            services.AddSingleton(p=>p.GetRequiredService<IOptions<ScopeOptions>>().Value.Scope);
+            services.AddSingleton(p => p.GetRequiredService<IOptions<ScopeOptions>>().Value.Scope);
             Services.AddSingleton<IHubConnectionBuilder, HubConnectionBuilder>();
-            Services.AddTransient(p=>p.GetRequiredService<IHubConnectionBuilder>().Build());
-
-            //foreach (var item in MethodContractDescriptor.Create<TContract>(instance))
-            //    cnx.On(item.Key, item.GetArgsTypes(), item.ReceiveAsync);
-
-            var hubUri = config.HubNamespaceProvider.GetHubUrl<TContract>(urlBase, scheme);
-
-            var connection = hubBuilder
-                .WithAutomaticReconnect(config.RetryPolicy)
-                .WithUrl(hubUri, options =>
-                {
-                    if (tokenProvider != null)
-                    {
-                        options.AccessTokenProvider = () => tokenProvider.AccessTokenProviderAsync(urlBase, userProvider);
-                        options.UseDefaultCredentials = true;
-                    }
-                });
+            Services.AddSingleton(p => p.GetRequiredService<IHubConnectionBuilder>().Build());
+            Services.AddSingleton<HubConnectionAttacher<TContract>>();
 
 
-            Services.AddTransient<IClientProxy, ClientProxy>();
+            //var hubUri = config.HubNamespaceProvider.GetHubUrl<TContract>(urlBase, scheme);
+
+            //var connection = hubBuilder
+            //    .WithAutomaticReconnect(config.RetryPolicy)
+            //    .WithUrl(hubUri, options =>
+            //    {
+            //        if (tokenProvider != null)
+            //        {
+            //            options.AccessTokenProvider = () => tokenProvider.AccessTokenProviderAsync(urlBase, userProvider);
+            //            options.UseDefaultCredentials = true;
+            //        }
+            //    });
+
+
+            Services.AddSingleton<IClientProxy, ClientProxy>();
         }
 
         public IServiceCollection Services { get; }
@@ -41,4 +40,21 @@ namespace SignalR.Proximity
             return Services.BuildServiceProvider().GetRequiredService<IClientProxy>();
         }
     }
+    internal class InstanceValue<TContract>
+    {
+        public InstanceValue(TContract instance)
+        {
+            Value = instance;
+        }
+        public TContract Value { get; }
+    }
+    internal class HubConnectionAttacher<TContract>
+    {
+        public HubConnectionAttacher(HubConnection cnx, InstanceValue<TContract> instanceValue)
+        {
+            foreach (var item in MethodContractDescriptor.Create(instanceValue.Value))
+                cnx.On(item.Key, item.GetArgsTypes(), item.ReceiveAsync);
+        }
+    }
+
 }

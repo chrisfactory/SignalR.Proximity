@@ -21,14 +21,14 @@ namespace SignalR.Proximity
             this.AddNotifierRetryPolicy();
 
             Services.AddSingleton(Services.Copy());
-            Services.AddTransient<IProximityClientBuilder, ProximityClientBuilder>();
-            Services.AddTransient<IProximityNotifierBuilder, ProximityNotifierBuilder>();
+            Services.AddTransient(typeof(IProximityClientBuilder<>), typeof(ProximityClientBuilder<>));
+            Services.AddTransient(typeof(IProximityNotifierBuilder<>), typeof(ProximityNotifierBuilder<>));
             Services.AddSingleton<IProximityContext, ProximityContext>();
             _lazyProvider = new Lazy<IServiceProvider>(() => this.Services.BuildServiceProvider());
         }
 
         public IServiceCollection Services { get; }
-       
+
         public IProximityContext Build()
         {
             return _lazyProvider.Value.GetRequiredService<IProximityContext>();

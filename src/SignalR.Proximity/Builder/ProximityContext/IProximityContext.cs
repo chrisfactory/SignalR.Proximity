@@ -2,7 +2,7 @@
 {
     public interface IProximityContext
     {
-        IProximityClientBuilder Client { get; }
-        IProximityNotifierBuilder Notifier { get; }
+        IProximityClientBuilder<TContract> Client<TContract>();
+        IProximityNotifierBuilder<TContract> Notifier<TContract>();
     }
 }

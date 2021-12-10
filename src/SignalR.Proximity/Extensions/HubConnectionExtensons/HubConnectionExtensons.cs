@@ -7,7 +7,7 @@ namespace SignalR.Proximity
 {
     public static class HubConnectionExtensons
     {
-        public static async Task<bool> StartWithRetryAsync<TRetryPolicy>(this HubConnection connection, TRetryPolicy policy, CancellationToken token)
+        internal static async Task<bool> StartWithRetryAsync<TRetryPolicy>(this HubConnection connection, TRetryPolicy policy, CancellationToken token)
             where TRetryPolicy :IRetryPolicy
         {
             RetryContext context = new RetryContext();

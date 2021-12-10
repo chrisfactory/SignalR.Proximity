@@ -22,15 +22,11 @@ namespace Samples.SignalR.Proximity.Professor.Wpf
 
             var builderFromCode = _proximityProvider.Get("From.Code");
             var builderFromConfigFile = _proximityProvider.Get("From.ConfigFile");
-            var c1 = builderFromCode.Client.WithGroups("C1", "C2");
-            var c2 = builderFromCode.Notifier;
 
-
-            var proxy = c1.WithGroups("C1", "C2").Build();
-
-
-
-
+             
+            var toasterClient = builderFromCode.Client<IToastNotificationsContract>().UseUrlBase("").WithGroups("C1", "C2").AttachStart(this); 
+       
+             
 
             ToastManager = new ToastManager();
             DataContext = this;
