@@ -2,6 +2,6 @@
 {
     public interface IProximityClientBuilder : IProximityConfigure
     {
-
+        IClientProxy Build();
     }
 }

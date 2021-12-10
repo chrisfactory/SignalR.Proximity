@@ -12,7 +12,6 @@ namespace Samples.SignalR.Proximity.Professor.Wpf
     /// </summary>
     public partial class MainWindow : Window, INotifyPropertyChanged, IToastNotificationsContract
     {
-        public const string TOASTER_GROUP = "GROUP_TEST";
         protected readonly IProximityProvider _proximityProvider;
         public MainWindow(IProximityProvider proximityProvider, IProximityContext defaultContext)
         {
@@ -23,9 +22,15 @@ namespace Samples.SignalR.Proximity.Professor.Wpf
 
             var builderFromCode = _proximityProvider.Get("From.Code");
             var builderFromConfigFile = _proximityProvider.Get("From.ConfigFile");
-            var c1 = builderFromCode.Client;
+            var c1 = builderFromCode.Client.WithGroups("C1", "C2");
             var c2 = builderFromCode.Notifier;
-      
+
+
+            var proxy = c1.WithGroups("C1", "C2").Build();
+
+
+
+
 
             ToastManager = new ToastManager();
             DataContext = this;
