@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace SignalR.Proximity
 {
-    public static class IProximityNotifierBuilderExtensions
+    public static partial class IProximityNotifierBuilderExtensions
     {
         public static async Task CallAsync<TContract>(this IProximityNotifierBuilder<TContract> source, Action<TContract> act)
         {

@@ -26,7 +26,7 @@ namespace Samples.SignalR.Proximity.Professor.Wpf
 
 
             var toasterClient = builderFromCode.Client<IToastNotificationsContract>().AttachStart(this);
-            _=builderFromCode.Notifier<IToastNotificationsContract>().CallAsync(c => c.ShowError(new ToasterRequest()
+            _=builderFromCode.Notifier<IToastNotificationsContract>().UseScopeAll().CallAsync(c => c.ShowError(new ToasterRequest()
             {
                 FromUser = "Professor",
                 Message ="test"

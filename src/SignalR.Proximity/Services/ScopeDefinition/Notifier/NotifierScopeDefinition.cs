@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic; 
-namespace SignalR.Proximity.Services.ScopeDefinition.Notifier
+namespace SignalR.Proximity
 {
     public class NotifierScopeDefinition : ScopeDefinitionBase
     {
