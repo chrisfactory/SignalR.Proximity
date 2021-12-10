@@ -30,7 +30,7 @@ namespace Samples.SignalR.Proximity.Professor.Wpf
             {
                 FromUser = "Professor",
                 Message ="test"
-            })); ;
+            })); 
 
             ToastManager = new ToastManager();
             DataContext = this;
