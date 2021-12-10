@@ -1,10 +1,16 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using System; 
+using System;
 
 namespace SignalR.Proximity
 {
     public static partial class IProximityBuilderExtensions
     {
+        public static IProximityBuilder UseUrlBase(this IProximityBuilder builder, string uriString)
+        {
+            builder.Services.Configure<ProximityConfig>(c => c.UrlBase = new Uri(uriString));
+
+            return builder;
+        }
         public static IProximityBuilder UseUrlBase(this IProximityBuilder builder, Uri uri)
         {
             builder.Services.Configure<ProximityConfig>(c => c.UrlBase = uri);
