@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace SignalR.Proximity
 {
-    public interface IClientProxy: IDisposable
+    public interface IClientProxy<TContract> : IDisposable
     { 
         void JoinGroups(params string[] groups);
         void QuitGroups(params string[] groups);

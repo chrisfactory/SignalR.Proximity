@@ -1,14 +1,14 @@
 ﻿using System;
 namespace SignalR.Proximity
 {  
-    public class UrlProvider : IUrlProvider
+    public class UrlProvider<TContract> : IUrlProvider<TContract>
     { 
         public string Postfix { get; set; }
         public bool UseMachineNamePostfix { get; set; }
 
-        public Uri GetHubUrl<TConract>(Uri UrlBase)
+        public Uri GetHubUrl(Uri UrlBase)
         {
-            string ns = $"hubs/{BuildNameSpace<TConract>()}";
+            string ns = $"hubs/{BuildNameSpace()}";
 
             if (UrlBase != null)
                 return new Uri(UrlBase, ns);
@@ -16,9 +16,9 @@ namespace SignalR.Proximity
                 return new Uri($"/{ns}", UriKind.Relative);
         }
 
-        public string BuildNameSpace<TConract>()
+        public string BuildNameSpace()
         {
-            var contractType = typeof(TConract);
+            var contractType = typeof(TContract);
 
             string urlPostFixPath = string.Empty;
             if (!string.IsNullOrWhiteSpace(Postfix))

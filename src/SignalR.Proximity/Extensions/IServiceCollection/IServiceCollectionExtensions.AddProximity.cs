@@ -30,7 +30,7 @@ namespace Microsoft.Extensions.DependencyInjection
 
             source.TryAddTransient<IProximityFactory, ProximityFactory>();
             source.TryAddSingleton<IProximityProvider, ProximityProvider>();
-            source.AddSingleton<IProximityContext>(p => p.GetRequiredService<IProximityProvider>().Get());
+            source.AddSingleton(p => p.GetRequiredService<IProximityProvider>().Get());
             source.AddSingleton(p =>
             {
                 var builder = p.GetRequiredService<IProximityFactory>((c) =>

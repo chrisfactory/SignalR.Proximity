@@ -8,36 +8,25 @@ namespace SignalR.Proximity
     {
         public ProximityClientBuilder(IServiceCollection services)
         {
-            Services = services;
+            Services = services.Copy();
             Services.AddOptions<ScopeOptions>();
-            services.AddSingleton(p => p.GetRequiredService<IOptions<ScopeOptions>>().Value.Scope);
-            Services.AddSingleton<IHubConnectionBuilder, HubConnectionBuilder>();
-            Services.AddSingleton(p => p.GetRequiredService<IHubConnectionBuilder>().Build());
+            Services.AddSingleton(p => p.GetRequiredService<IOptions<ScopeOptions>>().Value.Scope);
+
+            //Services.AddSingleton<IHubConnectionBuilder, HubConnectionBuilder>();
+            Services.AddSingleton<HubConnectionBuilderConfigure<TContract>>();
             Services.AddSingleton<HubConnectionAttacher<TContract>>();
 
+            Services.AddSingleton(p => p.GetRequiredService<HubConnectionBuilderConfigure<TContract>>().Configure(new HubConnectionBuilder()));
+            Services.AddSingleton(p => p.GetRequiredService<HubConnectionAttacher<TContract>>().Attach(p.GetRequiredService<IHubConnectionBuilder>().Build()));
 
-            //var hubUri = config.HubNamespaceProvider.GetHubUrl<TContract>(urlBase, scheme);
-
-            //var connection = hubBuilder
-            //    .WithAutomaticReconnect(config.RetryPolicy)
-            //    .WithUrl(hubUri, options =>
-            //    {
-            //        if (tokenProvider != null)
-            //        {
-            //            options.AccessTokenProvider = () => tokenProvider.AccessTokenProviderAsync(urlBase, userProvider);
-            //            options.UseDefaultCredentials = true;
-            //        }
-            //    });
-
-
-            Services.AddSingleton<IClientProxy, ClientProxy>();
+            Services.AddSingleton<IClientProxy<TContract>, ClientProxy<TContract>>();
         }
 
         public IServiceCollection Services { get; }
 
-        public IClientProxy Build()
+        public IClientProxy<TContract> Build()
         {
-            return Services.BuildServiceProvider().GetRequiredService<IClientProxy>();
+            return Services.BuildServiceProvider().GetRequiredService<IClientProxy<TContract>>();
         }
     }
     internal class InstanceValue<TContract>
@@ -50,11 +39,55 @@ namespace SignalR.Proximity
     }
     internal class HubConnectionAttacher<TContract>
     {
-        public HubConnectionAttacher(HubConnection cnx, InstanceValue<TContract> instanceValue)
+        private readonly InstanceValue<TContract> _instanceValue;
+        public HubConnectionAttacher(InstanceValue<TContract> instanceValue)
         {
-            foreach (var item in MethodContractDescriptor.Create(instanceValue.Value))
+            _instanceValue = instanceValue;
+        }
+
+        public HubConnection Attach(HubConnection cnx)
+        {
+            foreach (var item in MethodContractDescriptor.Create(_instanceValue.Value))
                 cnx.On(item.Key, item.GetArgsTypes(), item.ReceiveAsync);
+
+            return cnx;
         }
     }
+
+    internal class HubConnectionBuilderConfigure<TContract>
+    {
+        private readonly ProximityConfig _config;
+        private readonly IRetryPolicy _retryPolicy;
+        private readonly ITokenProvider _tokenProvider;
+        private readonly IUrlProvider<TContract> _urlProvider;
+        public HubConnectionBuilderConfigure(
+            IOptions<ProximityConfig> configOptions,
+            IClientRetryPolicy retryPolicy,
+            ITokenProvider tokenProvider,
+            IUrlProvider<TContract> urlProvider)
+        {
+            _config = configOptions.Value;
+            _retryPolicy = retryPolicy;
+            _tokenProvider = tokenProvider;
+            _urlProvider = urlProvider;
+        }
+
+        public IHubConnectionBuilder Configure(IHubConnectionBuilder builder)
+        {
+
+            var hubUri = _urlProvider.GetHubUrl(_config.UrlBase);
+
+            var connection = builder
+                .WithAutomaticReconnect(_retryPolicy)
+                .WithUrl(hubUri, options =>
+                {
+                    options.AccessTokenProvider = () => _tokenProvider.GetTokenAsync(_config.UrlBase);
+                    options.UseDefaultCredentials = true;
+
+                });
+            return builder;
+        }
+    }
+
 
 }

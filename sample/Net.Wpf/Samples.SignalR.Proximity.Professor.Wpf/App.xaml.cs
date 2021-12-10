@@ -30,6 +30,8 @@ namespace Samples.SignalR.Proximity.Professor.Wpf
 
         private void ConfigureServices(IServiceCollection serviceCollection, IConfigurationRoot rootConfig)
         {
+ 
+
             serviceCollection.AddProximity((b) =>
             {
                 b.UseUrlBase("https://default.context");

@@ -1,8 +1,8 @@
 ﻿using System;
 namespace SignalR.Proximity
 {
-    public interface IUrlProvider
+    public interface IUrlProvider<TContract>
     { 
-        Uri GetHubUrl<TConract>(Uri UrlBase); 
+        Uri GetHubUrl(Uri UrlBase); 
     } 
 }

@@ -12,7 +12,7 @@ namespace SignalR.Proximity
     /// <summary>
     ///    Represents an instances of type <see cref="ClientProxy"/>.  
     /// </summary>
-    internal class ClientProxy : IClientProxy
+    internal class ClientProxy<TContract> : IClientProxy<TContract>
     {
         private object _sync = new object();
         private bool disposedValue = false;

@@ -15,15 +15,12 @@ namespace SignalR.Proximity
             Services.AddOptions<ProximityConfig>();
             this.AddClientRetryPolicy();
 
-            Services.AddSingleton<IUrlProvider, UrlProvider>();
+            Services.AddSingleton(typeof(IUrlProvider<>), typeof(UrlProvider<>));
             Services.AddSingleton<ITokenProvider, TokenProvider>();
             this.AddClientRetryPolicy();
             this.AddNotifierRetryPolicy();
 
-            Services.AddSingleton(Services.Copy());
-            Services.AddTransient(typeof(IProximityClientBuilder<>), typeof(ProximityClientBuilder<>));
-            Services.AddTransient(typeof(IProximityNotifierBuilder<>), typeof(ProximityNotifierBuilder<>));
-            Services.AddSingleton<IProximityContext, ProximityContext>();
+          
             _lazyProvider = new Lazy<IServiceProvider>(() => this.Services.BuildServiceProvider());
         }
 
@@ -31,6 +28,10 @@ namespace SignalR.Proximity
 
         public IProximityContext Build()
         {
+            Services.AddSingleton(Services.Copy());
+            Services.AddTransient(typeof(IProximityClientBuilder<>), typeof(ProximityClientBuilder<>));
+            Services.AddTransient(typeof(IProximityNotifierBuilder<>), typeof(ProximityNotifierBuilder<>));
+            Services.AddSingleton<IProximityContext, ProximityContext>();
             return _lazyProvider.Value.GetRequiredService<IProximityContext>();
         }
     }
