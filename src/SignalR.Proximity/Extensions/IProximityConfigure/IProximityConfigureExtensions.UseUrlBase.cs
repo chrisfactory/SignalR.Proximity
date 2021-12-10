@@ -5,13 +5,13 @@ namespace SignalR.Proximity
 {
     public static partial class IProximityBuilderExtensions
     {
-        public static IProximityBuilder UseUrlBase(this IProximityBuilder builder, string uriString)
+        public static IProximityConfigure UseUrlBase(this IProximityConfigure builder, string uriString)
         {
             builder.Services.Configure<ProximityConfig>(c => c.UrlBase = new Uri(uriString));
 
             return builder;
         }
-        public static IProximityBuilder UseUrlBase(this IProximityBuilder builder, Uri uri)
+        public static IProximityConfigure UseUrlBase(this IProximityConfigure builder, Uri uri)
         {
             builder.Services.Configure<ProximityConfig>(c => c.UrlBase = uri);
 

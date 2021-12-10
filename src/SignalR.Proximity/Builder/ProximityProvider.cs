@@ -4,7 +4,7 @@ namespace SignalR.Proximity
 {
     internal class ProximityProvider : IProximityProvider
     {
-        private readonly Dictionary<string, IProximityBuilder> _container = new Dictionary<string, IProximityBuilder>();
+        private readonly Dictionary<string, IProximityFactory> _container = new Dictionary<string, IProximityFactory>();
         public const string DefaultContainerName = "Default";
         public ProximityProvider(IEnumerable<ContainerKeyValue> values)
         {
@@ -12,15 +12,16 @@ namespace SignalR.Proximity
                 _container.Add(builderKV.Key, builderKV.Value);
         } 
 
-        public IProximityBuilder Get()
+        public IProximityContext Get()
         {
             return Get(DefaultContainerName);
         }
 
-        public IProximityBuilder Get(string name)
+        public IProximityContext Get(string name)
         {
              _container.TryGetValue(name, out var value);
-            return value;
+            return value?.Build();
         }
+         
     }
 }

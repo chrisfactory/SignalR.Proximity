@@ -3,7 +3,7 @@
     public interface IProximityProvider
     {
 
-        IProximityBuilder Get();
-        IProximityBuilder Get(string name);
+        IProximityContext Get();
+        IProximityContext Get(string name);
     }
 }

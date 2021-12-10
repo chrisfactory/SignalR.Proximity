@@ -21,40 +21,26 @@ namespace Samples.SignalR.Proximity.Client.Wpf
                             .AddJsonFile("Config.json", optional: false, reloadOnChange: false)
                              //.AddXmlFile("Config.xml", optional: false, reloadOnChange: false)
                              .Build();
+            serviceCollection.AddSingleton<MainWindow>();
 
             ConfigureServices(serviceCollection, config);
 
-
-
-            var _serviceProvider = serviceCollection.BuildServiceProvider();
-            //   _serviceProvider.GetService<ISignalRProximityClientFactory>();//Force to resolve
-            _serviceProvider.GetService<IProximityProvider>();//Force to resolve
+            this.MainWindow = serviceCollection.BuildServiceProvider().GetRequiredService<MainWindow>();
         }
 
         private void ConfigureServices(IServiceCollection serviceCollection, IConfigurationRoot rootConfig)
         {
+            serviceCollection.AddProximity((b) =>
+            {
+                b.UseUrlBase("https://default.context");
+            });
+            serviceCollection.AddProximity("From.Code", (b) =>
+             {
+                 b.UseUrlBase("https://localhost:5011");
+             });
 
-            //serviceCollection.AddProximity((b) => { });
-            //serviceCollection.AddProximity("dd", (b) => { });
-            serviceCollection.AddProximity("dddd", rootConfig.GetSection("Proximity"));
-            //serviceCollection.AddProximity("chat.container", rootConfig.GetSection("Proximity:dev"));
-            //serviceCollection.AddProximity("toaster.container", rootConfig.GetSection("Proximity:prod"), (b) => { });
-          
+            serviceCollection.AddProximity("From.ConfigFile", rootConfig.GetSection("Proximity"));
 
-            //serviceCollection.AddProximity(builder =>
-            //{
-            //builder.UseClient(notifier =>
-            //{
-            //    notifier.Configure(rootConfig.GetSection("SignalRProximityClientConfiguration"), c =>
-            //       {
-            //           c.WithUserProvider(u => u.UserId = "chris");
-            //           c.WithAutomaticReconnect();
-            //           c.WithGroupsAutoRestored();
-            //       });
-            //    notifier.Configure("dev", rootConfig.GetSection("SignalRProximityClientConfiguration:dev"));
-            //    notifier.Configure("prod", rootConfig.GetSection("SignalRProximityClientConfiguration:prod"));
-            //});
-            //});
         }
     }
 

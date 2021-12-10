@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace SignalR.Proximity
 {
-    internal class ProximityBuilder : IProximityBuilder
+    internal class ProximityFactory : IProximityFactory
     {
-        public ProximityBuilder()
+        private Lazy<IServiceProvider> _lazyProvider;
+        public ProximityFactory()
         {
             Services = new ServiceCollection();
             Services.AddOptions<ProximityConfig>();
@@ -22,17 +23,41 @@ namespace SignalR.Proximity
             Services.AddSingleton(Services.Copy());
             Services.AddTransient<IProximityClientBuilder, FFClient>();
             Services.AddTransient<IProximityNotifierBuilder, FFNotifier>();
-
+            Services.AddSingleton<IProximityContext, ProximityContext>();
+            _lazyProvider = new Lazy<IServiceProvider>(() => this.Services.BuildServiceProvider());
         }
 
         public IServiceCollection Services { get; }
-
-        public void Build()
+       
+        public IProximityContext Build()
         {
-            var c = Services.BuildServiceProvider().GetRequiredService<IProximityClientBuilder>();
+            return _lazyProvider.Value.GetRequiredService<IProximityContext>();
         }
     }
-    public interface IProximityClientBuilder : IProximityBuilder
+
+    public interface IProximityContext
+    {
+        IProximityClientBuilder Client();
+        IProximityNotifierBuilder Notifier();
+    }
+    internal class ProximityContext : IProximityContext
+    {
+        private readonly IServiceProvider _provider;
+        public ProximityContext(IServiceProvider provider)
+        {
+             this._provider = provider;
+        }
+        public IProximityClientBuilder Client()
+        {
+            return _provider.GetRequiredService<IProximityClientBuilder>();
+        }
+
+        public IProximityNotifierBuilder Notifier()
+        {
+            return _provider.GetRequiredService<IProximityNotifierBuilder>();
+        }
+    }
+    public interface IProximityClientBuilder : IProximityConfigure
     {
 
     }
@@ -45,12 +70,10 @@ namespace SignalR.Proximity
 
         public IServiceCollection Services { get; }
 
-        public void Build()
-        {
-
-        }
+        
+       
     }
-    public interface IProximityNotifierBuilder : IProximityBuilder
+    public interface IProximityNotifierBuilder : IProximityConfigure
     {
 
     }
@@ -63,9 +86,6 @@ namespace SignalR.Proximity
 
         public IServiceCollection Services { get; }
 
-        public void Build()
-        {
-
-        }
+     
     }
 }
