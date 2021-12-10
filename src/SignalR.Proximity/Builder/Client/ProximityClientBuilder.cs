@@ -1,32 +1,41 @@
 ﻿using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Options;
+using System;
 
 namespace SignalR.Proximity
 {
     internal class ProximityClientBuilder<TContract> : IProximityClientBuilder<TContract>
     {
-        private readonly IHubConnectionBuilder _cnxBuilder;
-        public ProximityClientBuilder(IServiceCollection services, IHubConnectionBuilder cnxBuilder)
+        private readonly Lazy<IClientProxy<TContract>> _lazyProxy;
+        public ProximityClientBuilder(IServiceCollection services)
         {
-            _cnxBuilder = cnxBuilder;
+            _lazyProxy = new Lazy<IClientProxy<TContract>>(InnerBuild);
             Services = services.Copy();
             Services.AddOptions<ScopeOptions>();
         }
 
         public IServiceCollection Services { get; }
 
+
         public IClientProxy<TContract> Build()
         {
-            Services.AddSingleton<HubConnectionBuilderConfigure<TContract>>();
-            Services.AddSingleton<HubConnectionAttacher<TContract>>();
-            Services.AddSingleton(p => p.GetRequiredService<IOptions<ScopeOptions>>().Value.Scope);
-            Services.AddSingleton(p => p.GetRequiredService<HubConnectionBuilderConfigure<TContract>>().Configure(_cnxBuilder));
-            Services.AddSingleton(p => p.GetRequiredService<HubConnectionAttacher<TContract>>().Build());
-            Services.AddSingleton<IClientProxy<TContract>, ClientProxy<TContract>>();
+            return _lazyProxy.Value;
+        }
+
+        private IClientProxy<TContract> InnerBuild()
+        {
+            Services.TryAddSingleton<HubConnectionBuilderConfigure<TContract>>();
+            Services.TryAddSingleton<HubConnectionAttacher<TContract>>();
+            Services.TryAddSingleton(p => p.GetRequiredService<IOptions<ScopeOptions>>().Value.Scope);
+            Services.TryAddSingleton(p => p.GetRequiredService<HubConnectionBuilderConfigure<TContract>>().Configure(new HubConnectionBuilder()));
+            Services.TryAddSingleton(p => p.GetRequiredService<HubConnectionAttacher<TContract>>().Build());
+            Services.TryAddSingleton<IClientProxy<TContract>, ClientProxy<TContract>>();
             return Services.BuildServiceProvider().GetRequiredService<IClientProxy<TContract>>();
         }
     }
+
     internal class InstanceValue<TContract>
     {
         public InstanceValue(TContract instance)

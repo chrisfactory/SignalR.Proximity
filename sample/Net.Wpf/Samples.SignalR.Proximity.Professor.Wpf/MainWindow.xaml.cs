@@ -25,13 +25,21 @@ namespace Samples.SignalR.Proximity.Professor.Wpf
             var builderFromConfigFile = _proximityProvider.Get("From.ConfigFile");
 
 
-            var toasterClient = builderFromCode.Client<IToastNotificationsContract>().AttachStart(this);
-            _=builderFromCode.Notifier<IToastNotificationsContract>().UseScopeAll().CallAsync(c => c.ShowError(new ToasterRequest()
+            var cl = builderFromCode.Client<IToastNotificationsContract>();
+            cl.WithGroups("c1").AttachStart(this);
+            cl.AttachStart(this);
+            //   toasterClient.Noti
+            var A = builderFromCode.Notifier<IToastNotificationsContract>().UseScopeOthers();
+           _= A.CallAsync(c => c.ShowError(new ToasterRequest()
             {
                 FromUser = "Professor",
-                Message ="test"
-            })); 
-
+                Message ="MassaA"
+            }));
+            _= A.CallAsync(c => c.ShowError(new ToasterRequest()
+            {
+                FromUser = "Professor",
+                Message ="MassaB"
+            }));
             ToastManager = new ToastManager();
             DataContext = this;
         }

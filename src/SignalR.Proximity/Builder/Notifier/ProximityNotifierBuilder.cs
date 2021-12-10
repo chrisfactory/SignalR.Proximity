@@ -7,10 +7,8 @@ namespace SignalR.Proximity
 {
     internal class ProximityNotifierBuilder<TContract> : IProximityNotifierBuilder<TContract>
     {
-        private readonly IHubConnectionBuilder _cnxBuilder;
-        public ProximityNotifierBuilder(IServiceCollection services, IHubConnectionBuilder cnxBuilder)
+        public ProximityNotifierBuilder(IServiceCollection services)
         {
-            _cnxBuilder = cnxBuilder;
             Services = services.Copy();
             Services.AddOptions<ScopeOptions>();
         }
@@ -19,12 +17,12 @@ namespace SignalR.Proximity
 
         public INotifierProxy<TContract> Build()
         { 
-            Services.AddSingleton<HubConnectionBuilderConfigure<TContract>>(); 
-            Services.AddSingleton(p => p.GetRequiredService<IOptions<ScopeOptions>>().Value.Scope);
-            Services.AddSingleton(p => p.GetRequiredService<HubConnectionBuilderConfigure<TContract>>().Configure(_cnxBuilder));
-            Services.AddSingleton(p => p.GetRequiredService<IHubConnectionBuilder>().Build()); 
+            Services.AddTransient<HubConnectionBuilderConfigure<TContract>>(); 
+            Services.AddTransient(p => p.GetRequiredService<IOptions<ScopeOptions>>().Value.Scope);
+            Services.AddTransient(p => p.GetRequiredService<HubConnectionBuilderConfigure<TContract>>().Configure(new HubConnectionBuilder()));
+            Services.AddTransient(p => p.GetRequiredService<IHubConnectionBuilder>().Build()); 
 
-            Services.AddSingleton<INotifierProxy<TContract>, NotifierProxy<TContract>>();
+            Services.AddTransient<INotifierProxy<TContract>, NotifierProxy<TContract>>();
             return Services.BuildServiceProvider().GetRequiredService<INotifierProxy<TContract>>();
         }
     }
