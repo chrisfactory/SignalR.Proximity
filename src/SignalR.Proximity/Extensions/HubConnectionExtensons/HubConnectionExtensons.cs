@@ -42,14 +42,14 @@ namespace SignalR.Proximity
                     await connection.StartAsync(token);
 
             }
-            catch (Exception ex)
+            catch  
             {
                 if (connection.State != HubConnectionState.Connected)//Situation de compétition sur StartAsync
                 {
-                    throw ex;
+                    throw;
                 }
             }
             return connection.State == HubConnectionState.Connected;
-        }
+        } 
     }
 }

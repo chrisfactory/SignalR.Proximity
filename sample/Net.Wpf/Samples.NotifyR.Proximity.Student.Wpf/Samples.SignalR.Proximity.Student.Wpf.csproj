@@ -156,10 +156,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\src\SignalR.Proximity.V2\SignalR.Proximity.csproj">
-      <Project>{82c3a876-8724-4e37-a410-9fc8c1017423}</Project>
-      <Name>SignalR.Proximity</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Samples.SignalR.Proximity.Contracs\Samples.SignalR.Proximity.Contracs.csproj">
       <Project>{f24e09d5-e86e-4a8c-8e69-65d7934365a8}</Project>
       <Name>Samples.SignalR.Proximity.Contracs</Name>

@@ -195,8 +195,8 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\..\src\SignalR.Proximity.V2\SignalR.Proximity.csproj">
-      <Project>{82c3a876-8724-4e37-a410-9fc8c1017423}</Project>
+    <ProjectReference Include="..\..\..\src\SignalR.Proximity\SignalR.Proximity.csproj">
+      <Project>{29335b45-4c6f-4abf-8ce1-dd33ca488ea5}</Project>
       <Name>SignalR.Proximity</Name>
     </ProjectReference>
     <ProjectReference Include="..\Samples.SignalR.Proximity.Contracs\Samples.SignalR.Proximity.Contracs.csproj">
