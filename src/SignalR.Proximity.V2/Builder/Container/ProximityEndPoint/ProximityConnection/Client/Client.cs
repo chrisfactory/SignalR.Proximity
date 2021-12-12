@@ -12,14 +12,26 @@ namespace SignalR.Proximity
         }
         public void Attach<T>(T instance) where T : class, TContract
         {
-            //throw new System.NotImplementedException();
+            HubConnection cnx = _connection;
+            foreach (var item in MethodContractDescriptor.Create<TContract>(instance))
+                cnx.On(item.Key, item.GetArgsTypes(), item.ReceiveAsync); 
         }
 
         public void Dettach<T>(T instance) where T : class, TContract
         {
-            //  throw new System.NotImplementedException();
+            //HubConnection cnx = _connection;
+            //foreach (var item in MethodContractDescriptor.Create(instance))
+            //    cnx.().On(item.Key, item.GetArgsTypes(), item.ReceiveAsync);
         }
 
+
+        void DettachAll()
+        {
+            //HubConnection cnx = _connection;
+            //foreach (var item in MethodContractDescriptor.Create(instance))
+            //    cnx.Remove().On(item.Key, item.GetArgsTypes(), item.ReceiveAsync);
+            //cnx.Remove()
+        }
 
 
         /// <summary>

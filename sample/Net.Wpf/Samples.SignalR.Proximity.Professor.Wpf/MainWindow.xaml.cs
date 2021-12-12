@@ -24,10 +24,11 @@ namespace Samples.SignalR.Proximity.Professor.Wpf
                 );
 
             cnx.Client.Attach(this);
+
+            cnx.StartAsync().Wait();
             _ = cnx.Client.JoinGroupsAsync("S1", "S2");
             _ = cnx.Client.QuitGroupsAsync("S1", "S2");
             cnx.Client.Dettach(this);
-            cnx.StartAsync().Wait();
             //cnx.Client.DettachAll();
 
 
