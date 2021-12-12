@@ -14,9 +14,9 @@ namespace SignalR.Proximity.Hubs
 
         public override Task OnConnectedAsync()
         {
-            var underlyingHttpContext = Context.GetHttpContext().Request.Path;
-            var ba = Context.GetHttpContext().Request.PathBase;
-            var user = Context.UserIdentifier;
+            //var underlyingHttpContext = Context.GetHttpContext().Request.Path;
+            //var ba = Context.GetHttpContext().Request.PathBase;
+            //var user = Context.UserIdentifier;
             //Context.Request.Environment[typeof(HttpContextBase).FullName] as HttpContextBase;
             return base.OnConnectedAsync();
         }

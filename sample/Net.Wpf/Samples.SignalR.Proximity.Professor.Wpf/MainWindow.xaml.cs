@@ -12,34 +12,52 @@ namespace Samples.SignalR.Proximity.Professor.Wpf
     /// </summary>
     public partial class MainWindow : Window, INotifyPropertyChanged, IToastNotificationsContract
     {
-        protected readonly IProximityProvider _proximityProvider;
+        protected readonly IProximityEndPointProvider _proximityProvider;
 
-        public MainWindow(IProximityProvider proximityProvider, IProximityContext defaultContext)
+        public MainWindow(IProximityEndPointProvider proximityProvider)
         {
             InitializeComponent();
 
-            _proximityProvider = proximityProvider;
+            _proximityProvider = proximityProvider; 
+            var cnx = _proximityProvider.Connect<IToastNotificationsContract>(
+            
+                ); 
+
+            cnx.Client.Attach(this);
+            cnx.Client.JoinGroups("S1", "S2");
+            cnx.Client.QuitGroups("S1", "S2");
+            cnx.Client.Dettach(this);
+            cnx.StartAsync().Wait();
+            //cnx.Client.DettachAll();
 
 
-            var builderFromCode = _proximityProvider.Get("From.Code");
-            var builderFromConfigFile = _proximityProvider.Get("From.ConfigFile");
 
 
-            var cl = builderFromCode.Client<IToastNotificationsContract>();
-            cl.WithGroups("c1").AttachStart(this);
-            cl.AttachStart(this);
-            //   toasterClient.Noti
-            var A = builderFromCode.Notifier<IToastNotificationsContract>().UseScopeOthers();
-           _= A.CallAsync(c => c.ShowError(new ToasterRequest()
-            {
-                FromUser = "Professor",
-                Message ="MassaA"
-            }));
-            _= A.CallAsync(c => c.ShowError(new ToasterRequest()
-            {
-                FromUser = "Professor",
-                Message ="MassaB"
-            }));
+
+            //client.Dettach(this);
+            //cnx.Notify.Auther(t => t.ShowError(new ToasterRequest()
+            //{
+            //    FromUser = "Professor",
+            //    Message = "MassaA"
+            //}));
+
+            //cnx.Disconnect();
+
+            // var cl = builderFromCode.Client<IToastNotificationsContract>();
+            // cl.WithGroups("c1").AttachStart(this);
+            // cl.AttachStart(this);
+            // //   toasterClient.Noti
+            // var A = builderFromCode.Notifier<IToastNotificationsContract>().UseScopeOthers();
+            //_= A.CallAsync(c => c.ShowError(new ToasterRequest()
+            // {
+            //     FromUser = "Professor",
+            //     Message ="MassaA"
+            // }));
+            // _= A.CallAsync(c => c.ShowError(new ToasterRequest()
+            // {
+            //     FromUser = "Professor",
+            //     Message ="MassaB"
+            // }));
             ToastManager = new ToastManager();
             DataContext = this;
         }

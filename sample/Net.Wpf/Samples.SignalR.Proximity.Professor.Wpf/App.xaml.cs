@@ -23,22 +23,19 @@ namespace Samples.SignalR.Proximity.Professor.Wpf
             ConfigureServices(services, config);
             services.AddSingleton<MainWindow>();
 
-            this.MainWindow  = services.BuildServiceProvider().GetRequiredService<MainWindow>();
+            this.MainWindow = services.BuildServiceProvider().GetRequiredService<MainWindow>();
             this.MainWindow.Show();
         }
 
         private void ConfigureServices(IServiceCollection serviceCollection, IConfigurationRoot rootConfig)
         {
-            serviceCollection.AddProximity((b) =>
+            serviceCollection.UseProximity(proximity =>
             {
-                b.UseUrlBase("https://default.context");
+                proximity.AddEndPoint("https://localhost:5011"); 
+                proximity.AddEndPoint("From.Code", "https://localhost:5011"); 
+                proximity.AddEndPoint("From.ConfigFile", rootConfig.GetSection("Proximity"));
             });
-            serviceCollection.AddProximity("From.Code", (b) =>
-             {
-                 b.UseUrlBase("https://localhost:5011");
-             });
 
-            serviceCollection.AddProximity("From.ConfigFile", rootConfig.GetSection("Proximity"));
 
         }
     }
