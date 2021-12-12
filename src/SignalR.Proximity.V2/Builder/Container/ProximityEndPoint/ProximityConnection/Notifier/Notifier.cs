@@ -9,5 +9,10 @@ namespace SignalR.Proximity
         {
             this._connection = cnx;
         }
+
+        public INotifierCaller<TContract> CreateCaller(NotifierScopeDefinition scope)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
