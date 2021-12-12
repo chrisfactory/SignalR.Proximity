@@ -4,6 +4,7 @@ using System.Runtime.CompilerServices;
 using System.Windows;
 using Sample.SignalR.Proximity.Toaster;
 using SignalR.Proximity;
+using System.Threading.Tasks;
 
 namespace Samples.SignalR.Proximity.Professor.Wpf
 {
@@ -17,26 +18,31 @@ namespace Samples.SignalR.Proximity.Professor.Wpf
         public MainWindow(IProximityEndPointProvider proximityProvider)
         {
             InitializeComponent();
-
             _proximityProvider = proximityProvider;
-            var cnx = _proximityProvider.Connect<IToastNotificationsContract>(
 
-                );
+            _ = Test();
 
-            cnx.Client.Attach(this);
-
-            cnx.StartAsync().Wait();
-            _ = cnx.Client.JoinGroupsAsync("S1", "S2");
-            _ = cnx.Client.QuitGroupsAsync("S1", "S2");
-            cnx.Client.Dettach(this);
-            //cnx.Client.DettachAll();
-
-
-
-             
             ToastManager = new ToastManager();
             DataContext = this;
         }
+
+
+
+        private async Task Test()
+        {
+
+            var cnx = _proximityProvider.Connect<IToastNotificationsContract>();
+            await cnx.StartAsync();
+
+            cnx.Client.Attach(this);
+            await cnx.Client.JoinGroupsAsync("S1", "S2");
+
+
+            cnx.Notifier;
+
+        }
+
+
 
         public ToastManager ToastManager { get; set; }
 
