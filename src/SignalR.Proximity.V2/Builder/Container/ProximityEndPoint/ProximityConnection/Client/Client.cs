@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.SignalR.Client;
+using System.Threading.Tasks;
 
 namespace SignalR.Proximity
 {
@@ -19,14 +20,36 @@ namespace SignalR.Proximity
             //  throw new System.NotImplementedException();
         }
 
-        public void JoinGroups(params string[] groups)
+
+
+        /// <summary>
+        ///     Adds a connection to the specified groups.
+        /// </summary>
+        /// <param name="groups">
+        ///     The groups names.
+        /// </param>
+        public async Task JoinGroupsAsync(params string[] groups)
         {
-            // throw new System.NotImplementedException();
+            if (groups != null)
+            {
+                if (_connection.State == HubConnectionState.Connected)
+                    await _connection.InvokeAsync("Interact", new ProximityHubRequest() { Scope = ClientScopeDefinition.JoinGroups(groups) }, new object[0]);
+            }
         }
 
-        public void QuitGroups(params string[] groups)
+
+        /// <summary>
+        ///     Removes a connection from the specified groups.
+        /// </summary>
+        /// <param name="groups">
+        ///     The groups names.
+        /// </param>
+        public async Task QuitGroupsAsync(params string[] groups)
         {
-            // throw new System.NotImplementedException();
-        }
+            if (_connection.State == HubConnectionState.Connected)
+                await _connection.InvokeAsync("Interact", new ProximityHubRequest() { Scope = ClientScopeDefinition.QuitGroups(groups) }, new object[0]);
+
+        } 
+
     }
 }

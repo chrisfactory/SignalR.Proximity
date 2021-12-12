@@ -18,46 +18,21 @@ namespace Samples.SignalR.Proximity.Professor.Wpf
         {
             InitializeComponent();
 
-            _proximityProvider = proximityProvider; 
+            _proximityProvider = proximityProvider;
             var cnx = _proximityProvider.Connect<IToastNotificationsContract>(
-            
-                ); 
+
+                );
 
             cnx.Client.Attach(this);
-            cnx.Client.JoinGroups("S1", "S2");
-            cnx.Client.QuitGroups("S1", "S2");
+            _ = cnx.Client.JoinGroupsAsync("S1", "S2");
+            _ = cnx.Client.QuitGroupsAsync("S1", "S2");
             cnx.Client.Dettach(this);
             cnx.StartAsync().Wait();
             //cnx.Client.DettachAll();
 
 
 
-
-
-            //client.Dettach(this);
-            //cnx.Notify.Auther(t => t.ShowError(new ToasterRequest()
-            //{
-            //    FromUser = "Professor",
-            //    Message = "MassaA"
-            //}));
-
-            //cnx.Disconnect();
-
-            // var cl = builderFromCode.Client<IToastNotificationsContract>();
-            // cl.WithGroups("c1").AttachStart(this);
-            // cl.AttachStart(this);
-            // //   toasterClient.Noti
-            // var A = builderFromCode.Notifier<IToastNotificationsContract>().UseScopeOthers();
-            //_= A.CallAsync(c => c.ShowError(new ToasterRequest()
-            // {
-            //     FromUser = "Professor",
-            //     Message ="MassaA"
-            // }));
-            // _= A.CallAsync(c => c.ShowError(new ToasterRequest()
-            // {
-            //     FromUser = "Professor",
-            //     Message ="MassaB"
-            // }));
+             
             ToastManager = new ToastManager();
             DataContext = this;
         }
