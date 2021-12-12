@@ -1,4 +1,7 @@
 ﻿using Microsoft.AspNetCore.SignalR.Client;
+using System;
+using System.Reflection;
+using System.Threading.Tasks;
 
 namespace SignalR.Proximity
 {
@@ -11,8 +14,28 @@ namespace SignalR.Proximity
         }
 
         public INotifierCaller<TContract> CreateCaller(NotifierScopeDefinition scope)
+        { 
+            return new Caller<TContract>(_connection, scope);
+        }
+
+        private class Caller<TContract> : INotifierCaller<TContract>
         {
-            throw new System.NotImplementedException();
+            private HubConnection _connection;
+            private NotifierScopeDefinition _scope; 
+
+            public Caller(HubConnection connection, NotifierScopeDefinition scope)
+            {
+                this._connection = connection;
+                this._scope = scope; 
+            }
+
+            public Task Notify(Action<TContract> action)
+            {
+                var proxy = DispatchProxy.Create<TContract, NotifierDispatchProxy>();
+                (proxy as NotifierDispatchProxy)?.Attach(_connection, _scope);
+                action?.Invoke(proxy);
+                return Task.CompletedTask;
+            }
         }
     }
 }

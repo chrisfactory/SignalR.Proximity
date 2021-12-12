@@ -38,8 +38,8 @@ namespace Samples.SignalR.Proximity.Professor.Wpf
             await cnx.Client.JoinGroupsAsync("S1", "S2");
 
 
-            await cnx.Notifier.ToAll().Notify(toaster => toaster.ShowError(new ToasterRequest() { FromUser = "my", Message = "test", Title = "title test" }));
-
+            await cnx.Notifier.ToAll().Notify(toaster => toaster.ShowError(new ToasterRequest() { FromUser = "my", Message = "ToAll", Title = "title test" }));
+            await cnx.Notifier.ToOthers().Notify(toaster => toaster.ShowError(new ToasterRequest() { FromUser = "my", Message = "ToOthers", Title = "title test" }));
         }
 
 
