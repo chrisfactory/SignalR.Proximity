@@ -40,6 +40,9 @@ namespace Samples.SignalR.Proximity.Professor.Wpf
 
             await cnx.Notifier.ToAll().Notify(toaster => toaster.ShowError(new ToasterRequest() { FromUser = "my", Message = "ToAll", Title = "title test" }));
             await cnx.Notifier.ToOthers().Notify(toaster => toaster.ShowError(new ToasterRequest() { FromUser = "my", Message = "ToOthers", Title = "title test" }));
+
+            await cnx.Notifier.ToClients(cnx.ConnectionId).Notify(toaster => toaster.ShowInformation(new ToasterRequest() { FromUser = "my", Message = $"ToClients {cnx.ConnectionId}", Title = "title test" }));
+            await cnx.Notifier.ToAllExcept(cnx.ConnectionId).Notify(toaster => toaster.ShowInformation(new ToasterRequest() { FromUser = "my", Message = $"ToAllExcept {cnx.ConnectionId}", Title = "title test" }));
         }
 
 

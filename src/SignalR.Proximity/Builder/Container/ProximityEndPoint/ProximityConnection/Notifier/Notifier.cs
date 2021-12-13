@@ -15,10 +15,10 @@ namespace SignalR.Proximity
 
         public INotifierCaller<TContract> CreateCaller(NotifierScopeDefinition scope)
         { 
-            return new Caller<TContract>(_connection, scope);
+            return new Caller(_connection, scope);
         }
 
-        private class Caller<TContract> : INotifierCaller<TContract>
+        private class Caller : INotifierCaller<TContract>
         {
             private HubConnection _connection;
             private NotifierScopeDefinition _scope; 
