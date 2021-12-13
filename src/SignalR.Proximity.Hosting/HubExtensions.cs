@@ -6,7 +6,7 @@ namespace SignalR.Proximity
 
     public static class HubExtensions
     {
-        public static async Task ResolveInteractAsync(this Hub hub, ProximityHubRequest request, object[] data)
+        internal static async Task ResolveInteractAsync(this Hub hub, ProximityHubRequest request, object[] data)
         {
             if (request == null)
                 return;

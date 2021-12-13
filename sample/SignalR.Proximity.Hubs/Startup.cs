@@ -3,11 +3,9 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-
-using Microsoft.IdentityModel.Tokens;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
-using System.Text;
-using SignalR.Proximity.Hubs.Middleware;
+using Microsoft.AspNetCore.SignalR;
+using Sample.SignalR.Proximity.Toaster;
+using SignalR.Proximity.Hosting;
 
 namespace SignalR.Proximity.Hubs
 {
@@ -33,7 +31,6 @@ namespace SignalR.Proximity.Hubs
             services.AddSignalR();
              
             services.AddControllersWithViews(); 
-            services.AddDynamicHubFactory<ProximityHubBase>();
         }
 
 
@@ -50,8 +47,7 @@ namespace SignalR.Proximity.Hubs
                 app.UseHsts();
             }
 
-            // app.UseHttpsRedirection();
-            app.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().AllowCredentials());
+            // app.UseHttpsRedirection(); 
             app.UseStaticFiles();
             app.UseRouting();
             //Si tu inverse ces deux prochaines lignes, ça ne marche plus en .netcore3.0...
@@ -66,15 +62,11 @@ namespace SignalR.Proximity.Hubs
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });
 
-
-            app.UseDynamicMapHub<ProximityHubBase>("/hubs/", (runtimeBuilder) =>
-           {
-               runtimeBuilder.UseCors(x => x.AllowAnyHeader().AllowAnyMethod().AllowCredentials());
-               runtimeBuilder.UseRouting();
-           
-               runtimeBuilder.UseAuthentication();
-               runtimeBuilder.UseAuthorization();
-           });
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapHub<ProximityHub<IToastNotificationsContract>>("/hubs/sample.signalr.proximity.toaster.itoastnotificationscontract");
+             //   endpoints.MapHub<ProximityHub<IToastNotificationsContract>>("/hubs/sample.signalr.proximity.toaster.itoastnotificationscontract");
+            }); 
         }
 
     }

@@ -15,7 +15,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\src\SignalR.Proximity.Core\SignalR.Proximity.Core.csproj" />
     <ProjectReference Include="..\..\src\SignalR.Proximity.Hosting\SignalR.Proximity.Hosting.csproj" />
+    <ProjectReference Include="..\Net.Wpf\Samples.SignalR.Proximity.Contracs\Samples.SignalR.Proximity.Contracs.csproj" />
   </ItemGroup>
 
 </Project>
