@@ -7,11 +7,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{D9F32C61-E4A
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{500F5E07-51E6-47EA-8235-0E375FB2B8C5}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Net.Wpf", "Net.Wpf", "{F0C44466-D92D-483A-81FB-7A51C0A214BD}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NetCore.WebApp", "NetCore.WebApp", "{F8FFF2E4-6C59-486D-9911-74604CA85DAF}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "NetCore.WPF", "NetCore.WPF", "{3AB91984-88F6-4B13-B1D3-557897F244A6}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Wpf", "Wpf", "{F0C44466-D92D-483A-81FB-7A51C0A214BD}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SignalR.Proximity.Hosting", "src\SignalR.Proximity.Hosting\SignalR.Proximity.Hosting.csproj", "{B1B65E1D-A17A-4A83-AC09-9ED09BFC4DD5}"
 EndProject
@@ -19,9 +15,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SignalR.Proximity", "src\Si
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Samples.SignalR.Proximity.Contracs", "sample\Net.Wpf\Samples.SignalR.Proximity.Contracs\Samples.SignalR.Proximity.Contracs.csproj", "{F24E09D5-E86E-4A8C-8E69-65D7934365A8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Samples.SignalR.Proximity.Professor.Wpf", "sample\Net.Wpf\Samples.SignalR.Proximity.Professor.Wpf\Samples.SignalR.Proximity.Professor.Wpf.csproj", "{6FD25EA5-A591-402E-9CD0-FBA5CC1325F7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Samples.SignalR.Proximity.Professor.Wpf", "sample\Net.Wpf\Samples.SignalR.Proximity.Professor.Wpf\Samples.SignalR.Proximity.Professor.Wpf.csproj", "{6FD25EA5-A591-402E-9CD0-FBA5CC1325F7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Samples.SignalR.Proximity.Student.Wpf", "sample\Net.Wpf\Samples.NotifyR.Proximity.Student.Wpf\Samples.SignalR.Proximity.Student.Wpf.csproj", "{86E0A823-2035-4ABD-A472-5A04D7D66105}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Samples.SignalR.Proximity.Student.Wpf", "sample\Net.Wpf\Samples.NotifyR.Proximity.Student.Wpf\Samples.SignalR.Proximity.Student.Wpf.csproj", "{86E0A823-2035-4ABD-A472-5A04D7D66105}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SignalR.Proximity.Core", "src\SignalR.Proximity.Core\SignalR.Proximity.Core.csproj", "{0C464DC8-B849-47BC-9BA8-478EA92E4A22}"
 EndProject
@@ -67,8 +63,6 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{F0C44466-D92D-483A-81FB-7A51C0A214BD} = {500F5E07-51E6-47EA-8235-0E375FB2B8C5}
-		{F8FFF2E4-6C59-486D-9911-74604CA85DAF} = {500F5E07-51E6-47EA-8235-0E375FB2B8C5}
-		{3AB91984-88F6-4B13-B1D3-557897F244A6} = {500F5E07-51E6-47EA-8235-0E375FB2B8C5}
 		{B1B65E1D-A17A-4A83-AC09-9ED09BFC4DD5} = {D9F32C61-E4A9-4F6C-AD35-EDB7D941CF44}
 		{29335B45-4C6F-4ABF-8CE1-DD33CA488EA5} = {D9F32C61-E4A9-4F6C-AD35-EDB7D941CF44}
 		{F24E09D5-E86E-4A8C-8E69-65D7934365A8} = {F0C44466-D92D-483A-81FB-7A51C0A214BD}

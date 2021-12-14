@@ -5,15 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Samples.SignalR.Proximity.Student.Wpf"
         mc:Ignorable="d"
-      Title=".Net 4.7.2 (Notifier)" Height="550" Width="800" Background="#30FFFFFF">
+      Height="550" Width="800" Background="#30FFFFFF">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Label Content=".Net 4.7.2 (Notifier)" HorizontalAlignment="Center" FontSize="40" Foreground="LightBlue"/>
-        <Grid Grid.Row="1">
+           <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="140"/>
                 <ColumnDefinition Width="Auto"/>

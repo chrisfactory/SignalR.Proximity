@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<configuration>
-  <ConfigSettings Enable="True" Url="http://default.com"/>
-  <ConfigSettings name="dev"  Enable="True" Url="http://dev.com"/>
-  <ConfigSettings name="prod"  Enable="True" Url="http://prod.com"/>
-    
-   
-</configuration>
-

@@ -6,15 +6,14 @@
         xmlns:local="clr-namespace:Samples.SignalR.Proximity.Professor.Wpf"
         xmlns:ui="clr-namespace:Samples.Ui"
         mc:Ignorable="d"
-         Title=".Net 4.7.2 (Client)" Height="550" Width="800" Background="#30FFFFFF">
+          Height="550" Width="800" Background="#30FFFFFF">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <Label Content=".Net 4.7.2 (Client)" HorizontalAlignment="Center" FontSize="40" Foreground="LightBlue"/>
-
+         
         <ui:ToasterManagerView DataContext="{Binding ToastManager}" Grid.RowSpan="2" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="15"/>
     </Grid>
 </Window>

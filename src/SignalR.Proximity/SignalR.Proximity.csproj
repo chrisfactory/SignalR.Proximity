@@ -1,15 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>net472;netstandard2.0;netcoreapp3.1;net6.0</TargetFrameworks>
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <PackageId>SignalR.Proximity</PackageId>
-    <Version>1.0.0</Version>
-    <Authors>Christophe Ohl</Authors>
-    <Company>Chrisfactory</Company>
-    <PackageDescription>.Net SignalR Without Hub Implementations</PackageDescription>
-    <RepositoryUrl>https://github.com/chrisfactory/SignalR.Proximity</RepositoryUrl>
+    <TargetFrameworks>net6.0</TargetFrameworks>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.SignalR.Common" Version="6.0.0" />
