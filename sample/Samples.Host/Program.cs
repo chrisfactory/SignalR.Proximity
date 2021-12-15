@@ -4,8 +4,9 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
-builder.Services.AddSignalR();
 
+builder.Services.AddSignalR();//  <--------------
+builder.Services.AddProximity();//  <--------------
 
 var app = builder.Build();
 
@@ -26,9 +27,8 @@ app.UseAuthorization();
 
 app.MapRazorPages();
 app.UseEndpoints(endpoints =>
-{ 
-    endpoints.MapProximity<ProximityHub<IToastNotificationsContract>>();
-    //   endpoints.MapHub<ProximityHub<IToastNotificationsContract>>("/hubs/sample.signalr.proximity.toaster.itoastnotificationscontract");
+{
+    endpoints.MapProximity<IToastNotificationsContract>("/samples");//  <--------------
 });
 
 
