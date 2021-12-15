@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace SignalR.Proximity
 {
-    public static class HubConnectionExtensons
+    public static class HubConnectionExtensions
     {
         internal static async Task<bool> StartWithRetryAsync<TRetryPolicy>(this HubConnection connection, TRetryPolicy policy, CancellationToken token)
             where TRetryPolicy :IRetryPolicy
