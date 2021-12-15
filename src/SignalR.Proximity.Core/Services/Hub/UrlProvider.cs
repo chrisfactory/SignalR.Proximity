@@ -8,7 +8,7 @@ namespace SignalR.Proximity
 
         public Uri GetHubUrl(Uri UrlBase)
         {
-            string ns = $"hubs/{BuildNameSpace()}";
+            string ns = $"/{BuildNameSpace()}";
 
             if (UrlBase != null)
                 return new Uri(UrlBase, ns);

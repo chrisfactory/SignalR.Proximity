@@ -1,13 +1,10 @@
 ﻿using Microsoft.AspNetCore.SignalR;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace SignalR.Proximity.Hosting
 {
-    public class ProximityHub<TContract>:Hub
+    public class ProximityHub<TContract> : Hub
     {
         public virtual async void Interact(ProximityHubRequest request, object[] metaArgs)
         {

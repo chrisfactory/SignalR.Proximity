@@ -1,6 +1,5 @@
 using Sample.SignalR.Proximity.Toaster;
 using SignalR.Proximity.Hosting;
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -27,8 +26,8 @@ app.UseAuthorization();
 
 app.MapRazorPages();
 app.UseEndpoints(endpoints =>
-{
-    endpoints.MapHub<ProximityHub<IToastNotificationsContract>>("/hubs/sample.signalr.proximity.toaster.itoastnotificationscontract");
+{ 
+    endpoints.MapProximity<ProximityHub<IToastNotificationsContract>>();
     //   endpoints.MapHub<ProximityHub<IToastNotificationsContract>>("/hubs/sample.signalr.proximity.toaster.itoastnotificationscontract");
 });
 
