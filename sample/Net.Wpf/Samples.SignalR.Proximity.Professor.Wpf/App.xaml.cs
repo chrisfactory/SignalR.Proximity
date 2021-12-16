@@ -1,7 +1,7 @@
-﻿using System.IO; 
+﻿using System.IO;
 using System.Windows;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Configuration; 
+using Microsoft.Extensions.Configuration;
 using SignalR.Proximity;
 
 namespace Samples.SignalR.Proximity.Professor.Wpf
@@ -14,31 +14,51 @@ namespace Samples.SignalR.Proximity.Professor.Wpf
 
         public App()
         {
-            var services = new ServiceCollection();
-            var config = new ConfigurationBuilder()
-                            .SetBasePath(Directory.GetCurrentDirectory())
-                            .AddJsonFile("Config.json", optional: false, reloadOnChange: false)
-                             //.AddXmlFile("Config.xml", optional: false, reloadOnChange: false)
-                             .Build();
-
+            IConfigurationRoot config = null;
+            var services = CreateServices(out config);
+             
             ConfigureServices(services, config);
-            services.AddSingleton<MainWindow>();
 
+            ConfigureSampleAppServices(services, config);
+            BuildApp(services);
+        }
+
+         
+        private void ConfigureServices(IServiceCollection services, IConfigurationRoot rootConfig)
+        {
+            services.UseProximity(proximity =>
+            {
+                proximity.AddEndPoint("https://localhost:5011");
+                proximity.AddEndPoint("From.Code", "https://localhost:5011");
+                proximity.AddEndPoint("From.ConfigFile", rootConfig.GetSection("Proximity"));
+            });
+        }
+
+
+        #region Not relevant for the examples 
+        private static IServiceCollection CreateServices(out IConfigurationRoot config)
+        {
+            var services = new ServiceCollection();
+            config =new ConfigurationBuilder()
+                        .SetBasePath(Directory.GetCurrentDirectory())
+                        .AddJsonFile("Config.json", optional: false, reloadOnChange: false)
+                        //.AddXmlFile("Config.xml", optional: false, reloadOnChange: false)
+                        .Build();
+
+            return services;
+        }
+        private void ConfigureSampleAppServices(IServiceCollection services, IConfigurationRoot rootConfig)
+        {
+            services.AddSingleton<GlobalViewModel>();
+            services.AddSingleton<MainWindow>();
+        }
+        private void BuildApp(IServiceCollection services)
+        {
             this.MainWindow = services.BuildServiceProvider().GetRequiredService<MainWindow>();
             this.MainWindow.Show();
         }
+        #endregion 
 
-        private void ConfigureServices(IServiceCollection serviceCollection, IConfigurationRoot rootConfig)
-        {
-            serviceCollection.UseProximity(proximity =>
-            {
-                proximity.AddEndPoint("https://localhost:5011"); 
-                proximity.AddEndPoint("From.Code", "https://localhost:5011"); 
-                proximity.AddEndPoint("From.ConfigFile", rootConfig.GetSection("Proximity"));
-            });
-
-
-        }
     }
 
 

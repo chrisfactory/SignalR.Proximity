@@ -1,22 +1,15 @@
 ﻿using Prism.Commands;
-using System;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-namespace Samples.Ui
-{
-    public interface IToastHost
+using System; 
+namespace Samples.Framework.WPF.Concepts.Toaster
+{ 
+    public class ToastViewModel : ViewModelBase
     {
-        void OnClosed(ToastViewModel item);
-    }
-    public class ToastViewModel : INotifyPropertyChanged
-    {
-        private IToastHost _host;
-        private PropertyChangedEventHandler _PropertyChanged;
-        private string _Title;
-        private string _User;
-        private string _Message;
+        private IToastableHost _host; 
+        private string? _Title;
+        private string? _User;
+        private string? _Message;
         private ToastTypes _ToastType;
-        public ToastViewModel(IToastHost host, ToastInfo infos)
+        public ToastViewModel(IToastableHost host, ToastInfo infos)
         {
 
             if (infos == null)
@@ -36,7 +29,7 @@ namespace Samples.Ui
 
 
         public DelegateCommand ClosedCommand { get; private set; }
-        public string User
+        public string? User
         {
             get { return _User; }
             private set
@@ -48,7 +41,7 @@ namespace Samples.Ui
                 }
             }
         }
-        public string Title
+        public string? Title
         {
             get { return _Title; }
             private set
@@ -60,7 +53,7 @@ namespace Samples.Ui
                 }
             }
         }
-        public string Message
+        public string? Message
         {
             get { return _Message; }
             private set
@@ -88,16 +81,6 @@ namespace Samples.Ui
         private void CloasAction()
         {
             _host.OnClosed(this);
-        }
-
-        event PropertyChangedEventHandler INotifyPropertyChanged.PropertyChanged { add { _PropertyChanged += value; } remove { _PropertyChanged -= value; } }
-        private void Notify([CallerMemberName]string propertyName = null)
-        {
-            var handler = _PropertyChanged;
-            if (handler != null)
-            {
-                handler(this, new PropertyChangedEventArgs(propertyName));
-            }
-        }
+        } 
     }
 }

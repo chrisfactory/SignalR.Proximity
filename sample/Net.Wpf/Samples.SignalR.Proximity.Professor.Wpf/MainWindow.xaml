@@ -3,17 +3,11 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Samples.SignalR.Proximity.Professor.Wpf"
-        xmlns:ui="clr-namespace:Samples.Ui"
+        xmlns:local="clr-namespace:Samples.SignalR.Proximity.Professor.Wpf" 
         mc:Ignorable="d"
-          Height="550" Width="800" Background="#30FFFFFF">
+        Height="550" Width="800" Background="#30FFFFFF">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-
-         
-        <ui:ToasterManagerView DataContext="{Binding ToastManager}" Grid.RowSpan="2" HorizontalAlignment="Right" VerticalAlignment="Bottom" Margin="15"/>
+       
+ 
     </Grid>
 </Window>

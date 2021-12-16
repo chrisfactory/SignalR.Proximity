@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.Connections;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 
 namespace SignalR.Proximity.Hosting
 {
@@ -11,20 +13,20 @@ namespace SignalR.Proximity.Hosting
         public ProximityHubBuilder()
         {
             Services = new ServiceCollection();
+            Services.AddOptions<ProximityHubBuilderConfiguration>();
             Services.AddSingleton<IUrlProvider<TContract>, UrlProvider<TContract>>();
             Services.AddSingleton<ISignalRPatternProvider, SignalRPatternProvider<TContract>>();
         }
 
         public IServiceCollection Services { get; }
 
-        public void Build()
+        public void Build(Action<HttpConnectionDispatcherOptions>? configureOptions)
         {
             var provider = this.Services.BuildServiceProvider();
             var endPointBuilder = provider.GetRequiredService<IEndpointRouteBuilder>();
             var patternProvider = provider.GetRequiredService<ISignalRPatternProvider>();
-            var pattern = patternProvider.GetPattern();
-            //var ... = Action<HttpConnectionDispatcherOptions> ? configureOptions
-            endPointBuilder.MapHub<TProximityHub>(pattern);
+            var pattern = patternProvider.GetPattern(); 
+            endPointBuilder.MapHub<TProximityHub>(pattern, configureOptions);
         }
     }
 }

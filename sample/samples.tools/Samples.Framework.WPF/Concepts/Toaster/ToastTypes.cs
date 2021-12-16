@@ -1,4 +1,4 @@
-﻿namespace Samples.Ui
+﻿namespace Samples.Framework.WPF.Concepts.Toaster
 {
     public enum ToastTypes
     {
