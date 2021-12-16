@@ -1,8 +1,13 @@
 ﻿<Application x:Class="Samples.SignalR.Proximity.Professor.Wpf.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:Samples.SignalR.Proximity.Professor.Wpf" >
+             xmlns:local="clr-namespace:Samples.SignalR.Proximity.Professor.Wpf"
+             xmlns:sampleFrwk="clr-namespace:Samples.Framework.WPF;assembly=Samples.Framework.WPF">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <sampleFrwk:SampleBaseResources/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>

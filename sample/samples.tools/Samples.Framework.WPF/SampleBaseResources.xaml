@@ -1,0 +1,9 @@
+﻿<ResourceDictionary x:Class="Samples.Framework.WPF.SampleBaseResources"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Samples.Framework.WPF"
+             xmlns:step="clr-namespace:Samples.Framework.WPF.Concepts.SampleStep">
+    <DataTemplate DataType="{x:Type step:SampleStepManager}">
+        <step:SampleSteManagerMenuViewer/>
+    </DataTemplate>
+</ResourceDictionary>
