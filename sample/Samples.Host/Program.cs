@@ -18,8 +18,6 @@ if (!app.Environment.IsDevelopment())
     app.UseHsts();
 }
 
-//Test codeql-analysis
-if (app!=null) { }    
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();

@@ -16,14 +16,9 @@ namespace Samples.SignalR.Proximity.Professor.Wpf
         private readonly IServiceProvider _provider;
         public App()
         {
-            IConfigurationRoot config = null;
-            var services = CreateServices(out config);
-
-
+            var services = CreateServices(out var config);
 
             ConfigureServices(services, config);
-
-
 
 
             ConfigureSampleAppServices(services, config);
