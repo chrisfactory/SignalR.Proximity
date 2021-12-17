@@ -82,7 +82,7 @@ namespace SignalR.Proximity
             var hubUri = _urlProvider.GetHubUrl(_config.UrlBase,_config.Pattern);
 
 
-            builder.WithAutomaticReconnect(_retryPolicy)
+            _=builder.WithAutomaticReconnect(_retryPolicy)
             .WithUrl(hubUri, options =>
             {
                 options.AccessTokenProvider = () => _tokenProvider.GetTokenAsync(_config.UrlBase);

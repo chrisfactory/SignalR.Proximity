@@ -1,4 +1,5 @@
-﻿namespace SignalR.Proximity
+﻿using System;
+namespace SignalR.Proximity
 {
     internal class ProximityEndPointProvider : IProximityEndPointProvider
     {
@@ -13,7 +14,10 @@
         }
         public IProximityEndPoint Get(string name)
         {
-            return _container.Get(name).Value;
+            var endPoint = _container.Get(name);
+            if (endPoint == null)
+                throw new NullReferenceException(nameof(endPoint));
+            return endPoint.Value;
         }
     }
 }

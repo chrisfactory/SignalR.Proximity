@@ -4,6 +4,6 @@ namespace SignalR.Proximity
 {
     internal interface IEndPointContainer
     {
-        Lazy<IProximityEndPoint> Get(string name);
+        Lazy<IProximityEndPoint>? Get(string name);
     }
 }

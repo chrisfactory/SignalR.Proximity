@@ -9,7 +9,7 @@ namespace SignalR.Proximity
         IClient<TContract> Client { get; } 
 
 
-        string ConnectionId { get; }
+        string? ConnectionId { get; }
 
         Task<bool> StartAsync(CancellationToken cancellationToken = default(CancellationToken));
         Task StopAsync(CancellationToken cancellationToken = default(CancellationToken));

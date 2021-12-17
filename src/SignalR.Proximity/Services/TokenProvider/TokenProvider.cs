@@ -7,9 +7,9 @@ namespace SignalR.Proximity
     {
         public DateTimeOffset? AbsoluteExpiration { get; set; }
 
-        public Task<string>? GetTokenAsync(Uri baseAddress)
+        public Task<string?> GetTokenAsync(Uri? baseAddress)
         {
-            return Task.FromResult(string.Empty);
+            return Task.FromResult<string?>(string.Empty);
         }
     }
 }

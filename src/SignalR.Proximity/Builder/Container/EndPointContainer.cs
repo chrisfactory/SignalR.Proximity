@@ -11,9 +11,9 @@ namespace SignalR.Proximity
             foreach (var builderKV in containers)
                 _endPoints.Add(builderKV.Key, builderKV.Value);
         }
-        public Lazy<IProximityEndPoint> Get(string name)
+        public Lazy<IProximityEndPoint>? Get(string name)
         {
-            _endPoints.TryGetValue(name, out Lazy<IProximityEndPoint> endPoint);
+            _endPoints.TryGetValue(name, out  Lazy<IProximityEndPoint>? endPoint);
             return endPoint;
         }
     }

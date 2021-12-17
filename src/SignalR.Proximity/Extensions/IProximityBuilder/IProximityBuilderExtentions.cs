@@ -12,12 +12,12 @@ namespace SignalR.Proximity
         public static IProximityBuilder AddEndPoint(this IProximityBuilder source, string name, Uri urlBase) => source.AddEndPointCore(name, null, b => b.UseUrlBase(urlBase));
         public static IProximityBuilder AddEndPoint(this IProximityBuilder source, string urlBase) => source.AddEndPointCore(ContainerKeyValue.DefaultContainerName, null, b => b.UseUrlBase(urlBase));
         public static IProximityBuilder AddEndPoint(this IProximityBuilder source, Uri urlBase) => source.AddEndPointCore(ContainerKeyValue.DefaultContainerName, null, b => b.UseUrlBase(urlBase));
-        public static IProximityBuilder AddEndPoint(this IProximityBuilder source, Action<IProximityEndPointBuilder> configure = null) => source.AddEndPointCore(ContainerKeyValue.DefaultContainerName, null, configure);
-        public static IProximityBuilder AddEndPoint(this IProximityBuilder source, string name, Action<IProximityEndPointBuilder> configure = null) => source.AddEndPointCore(name, null, configure);
-        public static IProximityBuilder AddEndPoint(this IProximityBuilder source, IConfiguration config, Action<IProximityEndPointBuilder> configure = null) => source.AddEndPointCore(ContainerKeyValue.DefaultContainerName, config, configure);
-        public static IProximityBuilder AddEndPoint(this IProximityBuilder source, string name, IConfiguration config, Action<IProximityEndPointBuilder> configure = null) => source.AddEndPointCore(name, config, configure);
+        public static IProximityBuilder AddEndPoint(this IProximityBuilder source, Action<IProximityEndPointBuilder>? configure = null) => source.AddEndPointCore(ContainerKeyValue.DefaultContainerName, null, configure);
+        public static IProximityBuilder AddEndPoint(this IProximityBuilder source, string name, Action<IProximityEndPointBuilder>? configure = null) => source.AddEndPointCore(name, null, configure);
+        public static IProximityBuilder AddEndPoint(this IProximityBuilder source, IConfiguration config, Action<IProximityEndPointBuilder>? configure = null) => source.AddEndPointCore(ContainerKeyValue.DefaultContainerName, config, configure);
+        public static IProximityBuilder AddEndPoint(this IProximityBuilder source, string name, IConfiguration config, Action<IProximityEndPointBuilder>? configure = null) => source.AddEndPointCore(name, config, configure);
 
-        private static IProximityBuilder AddEndPointCore(this IProximityBuilder source, string name, IConfiguration config, Action<IProximityEndPointBuilder> configure = null)
+        private static IProximityBuilder AddEndPointCore(this IProximityBuilder source, string? name, IConfiguration? config, Action<IProximityEndPointBuilder>? configure = null)
         {
             if (string.IsNullOrWhiteSpace(name))
                 throw new ArgumentNullException(nameof(name));
