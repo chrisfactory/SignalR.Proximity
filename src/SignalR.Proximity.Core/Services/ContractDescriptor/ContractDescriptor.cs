@@ -51,7 +51,7 @@ namespace SignalR.Proximity
         public IEnumerable<MethodDescriptor> GetDescription<TProxy>(TProxy instance)
             where TProxy : TContract
         {
-            if(instance == null)
+            if (instance == null)
                 throw new ArgumentNullException(nameof(instance));
 
             var proxyType = typeof(TContract);

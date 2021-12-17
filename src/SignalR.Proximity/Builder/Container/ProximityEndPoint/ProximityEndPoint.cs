@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Options;
 using System;
 
 namespace SignalR.Proximity
@@ -13,7 +12,7 @@ namespace SignalR.Proximity
         }
 
         public IConnection<TContract> Connect<TContract>()
-        { 
+        {
             return this._provider.GetRequiredService<IConnectionBuilder<TContract>>().Build();
         }
     }

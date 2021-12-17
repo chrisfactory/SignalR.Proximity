@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 
 namespace SignalR.Proximity
-{ 
+{
     internal class TokenProvider : ITokenProvider
     {
         public DateTimeOffset? AbsoluteExpiration { get; set; }

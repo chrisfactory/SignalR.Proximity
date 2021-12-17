@@ -4,11 +4,11 @@
     {
         public static IConnection<TContract> Connect<TContract>(this IProximityEndPointProvider provider)
         {
-           return provider.Get().Connect<TContract>();
+            return provider.Get().Connect<TContract>();
         }
-        public static IConnection<TContract> Connect<TContract>(this IProximityEndPointProvider provider,string endPointName)
+        public static IConnection<TContract> Connect<TContract>(this IProximityEndPointProvider provider, string endPointName)
         {
-           return provider.Get(endPointName).Connect<TContract>();
+            return provider.Get(endPointName).Connect<TContract>();
         }
     }
 }

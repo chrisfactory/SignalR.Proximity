@@ -1,10 +1,10 @@
-﻿using System.IO;
-using System.Windows;
+﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Configuration;
-using SignalR.Proximity;
 using Samples.Framework.WPF.Concepts.SampleStep;
+using SignalR.Proximity;
 using System;
+using System.IO;
+using System.Windows;
 
 namespace Samples.SignalR.Proximity.Professor.Wpf
 {

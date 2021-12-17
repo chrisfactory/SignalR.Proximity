@@ -13,7 +13,7 @@ namespace SignalR.Proximity
         }
         public Lazy<IProximityEndPoint>? Get(string name)
         {
-            _endPoints.TryGetValue(name, out  Lazy<IProximityEndPoint>? endPoint);
+            _endPoints.TryGetValue(name, out Lazy<IProximityEndPoint>? endPoint);
             return endPoint;
         }
     }

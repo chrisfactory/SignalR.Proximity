@@ -63,7 +63,7 @@ namespace SignalR.Proximity
             if (_connection.State == HubConnectionState.Connected)
                 await _connection.InvokeAsync("Interact", new ProximityHubRequest() { Scope = ClientScopeDefinition.QuitGroups(groups) }, new object[0]);
 
-        } 
+        }
 
     }
 }

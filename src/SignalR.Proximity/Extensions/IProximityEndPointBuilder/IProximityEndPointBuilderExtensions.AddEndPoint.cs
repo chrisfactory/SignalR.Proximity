@@ -6,7 +6,7 @@ namespace SignalR.Proximity
     {
         public static IProximityEndPointBuilder UseUrlBase(this IProximityEndPointBuilder builder, string uriString)
         {
-            builder.Services.Configure< ProximityEndPointConfig>(c => c.UrlBase = new Uri(uriString));
+            builder.Services.Configure<ProximityEndPointConfig>(c => c.UrlBase = new Uri(uriString));
 
             return builder;
         }

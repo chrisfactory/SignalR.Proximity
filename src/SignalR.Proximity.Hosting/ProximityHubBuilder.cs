@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Connections;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
@@ -25,7 +24,7 @@ namespace SignalR.Proximity.Hosting
             var provider = this.Services.BuildServiceProvider();
             var endPointBuilder = provider.GetRequiredService<IEndpointRouteBuilder>();
             var patternProvider = provider.GetRequiredService<ISignalRPatternProvider>();
-            var pattern = patternProvider.GetPattern(); 
+            var pattern = patternProvider.GetPattern();
             endPointBuilder.MapHub<TProximityHub>(pattern, configureOptions);
         }
     }

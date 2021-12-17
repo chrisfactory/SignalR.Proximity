@@ -11,7 +11,7 @@ namespace SignalR.Proximity
         private readonly IRetryPolicy _policy;
         private readonly Lazy<INotifier<TContract>> _notifier;
         private readonly Lazy<IClient<TContract>> _client;
-       
+
         public Connection(
             HubConnection connection,
             IRetryPolicy policy,

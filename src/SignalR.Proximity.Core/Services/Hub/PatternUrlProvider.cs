@@ -1,8 +1,8 @@
 ﻿using System;
 namespace SignalR.Proximity
-{  
+{
     public class PatternUrlProvider<TContract> : IPatternUrlProvider<TContract>
-    { 
+    {
         public string? Postfix { get; set; }
         public bool UseMachineNamePostfix { get; set; }
 

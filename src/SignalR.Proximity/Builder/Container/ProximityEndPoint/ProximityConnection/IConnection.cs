@@ -6,7 +6,7 @@ namespace SignalR.Proximity
     public interface IConnection<TContract>
     {
         INotifier<TContract> Notifier { get; }
-        IClient<TContract> Client { get; } 
+        IClient<TContract> Client { get; }
 
 
         string? ConnectionId { get; }

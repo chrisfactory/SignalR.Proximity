@@ -25,10 +25,10 @@ namespace Microsoft.AspNetCore.Builder
         where TProximityHub : ProximityHub<TContract>
         {
             var proximityBuilder = builder.ServiceProvider.GetRequiredService<IProximityHubBuilder<TProximityHub, TContract>>();
-            proximityBuilder.UseEndpointRouteBuilder(builder); 
+            proximityBuilder.UseEndpointRouteBuilder(builder);
             proximityBuilder.Services.Configure<ProximityHubBuilderConfiguration>(config => config.SignalRPattern = pattern);
             proximityBuilder.Build(configureOptions);
-          
+
             return builder;
         }
     }

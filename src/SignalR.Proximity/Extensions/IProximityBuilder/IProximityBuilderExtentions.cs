@@ -7,8 +7,8 @@ namespace SignalR.Proximity
 {
     public static partial class IProximityBuilderExtentions
     {
- 
-        public static IProximityBuilder AddEndPoint(this IProximityBuilder source, string name, string urlBase) => source.AddEndPointCore(name, null, b => b.UseUrlBase(urlBase));  
+
+        public static IProximityBuilder AddEndPoint(this IProximityBuilder source, string name, string urlBase) => source.AddEndPointCore(name, null, b => b.UseUrlBase(urlBase));
         public static IProximityBuilder AddEndPoint(this IProximityBuilder source, string name, Uri urlBase) => source.AddEndPointCore(name, null, b => b.UseUrlBase(urlBase));
         public static IProximityBuilder AddEndPoint(this IProximityBuilder source, string urlBase) => source.AddEndPointCore(ContainerKeyValue.DefaultContainerName, null, b => b.UseUrlBase(urlBase));
         public static IProximityBuilder AddEndPoint(this IProximityBuilder source, Uri urlBase) => source.AddEndPointCore(ContainerKeyValue.DefaultContainerName, null, b => b.UseUrlBase(urlBase));

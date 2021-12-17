@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.SignalR.Client;
-using System; 
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -8,7 +8,7 @@ namespace SignalR.Proximity
     public static class HubConnectionExtensions
     {
         internal static async Task<bool> StartWithRetryAsync<TRetryPolicy>(this HubConnection connection, TRetryPolicy policy, CancellationToken token)
-            where TRetryPolicy :IRetryPolicy
+            where TRetryPolicy : IRetryPolicy
         {
             RetryContext context = new RetryContext();
             while (true)
@@ -42,7 +42,7 @@ namespace SignalR.Proximity
                     await connection.StartAsync(token);
 
             }
-            catch  
+            catch
             {
                 if (connection.State != HubConnectionState.Connected)//Situation de compétition sur StartAsync
                 {
@@ -50,6 +50,6 @@ namespace SignalR.Proximity
                 }
             }
             return connection.State == HubConnectionState.Connected;
-        } 
+        }
     }
 }
