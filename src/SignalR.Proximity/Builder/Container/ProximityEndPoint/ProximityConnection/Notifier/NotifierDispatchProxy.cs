@@ -17,19 +17,17 @@ namespace SignalR.Proximity
             _scope = scope;
         }
 
-        protected override object Invoke(MethodInfo targetMethod, object[] args)
+        protected override  object Invoke(MethodInfo targetMethod, object[] args)
         {
             var methodKey = targetMethod.ToString();
             if (targetMethod.IsGenericMethod)
                 throw new InvalidOperationException($"{methodKey} ne peut être generique");
             if (targetMethod.ReturnType != typeof(void))
                 throw new InvalidOperationException($"{methodKey} ReturnType ne peut être différent de void");
-
-            var task = _hubConnection.InvokeAsync("Interact", new ProximityHubRequest() { Argument = methodKey, Scope = _scope }, args);
-            var aw = task.GetAwaiter();
-            aw.GetResult();
+            _= Task.Factory.StartNew(async () => await _hubConnection.InvokeAsync("Interact", new ProximityHubRequest() { Argument = methodKey, Scope = _scope }, args));
+       
             return null;
-        } 
+        }
 
     }
 }

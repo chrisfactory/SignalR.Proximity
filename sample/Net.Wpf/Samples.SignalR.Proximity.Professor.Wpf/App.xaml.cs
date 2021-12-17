@@ -35,9 +35,7 @@ namespace Samples.SignalR.Proximity.Professor.Wpf
         {
             services.UseProximity(proximity =>
             {
-                proximity.AddEndPoint("https://localhost:5011");
-                proximity.AddEndPoint("From.Code", "https://localhost:5011");
-                proximity.AddEndPoint("From.ConfigFile", rootConfig.GetSection("Proximity"));
+                proximity.AddEndPoint(rootConfig.GetSection("Proximity"));
             });
         }
 
@@ -60,6 +58,8 @@ namespace Samples.SignalR.Proximity.Professor.Wpf
             services.AddSingleton<MainWindow>();
             services.AddSingleton<GlobalViewModel>();
             services.AddSingleton<SampleStepManager>();
+
+            services.AddSingleton<ProfessorViewModel>();
             services.AddTransient<ISampleStep, ProximityAppConfigurationStep>();
         }
 
@@ -68,7 +68,7 @@ namespace Samples.SignalR.Proximity.Professor.Wpf
         {
             base.OnStartup(e);
             this.MainWindow =this._provider.GetRequiredService<MainWindow>();
-            this.MainWindow.Show(); 
+            this.MainWindow.Show();
         }
         #endregion 
 

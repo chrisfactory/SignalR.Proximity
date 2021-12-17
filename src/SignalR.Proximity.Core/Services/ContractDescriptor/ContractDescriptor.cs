@@ -28,13 +28,13 @@ namespace SignalR.Proximity
 
             return miDefinition.ToString();
         }
-        public Task ReceiveAsync(object[] arg1)
+        internal Task ReceiveAsync(object[] arg1)
         {
             Method.Invoke(Instance, arg1);
             return Task.CompletedTask;
         }
 
-        public Type[] GetArgsTypes()
+        internal Type[] GetArgsTypes()
         {
             var argsTypes = Method.GetParameters();
             return argsTypes.Select(m => m.ParameterType).ToArray();
@@ -51,7 +51,7 @@ namespace SignalR.Proximity
         public IEnumerable<MethodDescriptor> GetDescription<TProxy>(TProxy instance)
             where TProxy : TContract
         {
-            var proxyType = typeof(TProxy);
+            var proxyType = typeof(TContract);
             if (!proxyType.IsInterface)
                 throw new ArgumentException($"{proxyType.FullName} n'est pas une interface");
 

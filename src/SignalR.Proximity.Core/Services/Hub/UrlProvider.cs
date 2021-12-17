@@ -6,9 +6,9 @@ namespace SignalR.Proximity
         public string Postfix { get; set; }
         public bool UseMachineNamePostfix { get; set; }
 
-        public Uri GetHubUrl(Uri UrlBase)
+        public Uri GetHubUrl(Uri UrlBase, string pattern)
         {
-            string ns = $"/{BuildNameSpace()}";
+            string ns = $"{pattern}/{BuildNameSpace()}";
 
             if (UrlBase != null)
                 return new Uri(UrlBase, ns);

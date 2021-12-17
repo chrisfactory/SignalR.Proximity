@@ -10,6 +10,6 @@ namespace SignalR.Proximity
 
     public interface INotifierCaller<TContract>
     {
-        Task Notify(Action<TContract> action);
+        Task NotifyAsync(Action<TContract> action);
     }
 }

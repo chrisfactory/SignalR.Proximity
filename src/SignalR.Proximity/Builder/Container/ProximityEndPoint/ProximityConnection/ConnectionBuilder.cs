@@ -79,7 +79,7 @@ namespace SignalR.Proximity
         public IHubConnectionBuilder Configure(IHubConnectionBuilder builder)
         {
 
-            var hubUri = _urlProvider.GetHubUrl(_config.UrlBase);
+            var hubUri = _urlProvider.GetHubUrl(_config.UrlBase,_config.Pattern);
 
 
             builder.WithAutomaticReconnect(_retryPolicy)

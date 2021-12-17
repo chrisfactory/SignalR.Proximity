@@ -1,25 +1,6 @@
 {
-  "Proximity": { 
+  "Proximity": {
     "UrlBase": "https://localhost:5011",
-    "AutoRestoreGroups": true
-  },
-
-
-  "Proximity:dev": { 
-    "UrlBase": "http://dev.com",
-    "HubNamespaceProvider": {
-      "Postfix": "TestPostFix_DEV",
-      "UseMachineNamePostfix": true
-    }
-  },
-
-
-  "Proximity:prod": {  
-    "UrlBase": "http://prod.com",
-    "HubNamespaceProvider": {
-      "Postfix": "TestPostFix_PROD"
-    }
+    "Pattern": "/samples"
   }
-
-
 }

@@ -29,11 +29,20 @@ namespace SignalR.Proximity
                 this._scope = scope; 
             }
 
-            public Task Notify(Action<TContract> action)
+            public Task NotifyAsync(Action<TContract> action)
             {
-                var proxy = DispatchProxy.Create<TContract, NotifierDispatchProxy>();
-                (proxy as NotifierDispatchProxy)?.Attach(_connection, _scope);
-                action?.Invoke(proxy);
+                try
+                {
+                    var proxy = DispatchProxy.Create<TContract, NotifierDispatchProxy>();
+                    (proxy as NotifierDispatchProxy)?.Attach(_connection, _scope);
+                    action?.Invoke(proxy);
+                }
+                catch (Exception  ex)
+                {
+
+                    throw;
+                }
+               
                 return Task.CompletedTask;
             }
         }
