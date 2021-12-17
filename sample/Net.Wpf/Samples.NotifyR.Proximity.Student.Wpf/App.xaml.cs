@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection; 
+using Microsoft.Extensions.DependencyInjection;
 using System.IO;
 using System.Windows;
 
@@ -21,12 +21,12 @@ namespace Samples.SignalR.Proximity.Student.Wpf
 
             ConfigureServices(serviceCollection, config);
 
-         //   var _serviceProvider = serviceCollection.BuildServiceProvider(); 
+            //   var _serviceProvider = serviceCollection.BuildServiceProvider(); 
         }
 
         private void ConfigureServices(IServiceCollection serviceCollection, IConfigurationRoot rootConfig)
         {
-            
+
         }
     }
 }
