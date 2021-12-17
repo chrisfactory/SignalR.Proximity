@@ -5,6 +5,6 @@ namespace SignalR.Proximity
 {
     public interface ITokenProvider
     {  
-        Task<string> GetTokenAsync(Uri baseAddress);
+        Task<string>? GetTokenAsync(Uri baseAddress);
     }
 }

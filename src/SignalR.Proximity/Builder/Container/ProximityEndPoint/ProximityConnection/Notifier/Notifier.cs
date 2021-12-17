@@ -14,35 +14,27 @@ namespace SignalR.Proximity
         }
 
         public INotifierCaller<TContract> CreateCaller(NotifierScopeDefinition scope)
-        { 
+        {
             return new Caller(_connection, scope);
         }
 
         private class Caller : INotifierCaller<TContract>
         {
             private HubConnection _connection;
-            private NotifierScopeDefinition _scope; 
+            private NotifierScopeDefinition _scope;
 
             public Caller(HubConnection connection, NotifierScopeDefinition scope)
             {
                 this._connection = connection;
-                this._scope = scope; 
+                this._scope = scope;
             }
 
             public Task NotifyAsync(Action<TContract> action)
             {
-                try
-                {
-                    var proxy = DispatchProxy.Create<TContract, NotifierDispatchProxy>();
-                    (proxy as NotifierDispatchProxy)?.Attach(_connection, _scope);
-                    action?.Invoke(proxy);
-                }
-                catch (Exception  ex)
-                {
+                var proxy = DispatchProxy.Create<TContract, NotifierDispatchProxy>();
+                (proxy as NotifierDispatchProxy)?.Attach(_connection, _scope);
+                action?.Invoke(proxy);
 
-                    throw;
-                }
-               
                 return Task.CompletedTask;
             }
         }

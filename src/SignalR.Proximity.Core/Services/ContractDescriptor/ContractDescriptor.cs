@@ -26,9 +26,9 @@ namespace SignalR.Proximity
             if (mi.IsGenericMethod)
                 miDefinition = mi.GetGenericMethodDefinition();//.GetBaseDefinition();
 
-            return miDefinition.ToString();
+            return miDefinition.ToString()??String.Empty;
         }
-        internal Task ReceiveAsync(object[] arg1)
+        internal Task ReceiveAsync(object?[] arg1)
         {
             Method.Invoke(Instance, arg1);
             return Task.CompletedTask;

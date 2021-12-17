@@ -2,6 +2,6 @@
 {
     public class ScopeOptions
     {
-        public ScopeDefinitionBase Scope { get; set; }
+        public ScopeDefinitionBase? Scope { get; set; }
     }
 }
