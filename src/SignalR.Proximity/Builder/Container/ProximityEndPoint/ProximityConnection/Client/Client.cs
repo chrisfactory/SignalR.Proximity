@@ -6,15 +6,17 @@ namespace SignalR.Proximity
     internal class Client<TContract> : IClient<TContract>
     {
         private readonly HubConnection _connection;
-        public Client(HubConnection cnx)
+        private readonly IContractDescriptor<TContract> _descriptor;
+        public Client(HubConnection cnx, IContractDescriptor<TContract> descriptor)
         {
             this._connection = cnx;
+            this._descriptor = descriptor;
         }
         public void Attach<T>(T instance) where T : class, TContract
         {
             HubConnection cnx = _connection;
-            foreach (var item in MethodContractDescriptor.Create<TContract>(instance))
-                cnx.On(item.Key, item.GetArgsTypes(), item.ReceiveAsync); 
+            foreach (var item in this._descriptor.GetDescription<T>(instance))
+                cnx.On(item.Key, item.GetArgsTypes(), item.ReceiveAsync);
         }
 
         public void Dettach<T>(T instance) where T : class, TContract

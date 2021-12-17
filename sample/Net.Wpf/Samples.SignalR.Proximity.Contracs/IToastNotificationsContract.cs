@@ -1,4 +1,6 @@
-﻿namespace Sample.SignalR.Proximity.Toaster
+﻿using System;
+
+namespace Sample.SignalR.Proximity.Toaster
 {
     public class ToasterRequest
     {
@@ -6,6 +8,7 @@
         public string Message { get; set; }
         public string FromUser { get; set; }
     }
+     
     public interface IToastNotificationsContract
     {
         void ShowInformation(ToasterRequest request);
