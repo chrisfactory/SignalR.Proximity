@@ -12,7 +12,7 @@ namespace SignalR.Proximity
             Services.AddOptions<ProximityEndPointConfig>();
             Services.AddSingleton<IRetryPolicy, RetryPolicy>();
             Services.AddSingleton<ITokenProvider, TokenProvider>();
-            Services.AddSingleton(typeof(IUrlProvider<>), typeof(UrlProvider<>)); 
+            Services.AddSingleton(typeof(IPatternUrlProvider<>), typeof(PatternUrlProvider<>)); 
            
         }
         public IServiceCollection Services { get; }

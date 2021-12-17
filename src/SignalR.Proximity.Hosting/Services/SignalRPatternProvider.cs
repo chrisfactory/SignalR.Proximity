@@ -10,9 +10,9 @@ namespace SignalR.Proximity.Hosting
 {
     internal class SignalRPatternProvider<TContract> : ISignalRPatternProvider
     {
-        private readonly IUrlProvider<TContract> urlProvider;
+        private readonly IPatternUrlProvider<TContract> urlProvider;
         private readonly ProximityHubBuilderConfiguration _config;
-        public SignalRPatternProvider(IUrlProvider<TContract> urlProvider, IOptions<ProximityHubBuilderConfiguration> configurationOptions)
+        public SignalRPatternProvider(IPatternUrlProvider<TContract> urlProvider, IOptions<ProximityHubBuilderConfiguration> configurationOptions)
         {
             this.urlProvider = urlProvider;
             this._config = configurationOptions.Value;

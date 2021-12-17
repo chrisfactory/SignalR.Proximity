@@ -14,7 +14,7 @@ namespace SignalR.Proximity.Hosting
         {
             Services = new ServiceCollection();
             Services.AddOptions<ProximityHubBuilderConfiguration>();
-            Services.AddSingleton<IUrlProvider<TContract>, UrlProvider<TContract>>();
+            Services.AddSingleton<IPatternUrlProvider<TContract>, PatternUrlProvider<TContract>>();
             Services.AddSingleton<ISignalRPatternProvider, SignalRPatternProvider<TContract>>();
         }
 
