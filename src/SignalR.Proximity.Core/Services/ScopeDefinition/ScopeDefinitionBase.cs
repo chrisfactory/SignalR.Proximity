@@ -3,11 +3,11 @@ namespace SignalR.Proximity
 {
     public class ScopeDefinitionBase
     {
-        protected ScopeDefinitionBase()
+        public ScopeDefinitionBase()
         {
 
         }
-        protected ScopeDefinitionBase(string? request, IReadOnlyList<string>? arguments, string? argument)
+        protected ScopeDefinitionBase(string request, IReadOnlyList<string>? arguments, string? argument)
         {
             Request = request;
             Arguments = arguments;
