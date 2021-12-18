@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http.Connections;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
+using SignalR.Proximity.Core;
 using SignalR.Proximity.Hosting;
 using System;
 
@@ -26,7 +27,7 @@ namespace Microsoft.AspNetCore.Builder
         {
             var proximityBuilder = builder.ServiceProvider.GetRequiredService<IProximityHubBuilder<TProximityHub, TContract>>();
             proximityBuilder.UseEndpointRouteBuilder(builder);
-            proximityBuilder.Services.Configure<ProximityHubBuilderConfiguration>(config => config.SignalRPattern = pattern);
+            proximityBuilder.Services.Configure<ProximityConfigurationCore>(config => config.PatternBase = pattern);
             proximityBuilder.Build(configureOptions);
 
             return builder;

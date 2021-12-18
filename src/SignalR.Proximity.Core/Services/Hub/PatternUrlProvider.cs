@@ -1,37 +1,40 @@
-﻿using System;
+﻿using Microsoft.Extensions.Options;
+using SignalR.Proximity.Core;
+using System;
 namespace SignalR.Proximity
 {
     public class PatternUrlProvider<TContract> : IPatternUrlProvider<TContract>
     {
-        public string? Postfix { get; set; }
-        public bool UseMachineNamePostfix { get; set; }
-
-        public Uri GetHubUrl(Uri? UrlBase, string? pattern)
+        private readonly ProximityConfigurationCore _configs;
+        public PatternUrlProvider(IOptions<ProximityConfigurationCore> configOptions)
         {
-            string ns = $"{pattern}/{BuildNameSpace()}";
-
-            if (UrlBase != null)
-                return new Uri(UrlBase, ns);
-            else
-                return new Uri($"/{ns}", UriKind.Relative);
+            _configs = configOptions.Value;
         }
 
-        public string BuildNameSpace()
+        public string GetPattern()
         {
             var contractType = typeof(TContract);
 
             string urlPostFixPath = string.Empty;
-            if (!string.IsNullOrWhiteSpace(Postfix))
-            {
-                urlPostFixPath += $".{Postfix}";
-            }
+            if (!string.IsNullOrWhiteSpace(_configs.PatternPostfix)) 
+                urlPostFixPath += $".{_configs.PatternPostfix}"; 
 
-            if (UseMachineNamePostfix)
-            {
-                urlPostFixPath += $".{Environment.MachineName}";
-            }
+            if (_configs.PatternMachineNamePostfix) 
+                urlPostFixPath += $".{Environment.MachineName}"; 
 
-            return $"{contractType.FullName}{urlPostFixPath}".ToLower();
+            return $"{_configs.PatternBase}/{contractType.FullName}{urlPostFixPath}".ToLower();
         }
+
+
+        public Uri GetHubUrl(Uri? UrlBase)
+        {
+            string ns = GetPattern();
+
+            if (UrlBase != null)
+                return new Uri(UrlBase, ns);
+            else
+                return new Uri($"{ns}", UriKind.Relative);
+        } 
+
     }
 }

@@ -1,10 +1,10 @@
-﻿using System;
+﻿using SignalR.Proximity.Core;
+using System;
 
 namespace SignalR.Proximity
 {
-    public class ProximityEndPointConfig
+    public class ProximityEndPointConfig : ProximityConfigurationCore
     {
         public Uri? UrlBase { get; set; }
-        public string? Pattern { get; set; }
     }
 }
