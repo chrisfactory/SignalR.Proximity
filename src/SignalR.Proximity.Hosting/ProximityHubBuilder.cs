@@ -15,7 +15,6 @@ namespace SignalR.Proximity.Hosting
             Services = new ServiceCollection();
             Services.AddOptions<ProximityConfigurationCore>();
             Services.AddSingleton<IPatternUrlProvider<TContract>, PatternUrlProvider<TContract>>();
-            Services.AddSingleton<ISignalRPatternProvider, SignalRPatternProvider<TContract>>();
         }
 
         public IServiceCollection Services { get; }
@@ -24,7 +23,7 @@ namespace SignalR.Proximity.Hosting
         {
             var provider = this.Services.BuildServiceProvider();
             var endPointBuilder = provider.GetRequiredService<IEndpointRouteBuilder>();
-            var patternProvider = provider.GetRequiredService<ISignalRPatternProvider>();
+            var patternProvider = provider.GetRequiredService<IPatternUrlProvider<TContract>>();
             var pattern = patternProvider.GetPattern();
             endPointBuilder.MapHub<TProximityHub>(pattern, configureOptions);
         }

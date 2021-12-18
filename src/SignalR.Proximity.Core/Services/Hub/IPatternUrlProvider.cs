@@ -3,7 +3,7 @@ namespace SignalR.Proximity
 {
     public interface IPatternUrlProvider<TContract>
     {
-        Uri GetHubUrl(Uri? UrlBase, string? pattern);
-        string BuildNameSpace();
+        string GetPattern();
+        Uri GetHubUrl(Uri? UrlBase);
     }
 }
