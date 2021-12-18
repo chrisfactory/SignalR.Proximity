@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
+using SignalR.Proximity.Core;
 using System;
 
 namespace SignalR.Proximity
@@ -10,6 +12,7 @@ namespace SignalR.Proximity
         {
             Services = new ServiceCollection();
             Services.AddOptions<ProximityEndPointConfig>();
+            Services.AddSingleton<IOptions<ProximityConfigurationCore>>(p=>p.GetRequiredService<IOptions<ProximityEndPointConfig>>());
             Services.AddSingleton<IRetryPolicy, RetryPolicy>();
             Services.AddSingleton<ITokenProvider, TokenProvider>();
             Services.AddSingleton(typeof(IPatternUrlProvider<>), typeof(PatternUrlProvider<>));

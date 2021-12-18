@@ -1,8 +1,15 @@
-﻿using System;
+﻿using Microsoft.Extensions.Options;
+using SignalR.Proximity.Core;
+using System;
 namespace SignalR.Proximity
 {
     public class PatternUrlProvider<TContract> : IPatternUrlProvider<TContract>
     {
+        private readonly ProximityConfigurationCore _configs;
+        public PatternUrlProvider(IOptions<ProximityConfigurationCore> configOptions)
+        {
+            _configs = configOptions.Value;
+        }
         public string? Postfix { get; set; }
         public bool UseMachineNamePostfix { get; set; }
 

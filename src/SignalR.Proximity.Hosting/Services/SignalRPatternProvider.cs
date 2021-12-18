@@ -1,22 +1,23 @@
 ﻿using Microsoft.Extensions.Options;
+using SignalR.Proximity.Core;
 
 namespace SignalR.Proximity.Hosting
 {
     internal class SignalRPatternProvider<TContract> : ISignalRPatternProvider
     {
         private readonly IPatternUrlProvider<TContract> urlProvider;
-        private readonly ProximityHubBuilderConfiguration _config;
-        public SignalRPatternProvider(IPatternUrlProvider<TContract> urlProvider, IOptions<ProximityHubBuilderConfiguration> configurationOptions)
+        private readonly ProximityConfigurationCore _config;
+        public SignalRPatternProvider(IPatternUrlProvider<TContract> urlProvider, IOptions<ProximityConfigurationCore> configurationOptions)
         {
             this.urlProvider = urlProvider;
             this._config = configurationOptions.Value;
         }
         public string GetPattern()
         {
-            if (string.IsNullOrWhiteSpace(_config.SignalRPattern))
+            if (string.IsNullOrWhiteSpace(_config.PatternBase))
                 return $"{urlProvider.BuildNameSpace()}";
             else
-                return $"{_config.SignalRPattern}/{urlProvider.BuildNameSpace()}";
+                return $"{_config.PatternBase}/{urlProvider.BuildNameSpace()}";
         }
     }
 }

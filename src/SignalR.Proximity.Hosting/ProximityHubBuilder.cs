@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http.Connections;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
+using SignalR.Proximity.Core;
 using System;
 
 namespace SignalR.Proximity.Hosting
@@ -12,7 +13,7 @@ namespace SignalR.Proximity.Hosting
         public ProximityHubBuilder()
         {
             Services = new ServiceCollection();
-            Services.AddOptions<ProximityHubBuilderConfiguration>();
+            Services.AddOptions<ProximityConfigurationCore>();
             Services.AddSingleton<IPatternUrlProvider<TContract>, PatternUrlProvider<TContract>>();
             Services.AddSingleton<ISignalRPatternProvider, SignalRPatternProvider<TContract>>();
         }
