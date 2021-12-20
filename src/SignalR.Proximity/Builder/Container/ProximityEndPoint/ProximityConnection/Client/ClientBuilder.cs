@@ -17,6 +17,7 @@ namespace SignalR.Proximity
         {
             var services = this.Services.Copy();
             services.AddSingleton<IContractDescriptor<TContract>, ContractDescriptor<TContract>>();
+            services.AddSingleton<IContractDescriptor>(p => p.GetRequiredService<IContractDescriptor<TContract>>());
             services.AddTransient<IClient<TContract>, Client<TContract>>();
             return new Lazy<IClient<TContract>>(() => services.BuildServiceProvider().GetRequiredService<IClient<TContract>>());
         }

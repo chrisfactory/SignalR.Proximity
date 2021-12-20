@@ -35,7 +35,7 @@ app.UseEndpoints(endpoints =>
         {
 
         });
-    });//  <--------------
+    });
 });
 
 

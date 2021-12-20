@@ -3,24 +3,28 @@ using SignalR.Proximity.Core;
 using System;
 namespace SignalR.Proximity
 {
-    public class PatternUrlProvider<TContract> : IPatternUrlProvider<TContract>
+    public class PatternUrlProvider : IPatternUrlProvider
     {
         private readonly ProximityConfigurationCore _configs;
-        public PatternUrlProvider(IOptions<ProximityConfigurationCore> configOptions)
+        private readonly IContractDescriptor _contractDescriptor;
+        public PatternUrlProvider(
+            IOptions<ProximityConfigurationCore> configOptions,
+            IContractDescriptor contractDescriptor)
         {
             _configs = configOptions.Value;
+            _contractDescriptor = contractDescriptor;
         }
 
         public virtual string GetPattern()
         {
-            var contractType = typeof(TContract);
+            var contractType = _contractDescriptor.ContractType;
 
             string urlPostFixPath = string.Empty;
-            if (!string.IsNullOrWhiteSpace(_configs.PatternPostfix)) 
-                urlPostFixPath += $".{_configs.PatternPostfix}"; 
+            if (!string.IsNullOrWhiteSpace(_configs.PatternPostfix))
+                urlPostFixPath += $".{_configs.PatternPostfix}";
 
-            if (_configs.PatternMachineNamePostfix) 
-                urlPostFixPath += $".{Environment.MachineName}"; 
+            if (_configs.PatternMachineNamePostfix)
+                urlPostFixPath += $".{Environment.MachineName}";
 
             return $"{_configs.PatternBase}/{contractType.FullName}{urlPostFixPath}".ToLower();
         }
@@ -34,7 +38,7 @@ namespace SignalR.Proximity
                 return new Uri(UrlBase, ns);
             else
                 return new Uri($"{ns}", UriKind.Relative);
-        } 
+        }
 
     }
 }

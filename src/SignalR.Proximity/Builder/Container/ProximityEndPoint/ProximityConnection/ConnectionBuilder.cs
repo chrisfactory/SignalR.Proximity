@@ -9,7 +9,9 @@ namespace SignalR.Proximity
         public ConnectionBuilder(IHubConnectionBuilder build, IOptions<ProximityEndPointConfig> options, IServiceCollection services)
         {
             Services = services.Copy();
-
+            Services.AddSingleton<IContractDescriptor<TContract>, ContractDescriptor<TContract>>();
+            Services.AddSingleton<IContractDescriptor>(p => p.GetRequiredService<IContractDescriptor<TContract>>());
+            Services.AddSingleton<IPatternUrlProvider, PatternUrlProvider>();
             Services.AddSingleton<HubConnectionBuilderConfigure<TContract>>();
             Services.AddSingleton(p => p.GetRequiredService<HubConnectionBuilderConfigure<TContract>>().Configure(build));
             Services.AddSingleton(p => p.GetRequiredService<IHubConnectionBuilder>().Build());
@@ -63,12 +65,12 @@ namespace SignalR.Proximity
         private readonly ProximityEndPointConfig _config;
         private readonly IRetryPolicy _retryPolicy;
         private readonly ITokenProvider _tokenProvider;
-        private readonly IPatternUrlProvider<TContract> _urlProvider;
+        private readonly IPatternUrlProvider _urlProvider;
         public HubConnectionBuilderConfigure(
             IOptions<ProximityEndPointConfig> configOptions,
             IRetryPolicy retryPolicy,
             ITokenProvider tokenProvider,
-            IPatternUrlProvider<TContract> urlProvider)
+            IPatternUrlProvider urlProvider)
         {
             _config = configOptions.Value;
             _retryPolicy = retryPolicy;

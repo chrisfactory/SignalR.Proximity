@@ -12,12 +12,11 @@ namespace SignalR.Proximity
         {
             Services = new ServiceCollection();
             Services.AddOptions<ProximityEndPointConfig>();
-            Services.AddSingleton<IOptions<ProximityConfigurationCore>>(p=>p.GetRequiredService<IOptions<ProximityEndPointConfig>>());
+            Services.AddSingleton<IOptions<ProximityConfigurationCore>>(p => p.GetRequiredService<IOptions<ProximityEndPointConfig>>());
             Services.AddSingleton<IRetryPolicy, RetryPolicy>();
             Services.AddSingleton<ITokenProvider, TokenProvider>();
-            Services.AddSingleton(typeof(IPatternUrlProvider<>), typeof(PatternUrlProvider<>));
-
         }
+
         public IServiceCollection Services { get; }
 
         public Lazy<IProximityEndPoint> Build()
