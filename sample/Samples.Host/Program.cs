@@ -29,7 +29,13 @@ app.UseAuthorization();
 app.MapRazorPages();
 app.UseEndpoints(endpoints =>
 {
-    endpoints.MapProximity<IToastNotificationsContract>("/samples");//  <--------------
+    endpoints.MapProximity<IToastNotificationsContract>("/samples", b =>
+    {
+        b.ConfigureHttpConnection(http =>
+        {
+
+        });
+    });//  <--------------
 });
 
 

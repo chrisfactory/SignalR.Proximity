@@ -13,7 +13,7 @@ namespace Microsoft.AspNetCore.Builder
         {
             return builder.MapProximity<ProximityHub<TContract>, TContract>(pattern, null);
         }
-        public static IEndpointRouteBuilder MapProximity<TContract>(this IEndpointRouteBuilder builder, string pattern, Action<HttpConnectionDispatcherOptions>? configureOptions)
+        public static IEndpointRouteBuilder MapProximity<TContract>(this IEndpointRouteBuilder builder, string pattern, Action<IProximityHubBuilder>? configureOptions)
         {
             return builder.MapProximity<ProximityHub<TContract>, TContract>(pattern, configureOptions);
         }
@@ -22,13 +22,14 @@ namespace Microsoft.AspNetCore.Builder
         {
             return builder.MapProximity<TProximityHub, TContract>(pattern, null);
         }
-        public static IEndpointRouteBuilder MapProximity<TProximityHub, TContract>(this IEndpointRouteBuilder builder, string pattern, Action<HttpConnectionDispatcherOptions>? configureOptions)
+        public static IEndpointRouteBuilder MapProximity<TProximityHub, TContract>(this IEndpointRouteBuilder builder, string pattern, Action<IProximityHubBuilder>? configureOptions)
         where TProximityHub : ProximityHub<TContract>
         {
             var proximityBuilder = builder.ServiceProvider.GetRequiredService<IProximityHubBuilder<TProximityHub, TContract>>();
             proximityBuilder.UseEndpointRouteBuilder(builder);
             proximityBuilder.Services.Configure<ProximityConfigurationCore>(config => config.PatternBase = pattern);
-            proximityBuilder.Build(configureOptions);
+            configureOptions?.Invoke(proximityBuilder);
+            proximityBuilder.Build();
 
             return builder;
         }

@@ -1,14 +1,15 @@
-﻿using Microsoft.AspNetCore.Routing;
+﻿using Microsoft.AspNetCore.Http.Connections;
+using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 
 namespace SignalR.Proximity.Hosting
 {
-    internal static class IProximityHubBuilderExtensions
+    public static partial class IProximityHubBuilderExtensions
     {
-        public static IProximityHubBuilder<TProximityHub, TContract> UseEndpointRouteBuilder<TProximityHub, TContract>(this IProximityHubBuilder<TProximityHub, TContract> builder, IEndpointRouteBuilder endPointBuilder)
-             where TProximityHub : ProximityHub<TContract>
+        public static IProximityHubBuilder ConfigureHttpConnection(this IProximityHubBuilder builder, Action<HttpConnectionDispatcherOptions> configureOptions)
         {
-            builder.Services.AddSingleton(endPointBuilder);
+            builder.Services.AddSingleton(configureOptions);
             return builder;
         }
     }

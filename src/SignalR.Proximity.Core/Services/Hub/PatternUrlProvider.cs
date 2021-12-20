@@ -11,7 +11,7 @@ namespace SignalR.Proximity
             _configs = configOptions.Value;
         }
 
-        public string GetPattern()
+        public virtual string GetPattern()
         {
             var contractType = typeof(TContract);
 
@@ -26,7 +26,7 @@ namespace SignalR.Proximity
         }
 
 
-        public Uri GetHubUrl(Uri? UrlBase)
+        public virtual Uri GetHubUrl(Uri? UrlBase)
         {
             string ns = GetPattern();
 
