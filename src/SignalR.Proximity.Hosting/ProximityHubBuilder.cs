@@ -13,11 +13,11 @@ namespace SignalR.Proximity.Hosting
         public ProximityHubBuilder()
         {
             Services = new ServiceCollection();
-            Services.AddSingleton<Action<HttpConnectionDispatcherOptions>>();
+            Services.AddSingleton<Action<HttpConnectionDispatcherOptions>>((e)=>{ });
             Services.AddOptions<ProximityConfigurationCore>(); 
             Services.AddSingleton<IContractDescriptor<TContract>, ContractDescriptor<TContract>>();
             Services.AddSingleton<IContractDescriptor>(p => p.GetRequiredService<IContractDescriptor<TContract>>());
-            Services.AddSingleton<IPatternProvider, PatternProvider>();
+            Services.AddSingleton<IPatternProvider, ContractPatternProvider>();
         }
 
         public IServiceCollection Services { get; }

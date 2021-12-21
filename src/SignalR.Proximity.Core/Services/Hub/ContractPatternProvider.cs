@@ -3,11 +3,11 @@ using SignalR.Proximity.Core;
 using System;
 namespace SignalR.Proximity
 {
-    public class PatternProvider : IPatternProvider
+    public class ContractPatternProvider : IPatternProvider
     {
         private readonly ProximityConfigurationCore _configs;
         private readonly IContractDescriptor _contractDescriptor;
-        public PatternProvider(
+        public ContractPatternProvider(
             IOptions<ProximityConfigurationCore> configOptions,
             IContractDescriptor contractDescriptor)
         {
