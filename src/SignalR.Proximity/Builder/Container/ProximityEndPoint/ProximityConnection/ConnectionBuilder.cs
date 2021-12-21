@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
+using System;
 
 namespace SignalR.Proximity
 {
@@ -11,7 +12,7 @@ namespace SignalR.Proximity
             Services = services.Copy();
             Services.AddSingleton<IContractDescriptor<TContract>, ContractDescriptor<TContract>>();
             Services.AddSingleton<IContractDescriptor>(p => p.GetRequiredService<IContractDescriptor<TContract>>());
-            Services.AddSingleton<IPatternUrlProvider, PatternUrlProvider>();
+
             Services.AddSingleton<HubConnectionBuilderConfigure<TContract>>();
             Services.AddSingleton(p => p.GetRequiredService<HubConnectionBuilderConfigure<TContract>>().Configure(build));
             Services.AddSingleton(p => p.GetRequiredService<IHubConnectionBuilder>().Build());
@@ -32,45 +33,17 @@ namespace SignalR.Proximity
     }
 
 
-
-    //internal class InstanceValue<TContract>
-    //{
-    //    public InstanceValue(TContract instance)
-    //    {
-    //        Value = instance;
-    //    }
-    //    public TContract Value { get; }
-    //}
-    //internal class HubConnectionAttacher<TContract>
-    //{
-    //    private readonly InstanceValue<TContract> _instanceValue;
-    //    private readonly IHubConnectionBuilder _connectionBuilder;
-    //    public HubConnectionAttacher(IHubConnectionBuilder builder, InstanceValue<TContract> instanceValue)
-    //    {
-    //        _connectionBuilder = builder;
-    //        _instanceValue = instanceValue;
-    //    }
-
-    //    public HubConnection Build()
-    //    {
-    //        HubConnection cnx = _connectionBuilder.Build();
-    //        foreach (var item in MethodContractDescriptor.Create(_instanceValue.Value))
-    //            cnx.On(item.Key, item.GetArgsTypes(), item.ReceiveAsync);
-    //        return cnx;
-    //    }
-    //}
-
     internal class HubConnectionBuilderConfigure<TContract>
     {
         private readonly ProximityEndPointConfig _config;
         private readonly IRetryPolicy _retryPolicy;
         private readonly ITokenProvider _tokenProvider;
-        private readonly IPatternUrlProvider _urlProvider;
+        private readonly IPatternProvider _urlProvider;
         public HubConnectionBuilderConfigure(
             IOptions<ProximityEndPointConfig> configOptions,
             IRetryPolicy retryPolicy,
             ITokenProvider tokenProvider,
-            IPatternUrlProvider urlProvider)
+            IPatternProvider urlProvider)
         {
             _config = configOptions.Value;
             _retryPolicy = retryPolicy;
@@ -80,7 +53,7 @@ namespace SignalR.Proximity
 
         public IHubConnectionBuilder Configure(IHubConnectionBuilder builder)
         {
-            var hubUri = _urlProvider.GetHubUrl(_config.UrlBase);
+            var hubUri = GetHubUrl(_config.UrlBase, _urlProvider.GetPattern());
 
             _=builder.WithAutomaticReconnect(_retryPolicy)
             .WithUrl(hubUri, options =>
@@ -90,6 +63,14 @@ namespace SignalR.Proximity
 
             });
             return builder;
+        }
+
+        public virtual Uri GetHubUrl(Uri? UrlBase,string pattern)
+        {  
+            if (UrlBase != null)
+                return new Uri(UrlBase, pattern);
+            else
+                return new Uri($"{pattern}", UriKind.Relative);
         }
     }
 

@@ -68,6 +68,5 @@ namespace Samples.SignalR.Proximity.Professor.Wpf
         #endregion 
 
     }
-
-
+     
 }

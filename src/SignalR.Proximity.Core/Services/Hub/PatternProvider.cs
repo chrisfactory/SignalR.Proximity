@@ -3,11 +3,11 @@ using SignalR.Proximity.Core;
 using System;
 namespace SignalR.Proximity
 {
-    public class PatternUrlProvider : IPatternUrlProvider
+    public class PatternProvider : IPatternProvider
     {
         private readonly ProximityConfigurationCore _configs;
         private readonly IContractDescriptor _contractDescriptor;
-        public PatternUrlProvider(
+        public PatternProvider(
             IOptions<ProximityConfigurationCore> configOptions,
             IContractDescriptor contractDescriptor)
         {
@@ -27,18 +27,6 @@ namespace SignalR.Proximity
                 urlPostFixPath += $".{Environment.MachineName}";
 
             return $"{_configs.PatternBase}/{contractType.FullName}{urlPostFixPath}".ToLower();
-        }
-
-
-        public virtual Uri GetHubUrl(Uri? UrlBase)
-        {
-            string ns = GetPattern();
-
-            if (UrlBase != null)
-                return new Uri(UrlBase, ns);
-            else
-                return new Uri($"{ns}", UriKind.Relative);
-        }
-
+        } 
     }
 }

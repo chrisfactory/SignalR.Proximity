@@ -2,7 +2,7 @@
 using System;
 namespace SignalR.Proximity
 {
-    public static class IProximityEndPointBuilderExtensions
+    public static partial class IProximityEndPointBuilderExtensions
     {
         public static IProximityEndPointBuilder UseUrlBase(this IProximityEndPointBuilder builder, string uriString)
         {
