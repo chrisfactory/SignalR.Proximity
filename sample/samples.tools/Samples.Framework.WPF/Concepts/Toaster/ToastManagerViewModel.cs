@@ -1,18 +1,18 @@
 ﻿using Prism.Commands;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel; 
+using System.Collections.ObjectModel;
 using System.Windows;
 
 namespace Samples.Framework.WPF.Concepts.Toaster
-{ 
+{
     public class ToastManagerViewModel : ViewModelBase, IToastableHost
-    { 
+    {
         public IReadOnlyCollection<ToastViewModel> _ReadOnlyToasts;
-        private ObservableCollection<ToastViewModel> _writableToasts = new ObservableCollection<ToastViewModel>();
+        private readonly ObservableCollection<ToastViewModel> _writableToasts = new ObservableCollection<ToastViewModel>();
         private Visibility _ManagerVisibility;
         private Visibility _CloseAllVisibility;
-        private object _sync = new object();
+        private readonly object _sync = new object();
         public ToastManagerViewModel()
         {
             _ReadOnlyToasts = _writableToasts;
@@ -54,7 +54,7 @@ namespace Samples.Framework.WPF.Concepts.Toaster
             get { return _ReadOnlyToasts; }
             private set
             {
-                if (_ReadOnlyToasts != value)
+                if (!ReferenceEquals(_ReadOnlyToasts, value))
                 {
                     _ReadOnlyToasts = value;
                     this.Notify();
@@ -118,6 +118,6 @@ namespace Samples.Framework.WPF.Concepts.Toaster
                 ManagerVisibility = Visibility.Collapsed;
             }
 
-        } 
+        }
     }
 }

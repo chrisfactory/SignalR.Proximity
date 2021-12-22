@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Samples.Framework.WPF.Concepts.SampleStep
 {
@@ -23,7 +20,7 @@ namespace Samples.Framework.WPF.Concepts.SampleStep
             get { return _CurrentStep; }
             set
             {
-                if (this._CurrentStep != value)
+                if (!ReferenceEquals(this._CurrentStep, value))
                 {
                     _CurrentStep = value;
                     base.Notify();
