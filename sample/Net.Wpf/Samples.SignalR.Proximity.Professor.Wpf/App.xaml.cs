@@ -21,12 +21,12 @@ namespace Samples.SignalR.Proximity.Professor.Wpf
             ConfigureServices(services, config);
 
 
-            ConfigureSampleAppServices(services, config);
+            ConfigureSampleAppServices(services);
             _provider= services.BuildServiceProvider();
         }
 
 
-        private void ConfigureServices(IServiceCollection services, IConfigurationRoot rootConfig)
+        private static void ConfigureServices(IServiceCollection services, IConfigurationRoot rootConfig)
         {
             services.UseProximity(proximity =>
             {
@@ -47,7 +47,7 @@ namespace Samples.SignalR.Proximity.Professor.Wpf
 
             return services;
         }
-        private void ConfigureSampleAppServices(IServiceCollection services, IConfigurationRoot rootConfig)
+        private static void ConfigureSampleAppServices(IServiceCollection services)
         {
 
             services.AddSingleton<MainWindow>();

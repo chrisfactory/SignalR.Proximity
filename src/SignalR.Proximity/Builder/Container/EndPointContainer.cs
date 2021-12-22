@@ -5,7 +5,7 @@ namespace SignalR.Proximity
 {
     internal class EndPointContainer : IEndPointContainer
     {
-        private Dictionary<string, Lazy<IProximityEndPoint>> _endPoints = new Dictionary<string, Lazy<IProximityEndPoint>>();
+        private readonly Dictionary<string, Lazy<IProximityEndPoint>> _endPoints = new Dictionary<string, Lazy<IProximityEndPoint>>();
         public EndPointContainer(IEnumerable<ContainerKeyValue> containers)
         {
             foreach (var builderKV in containers)
