@@ -13,7 +13,7 @@ namespace SignalR.Proximity
             Services = new ServiceCollection();
             Services.AddOptions<ProximityEndPointConfig>();
             Services.AddSingleton<IOptions<ProximityConfigurationCore>>(p => p.GetRequiredService<IOptions<ProximityEndPointConfig>>());
-            Services.AddSingleton<IRetryPolicy, RetryPolicy>();
+            this.UseDefaultRetryPolicy();
             Services.AddSingleton<ITokenProvider, TokenProvider>();
             Services.AddSingleton<IPatternProvider, ContractPatternProvider>();
         }
