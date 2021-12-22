@@ -17,7 +17,7 @@ namespace SignalR.Proximity
         public static IProximityBuilder AddEndPoint(this IProximityBuilder source, IConfiguration config, Action<IProximityEndPointBuilder>? configure = null) => source.AddEndPointCore(ContainerKeyValue.DefaultContainerName, config, configure);
         public static IProximityBuilder AddEndPoint(this IProximityBuilder source, string name, IConfiguration config, Action<IProximityEndPointBuilder>? configure = null) => source.AddEndPointCore(name, config, configure);
 
-        private static IProximityBuilder AddEndPointCore(this IProximityBuilder source, string name, IConfiguration? config, Action<IProximityEndPointBuilder>? configure = null)
+        private static IProximityBuilder AddEndPointCore(this IProximityBuilder source, string? name, IConfiguration? config, Action<IProximityEndPointBuilder>? configure = null)
         {
             if (string.IsNullOrWhiteSpace(name))
                 throw new ArgumentNullException(nameof(name));
