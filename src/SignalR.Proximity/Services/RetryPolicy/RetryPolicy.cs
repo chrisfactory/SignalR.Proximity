@@ -6,7 +6,7 @@ namespace SignalR.Proximity
     {
         protected static TimeSpan?[] DEFAULT_RETRY_DELAYS_IN_MILLISECONDS = new TimeSpan?[] { null };
 
-        private TimeSpan?[] _retryDelays;
+        private readonly TimeSpan?[] _retryDelays;
 
         public RetryPolicy()
         {

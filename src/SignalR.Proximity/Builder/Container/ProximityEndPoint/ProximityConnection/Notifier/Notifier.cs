@@ -20,8 +20,8 @@ namespace SignalR.Proximity
 
         private class Caller : INotifierCaller<TContract>
         {
-            private HubConnection _connection;
-            private NotifierScopeDefinition _scope;
+            private readonly HubConnection _connection;
+            private readonly NotifierScopeDefinition _scope;
 
             public Caller(HubConnection connection, NotifierScopeDefinition scope)
             {
