@@ -12,7 +12,7 @@ namespace SignalR.Proximity.Hosting
     {
         public ProximityHubBuilder()
         {
-            Services = new ServiceCollection();
+            Services = ServiceCollectionFactory.Create();
             Services.AddSingleton<Action<HttpConnectionDispatcherOptions>>((e)=>{ });
             Services.AddOptions<ProximityConfigurationCore>(); 
             Services.AddSingleton<IContractDescriptor<TContract>, ContractDescriptor<TContract>>();

@@ -1,17 +1,25 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
   <PropertyGroup>
-    <TargetFrameworks>net6.0</TargetFrameworks>
+    <TargetFrameworks>net5.0;net6.0;netcoreapp3.1</TargetFrameworks>
     <SignAssembly>True</SignAssembly>
     <AssemblyOriginatorKeyFile>..\..\Key.snk</AssemblyOriginatorKeyFile>
     <Nullable>enable</Nullable>
+    <LangVersion>8.0</LangVersion>
+    <OutputType>Library</OutputType>
+
+
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <IsPackable>true</IsPackable>
+    <PackageId>SignalR.Proximity.Hosting</PackageId>
+    <Version>1.0.0</Version>
+    <Authors>Christophe Ohl</Authors>
+    <Company>Chrisfactory</Company>
+    <PackageDescription>.Net SignalR Without Hub Implementations!</PackageDescription>
+    <RepositoryUrl>https://github.com/chrisfactory/SignalR.Proximity</RepositoryUrl>
   </PropertyGroup>
-  <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="6.0.1" />
-  </ItemGroup>
+
   <ItemGroup>
     <ProjectReference Include="..\SignalR.Proximity.Core\SignalR.Proximity.Core.csproj" />
   </ItemGroup>
-
-
 
 </Project>
