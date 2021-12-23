@@ -11,16 +11,19 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <IsPackable>true</IsPackable>
     <PackageId>SignalR.Proximity.Hosting</PackageId>
-    <Version>1.0.4</Version>
+    <Version>1.0.5</Version>
     <Authors>Christophe Ohl</Authors>
     <Company>Chrisfactory</Company>
     <PackageDescription>.Net SignalR Without Hub Implementations!</PackageDescription>
     <RepositoryUrl>https://github.com/chrisfactory/SignalR.Proximity</RepositoryUrl>
     <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\SignalR.Proximity.Core\SignalR.Proximity.Core.csproj" />
   </ItemGroup>
-
+  <ItemGroup>
+    <None Include="..\..\README.md" Pack="true" PackagePath="\"/>
+  </ItemGroup>
 </Project>
