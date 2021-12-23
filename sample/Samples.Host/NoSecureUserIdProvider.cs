@@ -2,7 +2,7 @@
 
 namespace Samples.Host
 {
-    public class NoSecuredUserIdProvider : IUserIdProvider
+    public class NoSecureUserIdProvider : IUserIdProvider
     {
         public string? GetUserId(HubConnectionContext connection)
         {

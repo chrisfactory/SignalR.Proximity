@@ -11,7 +11,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 
 builder.Services.AddSignalR();//  <--------------
-builder.Services.AddSingleton<IUserIdProvider, NoSecuredUserIdProvider>();
+builder.Services.AddSingleton<IUserIdProvider, NoSecureUserIdProvider>();
 builder.Services.AddProximity();//  <--------------
 
 var app = builder.Build();
