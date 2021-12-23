@@ -11,7 +11,7 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <IsPackable>true</IsPackable>
     <PackageId>SignalR.Proximity.Hosting</PackageId>
-    <Version>1.0.2</Version>
+    <Version>1.0.3</Version>
     <Authors>Christophe Ohl</Authors>
     <Company>Chrisfactory</Company>
     <PackageDescription>.Net SignalR Without Hub Implementations!</PackageDescription>
