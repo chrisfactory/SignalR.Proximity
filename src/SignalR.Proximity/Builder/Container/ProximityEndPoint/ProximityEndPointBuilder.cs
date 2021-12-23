@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.SignalR.Client;
+﻿using Microsoft.AspNetCore.Http.Connections.Client;
+using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using SignalR.Proximity.Core;
@@ -14,7 +15,7 @@ namespace SignalR.Proximity
             Services.AddOptions<ProximityEndPointConfig>();
             Services.AddSingleton<IOptions<ProximityConfigurationCore>>(p => p.GetRequiredService<IOptions<ProximityEndPointConfig>>());
             this.UseDefaultRetryPolicy();
-            Services.AddSingleton<ITokenProvider, TokenProvider>();
+            Services.AddSingleton<Action<HttpConnectionOptions>>((e) => { });
             Services.AddSingleton<IPatternProvider, ContractPatternProvider>();
         }
 

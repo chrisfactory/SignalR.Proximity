@@ -30,7 +30,10 @@ namespace Samples.SignalR.Proximity.Professor.Wpf
         {
             services.UseProximity(proximity =>
             {
-                proximity.AddEndPoint(rootConfig.GetSection("Proximity"));
+                proximity.AddEndPoint(rootConfig.GetSection("Proximity"), b =>
+                {
+                    b.ConfigureHttpConnection(cnxOptions => cnxOptions.Headers.Add("username", "anonymous"));
+                });
             });
         }
 

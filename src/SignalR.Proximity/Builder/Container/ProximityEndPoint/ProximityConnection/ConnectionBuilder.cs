@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.SignalR.Client;
+﻿using Microsoft.AspNetCore.Http.Connections.Client;
+using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using System;
@@ -37,36 +38,32 @@ namespace SignalR.Proximity
     {
         private readonly ProximityEndPointConfig _config;
         private readonly IRetryPolicy _retryPolicy;
-        private readonly ITokenProvider _tokenProvider;
         private readonly IPatternProvider _urlProvider;
+        private readonly Action<HttpConnectionOptions> _configureHttpConnection;
         public HubConnectionBuilderConfigure(
             IOptions<ProximityEndPointConfig> configOptions,
             IRetryPolicy retryPolicy,
-            ITokenProvider tokenProvider,
-            IPatternProvider urlProvider)
+            IPatternProvider urlProvider,
+            Action<HttpConnectionOptions> configureHttpConnection)
         {
             _config = configOptions.Value;
             _retryPolicy = retryPolicy;
-            _tokenProvider = tokenProvider;
             _urlProvider = urlProvider;
+            _configureHttpConnection = configureHttpConnection; 
         }
 
         public IHubConnectionBuilder Configure(IHubConnectionBuilder builder)
         {
-            var hubUri = GetHubUrl(_config.UrlBase, _urlProvider.GetPattern());
+            var hubUri = GetHubUrl(_config.UrlBase, _urlProvider.GetPattern()); 
+            _ = builder
+                .WithAutomaticReconnect(_retryPolicy)
+                .WithUrl(hubUri, _configureHttpConnection);
 
-            _=builder.WithAutomaticReconnect(_retryPolicy)
-            .WithUrl(hubUri, options =>
-            {
-                options.AccessTokenProvider = () => _tokenProvider.GetTokenAsync(_config.UrlBase);
-                options.UseDefaultCredentials = true;
-
-            });
             return builder;
         }
 
-        public virtual Uri GetHubUrl(Uri? UrlBase,string pattern)
-        {  
+        public virtual Uri GetHubUrl(Uri? UrlBase, string pattern)
+        {
             if (UrlBase != null)
                 return new Uri(UrlBase, pattern);
             else

@@ -14,9 +14,10 @@ namespace SignalR.Proximity
         }
         public void Attach<T>(T instance) where T : class, TContract
         {
-            HubConnection cnx = _connection;
+            HubConnection cnx = _connection; 
             foreach (var item in this._descriptor.GetDescription<T>(instance))
                 cnx.On(item.Key, item.GetArgsTypes(), item.ReceiveAsync);
+                      
         }
 
         public void Dettach<T>(T instance) where T : class, TContract

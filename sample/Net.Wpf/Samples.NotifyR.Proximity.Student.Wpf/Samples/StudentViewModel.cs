@@ -5,31 +5,33 @@ using SignalR.Proximity;
 
 namespace Samples.SignalR.Proximity
 {
-    public class ProfessorViewModel : ViewModelBase, ISchoolContract
+    public class StudentViewModel : ViewModelBase, ISchoolContract
     {
         private readonly IConnection<ISchoolContract> _SchoolMessageConnection;
-        public ProfessorViewModel(IProximityEndPointProvider endPointProvider)
+        public StudentViewModel(IProximityEndPointProvider endPointProvider, string name)
         {
-            Name = "Professor";
-            _SchoolMessageConnection = endPointProvider.Connect<ISchoolContract>();
+            Name = name;
+            SendCommand = new DelegateCommand(SendAction);
+
+
             _SchoolMessageConnection = endPointProvider.Connect<ISchoolContract>(cnxOptions =>
-             {
-                 cnxOptions.Headers.Add("username", Name);
-             });
+            {
+                cnxOptions.Headers.Add("username", Name);
+            });
 
             _SchoolMessageConnection.Client.Attach(this);
-
             _ = _SchoolMessageConnection.StartAsync();
-            SendCommand = new DelegateCommand(SendAction);
         }
 
 
         public string Name { get; }
         public DelegateCommand SendCommand { get; set; }
 
+
+
         private async void SendAction()
         {
-            await _SchoolMessageConnection.Notifier.ToAll().NotifyAsync(t => t.Send("hello", Name));
+            await _SchoolMessageConnection.Notifier.ToUsers("Professor").NotifyAsync(t => t.Send("hello", Name));
         }
 
 

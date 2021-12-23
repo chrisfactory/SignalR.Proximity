@@ -11,18 +11,19 @@ namespace SignalR.Proximity.Hosting
             await this.ResolveInteractAsync(request, metaArgs);
         }
 
-        public override Task OnConnectedAsync()
-        {
-            //var underlyingHttpContext = Context.GetHttpContext().Request.Path;
-            //var ba = Context.GetHttpContext().Request.PathBase;
-            //var user = Context.UserIdentifier;
-            //Context.Request.Environment[typeof(HttpContextBase).FullName] as HttpContextBase;
-            return base.OnConnectedAsync();
-        }
+        //public override Task OnConnectedAsync()
+        //{
+        //    var httpContext = Context.GetHttpContext();
+        //    var request = httpContext.Request;
+        //    var cnxId = Context.ConnectionId;
+        //    var user = Context.User;  
+        //    var userId = Context.UserIdentifier; 
+        //    return base.OnConnectedAsync();
+        //}
 
-        public override Task OnDisconnectedAsync(Exception? exception)
-        {
-            return base.OnDisconnectedAsync(exception);
-        }
+        //public override Task OnDisconnectedAsync(Exception? exception)
+        //{
+        //    return base.OnDisconnectedAsync(exception);
+        //}
     }
 }

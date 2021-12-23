@@ -1,27 +1,6 @@
 {
-  "SignalRProximityNotifierConfiguration": {
-    "DisplayName": "default",
-    "UrlBase": "https://localhost:5011"
-  },
-
-  "SignalRProximityNotifierConfiguration:dev": {
-    "DisplayName": "dev",
-    "UrlBase": "http://dev.com",
-    "HubNamespaceProvider": {
-      "Postfix": "TestPostFix_DEV",
-      "UseMachineNamePostfix": true
-    }
-  },
-  "SignalRProximityNotifierConfiguration:prod": {
-    "DisplayName": "prod",
-    "IsActivated": false, //         <
-    "UrlBase": "http://prod.com",
-    "HubNamespaceProvider": {
-      "Postfix": "TestPostFix_PROD"
-    }
+  "Proximity": {
+    "UrlBase": "https://localhost:5011",
+    "PatternBase": "/samples"
   }
-
-
 }
- 
-  

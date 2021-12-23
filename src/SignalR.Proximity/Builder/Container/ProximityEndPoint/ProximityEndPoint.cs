@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.AspNetCore.Http.Connections.Client;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 
 namespace SignalR.Proximity
@@ -11,9 +12,12 @@ namespace SignalR.Proximity
             this._provider = provider;
         }
 
-        public IConnection<TContract> Connect<TContract>()
+        public IConnection<TContract> Connect<TContract>(Action<HttpConnectionOptions>? configureHttpConnection = null)
         {
-            return this._provider.GetRequiredService<IConnectionBuilder<TContract>>().Build();
+            var builder = this._provider.GetRequiredService<IConnectionBuilder<TContract>>();
+            if (configureHttpConnection != null)
+                builder.Services.AddSingleton(configureHttpConnection);
+            return builder.Build();
         }
     }
 }

@@ -1,12 +1,17 @@
+using Microsoft.AspNetCore.SignalR;
 using Sample.SignalR.Proximity.Toaster;
+using Samples.Host;
 using SignalR.Proximity;
 using SignalR.Proximity.Hosting;
 var builder = WebApplication.CreateBuilder(args);
+
+ 
 
 // Add services to the container.
 builder.Services.AddRazorPages();
 
 builder.Services.AddSignalR();//  <--------------
+builder.Services.AddSingleton<IUserIdProvider, NoSecuredUserIdProvider>();
 builder.Services.AddProximity();//  <--------------
 
 var app = builder.Build();
@@ -31,10 +36,8 @@ app.UseAuthorization();
 app.MapRazorPages();
 app.UseEndpoints(endpoints =>
 {
-    endpoints.MapProximity<IToastNotificationsContract>("/samples", b =>
-    {
-        
-    });
+    endpoints.MapProximity<IToastNotificationsContract>("/samples");
+    endpoints.MapProximity<ISchoolContract>("/samples");
 });
 
 
