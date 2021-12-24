@@ -17,7 +17,7 @@ await cnx.Notifier.ToGroups("My groupe").NotifyAsync(t => t.MyNotification("hell
 
 ```
 ## Contributing
-woring progress..
+Working progress..
 
 How to get it
 --------------------------------
