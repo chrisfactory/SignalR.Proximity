@@ -9,7 +9,7 @@
 
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageId>SignalR.Proximity.Core</PackageId>
-    <Version>1.0.5</Version>
+    <Version>1.0.6</Version>
     <Authors>Christophe Ohl</Authors>
     <Company>Chrisfactory</Company>
     <PackageDescription>.Net SignalR Without Hub Implementations!</PackageDescription>
