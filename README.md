@@ -28,7 +28,7 @@ using SignalR.Proximity;
 public class SampleClass : IMyNotificationContract
 {
   ...
-  await cnx.Client.Attach(this);
+  cnx.Client.Attach(this);
   await cnx.Client.JoinGroupsAsync("My groupe");
   ..
   public void MyNotification(string message)
