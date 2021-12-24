@@ -1,23 +1,46 @@
 # SignalR.Proximity
 
+
+
+
 SignalR.Proximity is a .Net library 
  
 
 ## Usage 
-Send message
+Instantiate connexions
 ```csharp
 using SignalR.Proximity;
 
 var cnx = endPointProvider.Connect<IMyNotificationContract>();
 await cnx.StartAsync();
-
-await cnx.Notifier.ToAll().NotifyAsync(t => t.MyNotification("hello word"));
-or
-await cnx.Notifier.ToGroups("My groupe").NotifyAsync(t => t.MyNotification("hello word"));
-
 ```
+Send messages
+```csharp
+await cnx.Notifier.ToAll().NotifyAsync(t=> t.MyNotification("hello word"));
+//or
+await cnx.Notifier
+         .ToGroups("My groupe","Auther Groupe","...") //Define here your target scope
+         .NotifyAsync(t => t.MyNotification("hello word"));//'t' is an proxy instance of IMyNotificationContract 
+```
+Receive messages
+```csharp
+using SignalR.Proximity;
+
+public class SampleClassB : IMyNotificationContract
+{
+  ...
+  await cnx.Client.Attach(this);
+  await cnx.Client.JoinGroupsAsync("My groupe");
+  ..
+  public void MyNotification(string message)
+  {
+      //Receive message callback here!
+  }
+}
+```
+Go to [samples](https://github.com/chrisfactory/SignalR.Proximity/tree/master/sample) for more details..
 ## Contributing
-Working progress..
+woring progress..
 
 How to get it
 --------------------------------
