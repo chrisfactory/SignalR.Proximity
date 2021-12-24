@@ -39,7 +39,7 @@ public class SampleClass : IMyNotificationContract
 ```
 Go to [samples](https://github.com/chrisfactory/SignalR.Proximity/tree/master/sample) for more details..
 ## Contributing
-woring progress..
+Working progress..
 
 How to get it
 --------------------------------
