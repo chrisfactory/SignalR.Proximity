@@ -11,7 +11,8 @@ namespace Samples.SignalR.Proximity
         public ProfessorViewModel(IProximityEndPointProvider endPointProvider)
         {
             Name = "Professor";
-            _SchoolMessageConnection = endPointProvider.Connect<ISchoolContract>();
+            SendCommand = new DelegateCommand(SendAction);
+
             _SchoolMessageConnection = endPointProvider.Connect<ISchoolContract>(cnxOptions =>
              {
                  cnxOptions.Headers.Add("username", Name);
@@ -20,7 +21,6 @@ namespace Samples.SignalR.Proximity
             _SchoolMessageConnection.Client.Attach(this);
 
             _ = _SchoolMessageConnection.StartAsync();
-            SendCommand = new DelegateCommand(SendAction);
         }
 
 

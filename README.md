@@ -1,8 +1,5 @@
 # SignalR.Proximity
 
-
-
-
 SignalR.Proximity is a .Net library 
  
 
@@ -19,14 +16,16 @@ Send messages
 await cnx.Notifier.ToAll().NotifyAsync(t=> t.MyNotification("hello word"));
 //or
 await cnx.Notifier
-         .ToGroups("My groupe","Auther Groupe","...") //Define here your target scope
-         .NotifyAsync(t => t.MyNotification("hello word"));//'t' is an proxy instance of IMyNotificationContract 
+         //Define here your target scope
+         .ToGroups("My groupe","Auther Groupe","...") 
+         //'t' is an proxy instance of IMyNotificationContract 
+         .NotifyAsync(t => t.MyNotification("hello word"));
 ```
 Receive messages
 ```csharp
 using SignalR.Proximity;
 
-public class SampleClassB : IMyNotificationContract
+public class SampleClass : IMyNotificationContract
 {
   ...
   await cnx.Client.Attach(this);
