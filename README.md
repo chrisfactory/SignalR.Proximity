@@ -54,7 +54,7 @@ PM> Install-Package SignalR.Proximity
 PM> Install-Package SignalR.Proximity.Hosting
 ```
 ## Status
-[![CI status](https://github.com/chrisfactory/SignalR.Proximity/workflows/CI/badge.svg)](https://github.com/chrisfactory/SignalR.Proximity/actions/workflows/ci-build-analysis.yml?query=branch%3AvNext)
+[![CI status](https://github.com/chrisfactory/SignalR.Proximity/workflows/CI/badge.svg)](https://github.com/chrisfactory/SignalR.Proximity/actions/workflows/ci-build-analysis.yml?query=branch%3Amaster)
 
 [![Publish status](https://github.com/chrisfactory/SignalR.Proximity/workflows/publish-nuget/badge.svg)](https://github.com/chrisfactory/SignalR.Proximity/actions/workflows/release.yml)
 ## License
