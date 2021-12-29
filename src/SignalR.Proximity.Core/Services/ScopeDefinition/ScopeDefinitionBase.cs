@@ -2,7 +2,7 @@
 namespace SignalR.Proximity
 {
     /// <summary>
-    /// Represents a base type to define a SignalR notification scope 
+    /// Represents a base type to define a SignalR notification scope.
     /// </summary>
     public class ScopeDefinitionBase
     {
@@ -23,14 +23,17 @@ namespace SignalR.Proximity
             Arguments = arguments;
             Argument = argument;
         }
+
         /// <summary>
         /// Represents the target query.
         /// </summary>
         public string? Request { get; set; }
+
         /// <summary>
         /// Represents the query arguments.
         /// </summary>
         public IReadOnlyList<string>? Arguments { get; set; }
+
         /// <summary>
         /// Represents the query argument.
         /// </summary>

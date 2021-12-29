@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 namespace SignalR.Proximity
 {
 
-    public static class HubExtensions
+    internal static class HubExtensions
     {
         internal static async Task ResolveInteractAsync(this Hub hub, ProximityHubRequest request, object[] data)
         {
