@@ -43,7 +43,7 @@ namespace SignalR.Proximity
 
         private static IClientProxy ResolveInteractWithClientsProxy(Hub hub, ScopeDefinitionBase scope)
         {
-            IClientProxy? proxy = null;
+            IClientProxy? proxy;
             switch (scope.Request)
             {
                 case "Notify.All":

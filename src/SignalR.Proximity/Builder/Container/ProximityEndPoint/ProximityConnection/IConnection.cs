@@ -11,7 +11,7 @@ namespace SignalR.Proximity
 
         string? ConnectionId { get; }
 
-        Task<bool> StartAsync(CancellationToken cancellationToken = default(CancellationToken));
-        Task StopAsync(CancellationToken cancellationToken = default(CancellationToken));
+        Task<bool> StartAsync(CancellationToken cancellationToken = default);
+        Task StopAsync(CancellationToken cancellationToken = default);
     }
 }

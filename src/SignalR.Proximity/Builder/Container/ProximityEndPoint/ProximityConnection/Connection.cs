@@ -30,8 +30,8 @@ namespace SignalR.Proximity
 
         public string? ConnectionId { get { return _connection.ConnectionId; } }
 
-        public Task<bool> StartAsync(CancellationToken cancellationToken = default(CancellationToken)) => _connection.StartWithRetryAsync(_policy, cancellationToken);
-        public Task StopAsync(CancellationToken cancellationToken = default(CancellationToken)) => _connection.StopAsync(cancellationToken);
+        public Task<bool> StartAsync(CancellationToken cancellationToken = default) => _connection.StartWithRetryAsync(_policy, cancellationToken);
+        public Task StopAsync(CancellationToken cancellationToken = default) => _connection.StopAsync(cancellationToken);
 
     }
 }

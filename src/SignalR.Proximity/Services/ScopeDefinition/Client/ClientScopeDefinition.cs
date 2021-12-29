@@ -15,10 +15,10 @@ namespace SignalR.Proximity
         /// </summary>
         public ClientScopeDefinition() : base() { }
 
-        private ClientScopeDefinition(string request) : base(request, null, null) { }
+        //private ClientScopeDefinition(string request) : base(request, null, null) { }
         private ClientScopeDefinition(string request, IReadOnlyList<string> arguments) : base(request, arguments, null) { }
-        private ClientScopeDefinition(string request, string argument) : base(request, null, argument) { }
-        private ClientScopeDefinition(string request, IReadOnlyList<string> arguments, string argument) : base(request, arguments, argument) { }
+        //private ClientScopeDefinition(string request, string argument) : base(request, null, argument) { }
+        //private ClientScopeDefinition(string request, IReadOnlyList<string> arguments, string argument) : base(request, arguments, argument) { }
 
         /// <summary>
         ///     Initializes a new instance of the <see cref="ClientScopeDefinition"/> class.

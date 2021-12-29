@@ -28,7 +28,7 @@ namespace SignalR.Proximity
                     var durration = policy.NextRetryDelay(context);
                     context.PreviousRetryCount++;
                     if (durration.HasValue)
-                        await Task.Delay(durration.Value);
+                        await Task.Delay(durration.Value, token);
                     else return false;
                 }
             }
