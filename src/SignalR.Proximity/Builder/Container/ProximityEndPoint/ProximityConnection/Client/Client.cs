@@ -14,10 +14,10 @@ namespace SignalR.Proximity
         }
         public void Attach<T>(T instance) where T : class, TContract
         {
-            HubConnection cnx = _connection; 
+            HubConnection cnx = _connection;
             foreach (var item in this._descriptor.GetDescription<T>(instance))
                 cnx.On(item.Key, item.GetArgsTypes(), item.ReceiveAsync);
-                      
+
         }
 
         public void Dettach<T>(T instance) where T : class, TContract
@@ -44,12 +44,9 @@ namespace SignalR.Proximity
         ///     The groups names.
         /// </param>
         public async Task JoinGroupsAsync(params string[] groups)
-        {
-            if (groups != null)
-            {
-                if (_connection.State == HubConnectionState.Connected)
-                    await _connection.InvokeAsync("Interact", new ProximityHubRequest() { Scope = ClientScopeDefinition.JoinGroups(groups) }, new object[0]);
-            }
+        { 
+            if (groups != null && _connection.State == HubConnectionState.Connected)
+                await _connection.InvokeAsync("Interact", new ProximityHubRequest() { Scope = ClientScopeDefinition.JoinGroups(groups) }, new object[0]); 
         }
 
 
