@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace SignalR.Proximity
 {
@@ -16,12 +17,7 @@ namespace SignalR.Proximity
             var proxyType = typeof(TContract);
             if (!proxyType.IsInterface)
                 throw new ArgumentException($"{proxyType.FullName} n'est pas une interface");
-
-            foreach (var meth in proxyType.GetMethods())
-            {
-                var result = new MethodDescriptor(instance, meth);
-                yield return result;
-            }
+            return proxyType.GetMethods().Select(meth => new MethodDescriptor(instance, meth));
         }
     }
 }
