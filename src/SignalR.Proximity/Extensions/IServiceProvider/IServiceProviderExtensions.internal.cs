@@ -3,7 +3,7 @@ using SignalR.Proximity;
 using System;
 namespace Microsoft.Extensions.DependencyInjection
 {
-    public static partial class ServiceProviderExtensions
+    internal static partial class ServiceProviderExtensions
     {
         internal static T GetRequiredService<T>(this IServiceProvider provider, Action<T>? configure)
             where T : notnull
