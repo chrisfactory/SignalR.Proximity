@@ -1,9 +1,6 @@
-﻿using Microsoft.AspNetCore.Http.Connections;
-using System;
-
-namespace SignalR.Proximity.Hosting
+﻿namespace SignalR.Proximity.Hosting
 {
-    public interface IProximityHubBuilder: IServicesBuilder
+    public interface IProximityHubBuilder : IServicesBuilder
     {
 
     }
