@@ -17,7 +17,10 @@ jobs:
         include-prerelease: True
 
     - name: Create NuGet Package
-      run: dotnet pack -c Release /p:Version=${{ github.event.release.tag_name }} /p:PackageReleaseNotes="See https://github.com/chrisfactory/SignalR.Proximity/releases/tag/${{ github.event.release.tag_name }}"
+      run: dotnet pack -c Release 
+                    /p:ContinuousIntegrationBuild=true 
+                    /p:Version=${{ github.event.release.tag_name }} 
+                    /p:PackageReleaseNotes="See https://github.com/chrisfactory/SignalR.Proximity/releases/tag/${{ github.event.release.tag_name }}"
       working-directory: ./src
 
     - name: Archive SignalR.Proximity.Core NuGet Package
