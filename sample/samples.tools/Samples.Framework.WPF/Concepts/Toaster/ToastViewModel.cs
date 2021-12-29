@@ -4,7 +4,7 @@ namespace Samples.Framework.WPF.Concepts.Toaster
 { 
     public class ToastViewModel : ViewModelBase
     {
-        private IToastableHost _host; 
+        private readonly IToastableHost _host; 
         private string? _Title;
         private string? _User;
         private string? _Message;
@@ -14,11 +14,7 @@ namespace Samples.Framework.WPF.Concepts.Toaster
 
             if (infos == null)
                 throw new ArgumentNullException(nameof(infos));
-
-            if (host == null)
-                throw new ArgumentNullException(nameof(host));
-
-            this._host = host;
+            this._host = host??throw new ArgumentNullException(nameof(host));
             this.ClosedCommand = new DelegateCommand(CloasAction);
             this.ToastType = infos.Type;
             this.Title = infos.Title;
