@@ -1,8 +1,14 @@
-﻿using System;
-namespace SignalR.Proximity
+﻿namespace SignalR.Proximity
 {
+    /// <summary>
+    /// Represents the provider of Hub Url Pattern.
+    /// </summary>
     public interface IPatternProvider
     {
-        string GetPattern(); 
+        /// <summary>
+        /// Provide the Hub Url Pattern
+        /// </summary>
+        /// <returns>Hub Url Pattern</returns>
+        string GetPattern();
     }
 }
