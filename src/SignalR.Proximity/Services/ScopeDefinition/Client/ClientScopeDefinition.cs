@@ -3,7 +3,7 @@
 namespace SignalR.Proximity
 {
     /// <summary>
-    ///    Represents a type used to configure the <see cref="ClientScopeDefinition"/>.
+    ///  Represents a type used to configure the <see cref="ClientScopeDefinition"/>.
     /// </summary>
     public class ClientScopeDefinition : ScopeDefinitionBase
     {

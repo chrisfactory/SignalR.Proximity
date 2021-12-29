@@ -17,7 +17,7 @@ namespace SignalR.Proximity
             _contractDescriptor = contractDescriptor;
             _actionPattern = actionPattern;
         }
-
+        /// <inheritdoc />
         public virtual string GetPattern()
         {
             return _actionPattern(_configs, _contractDescriptor);

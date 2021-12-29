@@ -3,10 +3,18 @@ using SignalR.Proximity.Core;
 using System;
 namespace SignalR.Proximity
 {
+    /// <summary>
+    /// Represents the provider of Hub Url Pattern.
+    /// </summary>
     public class ContractPatternProvider : IPatternProvider
     {
         private readonly ProximityConfigurationCore _configs;
         private readonly IContractDescriptor _contractDescriptor;
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ContractPatternProvider"/> class.
+        /// </summary>
+        /// <param name="configOptions">Options configuration</param>
+        /// <param name="contractDescriptor">Contract Descriptor</param>
         public ContractPatternProvider(
             IOptions<ProximityConfigurationCore> configOptions,
             IContractDescriptor contractDescriptor)
@@ -14,7 +22,7 @@ namespace SignalR.Proximity
             _configs = configOptions.Value;
             _contractDescriptor = contractDescriptor;
         }
-
+        /// <inheritdoc />
         public virtual string GetPattern()
         {
             var contractType = _contractDescriptor.ContractType;
@@ -27,6 +35,6 @@ namespace SignalR.Proximity
                 urlPostFixPath += $".{Environment.MachineName}";
 
             return $"{_configs.PatternBase}/{contractType.FullName}{urlPostFixPath}".ToLower();
-        } 
+        }
     }
 }
