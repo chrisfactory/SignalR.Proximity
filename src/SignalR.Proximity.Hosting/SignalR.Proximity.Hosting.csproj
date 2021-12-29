@@ -7,8 +7,7 @@
     <LangVersion>8.0</LangVersion>
     <OutputType>Library</OutputType>
 
-
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+ 
     <IsPackable>true</IsPackable>
     <PackageId>SignalR.Proximity.Hosting</PackageId>
     <Version>1.0.6</Version>

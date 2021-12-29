@@ -6,8 +6,7 @@
     <LangVersion>8.0</LangVersion>
     <AssemblyOriginatorKeyFile>..\..\Key.snk</AssemblyOriginatorKeyFile>
 
-
-    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+ 
     <PackageId>SignalR.Proximity</PackageId>
     <Version>1.0.6</Version>
     <Authors>Christophe Ohl</Authors>
