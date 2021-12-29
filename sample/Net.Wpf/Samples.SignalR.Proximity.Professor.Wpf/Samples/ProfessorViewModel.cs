@@ -21,6 +21,7 @@ namespace Samples.SignalR.Proximity
             _SchoolMessageConnection.Client.Attach(this);
 
             _ = _SchoolMessageConnection.StartAsync();
+
         }
 
 

@@ -13,7 +13,7 @@
     <Company>Chrisfactory</Company>
     <PackageDescription>.Net SignalR Without Hub Implementations!</PackageDescription>
     <RepositoryUrl>https://github.com/chrisfactory/SignalR.Proximity</RepositoryUrl>
-
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>

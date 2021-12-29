@@ -2,17 +2,22 @@
 using System;
 namespace SignalR.Proximity
 {
+    /// <summary>
+    /// Represents a default implementation of <see cref="Microsoft.AspNetCore.SignalR.Client.IRetryPolicy"/> 
+    /// </summary>
     public class RetryPolicy : IRetryPolicy
     {
-        protected static TimeSpan?[] DEFAULT_RETRY_DELAYS_IN_MILLISECONDS = new TimeSpan?[] { null };
 
-        private readonly TimeSpan?[] _retryDelays;
+        private readonly TimeSpan?[] _retryDelays = new TimeSpan?[] { null };
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RetryPolicy"/> 
+        /// </summary>
+        public RetryPolicy() { }
 
-        public RetryPolicy()
-        {
-            _retryDelays = DEFAULT_RETRY_DELAYS_IN_MILLISECONDS;
-        }
-
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RetryPolicy"/> 
+        /// </summary>
+        /// <param name="retryDelays">Represents the sequence for retrying. </param>
         public RetryPolicy(TimeSpan[] retryDelays)
         {
             _retryDelays = new TimeSpan?[retryDelays.Length + 1];
@@ -23,8 +28,9 @@ namespace SignalR.Proximity
             }
         }
 
+        /// <inheritdoc />
         public virtual TimeSpan? NextRetryDelay(RetryContext retryContext)
-        {
+        { 
             return _retryDelays[retryContext.PreviousRetryCount];
         }
     }
