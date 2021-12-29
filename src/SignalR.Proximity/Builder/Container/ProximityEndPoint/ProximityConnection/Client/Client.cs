@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.SignalR.Client;
+using System;
 using System.Threading.Tasks;
 
 namespace SignalR.Proximity
@@ -28,13 +29,13 @@ namespace SignalR.Proximity
         }
 
 
-        void DettachAll()
-        {
+        //void DettachAll()
+        //{
             //HubConnection cnx = _connection;
             //foreach (var item in MethodContractDescriptor.Create(instance))
             //    cnx.Remove().On(item.Key, item.GetArgsTypes(), item.ReceiveAsync);
             //cnx.Remove()
-        }
+        //}
 
 
         /// <summary>
@@ -44,9 +45,9 @@ namespace SignalR.Proximity
         ///     The groups names.
         /// </param>
         public async Task JoinGroupsAsync(params string[] groups)
-        { 
+        {
             if (groups != null && _connection.State == HubConnectionState.Connected)
-                await _connection.InvokeAsync("Interact", new ProximityHubRequest() { Scope = ClientScopeDefinition.JoinGroups(groups) }, new object[0]); 
+                await _connection.InvokeAsync("Interact", new ProximityHubRequest() { Scope = ClientScopeDefinition.JoinGroups(groups) }, Array.Empty<object>());
         }
 
 
@@ -59,7 +60,7 @@ namespace SignalR.Proximity
         public async Task QuitGroupsAsync(params string[] groups)
         {
             if (_connection.State == HubConnectionState.Connected)
-                await _connection.InvokeAsync("Interact", new ProximityHubRequest() { Scope = ClientScopeDefinition.QuitGroups(groups) }, new object[0]);
+                await _connection.InvokeAsync("Interact", new ProximityHubRequest() { Scope = ClientScopeDefinition.QuitGroups(groups) }, Array.Empty<object>());
 
         }
 

@@ -8,7 +8,7 @@ namespace SignalR.Proximity
 {
     internal class ConnectionBuilder<TContract> : IConnectionBuilder<TContract>
     {
-        public ConnectionBuilder(IHubConnectionBuilder build, IOptions<ProximityEndPointConfig> options, IServiceCollection services)
+        public ConnectionBuilder(IHubConnectionBuilder build, IServiceCollection services)
         {
             Services = services.Copy();
             Services.AddSingleton<IContractDescriptor<TContract>, ContractDescriptor<TContract>>();
