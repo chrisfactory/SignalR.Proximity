@@ -2,6 +2,9 @@
 
 namespace Samples.Host
 {
+    /// <summary>
+    /// Don't do this in production. Used to simulate an implementation of user authentication. 
+    /// </summary>
     public class NoSecureUserIdProvider : IUserIdProvider
     {
         public string? GetUserId(HubConnectionContext connection)

@@ -1,5 +1,4 @@
 ﻿using Samples.Framework.WPF;
-using Samples.Framework.WPF.Concepts.SampleStep;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 

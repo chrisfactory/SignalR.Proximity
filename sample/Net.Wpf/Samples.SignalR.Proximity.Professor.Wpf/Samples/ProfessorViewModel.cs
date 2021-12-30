@@ -15,7 +15,7 @@ namespace Samples.SignalR.Proximity
 
             _SchoolMessageConnection = endPointProvider.Connect<ISchoolContract>(cnxOptions =>
              {
-                 cnxOptions.Headers.Add("username", Name);
+                 cnxOptions.Headers.Add("username", Name);//Don't do this in production. Used to simulate an implementation of user authentication. 
              });
 
             _SchoolMessageConnection.Client.Attach(this);
