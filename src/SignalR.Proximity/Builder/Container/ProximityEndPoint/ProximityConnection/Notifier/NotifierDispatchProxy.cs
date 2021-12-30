@@ -5,6 +5,9 @@ using System.Threading.Tasks;
 
 namespace SignalR.Proximity
 {
+    /// <summary>
+    /// Provides a mechanism for instantiating notifiers proxy objects and handling their method dispatch.
+    /// </summary>
     public class NotifierDispatchProxy : DispatchProxy
     {
 #pragma warning disable CS8618 // Un champ non-nullable doit contenir une valeur non-null lors de la fermeture du constructeur. Envisagez de déclarer le champ comme nullable.
@@ -17,6 +20,7 @@ namespace SignalR.Proximity
             _scope = scope;
         }
 
+        /// <inheritdoc />
         protected override object? Invoke(MethodInfo? targetMethod, object?[]? args)
         {
             if (targetMethod == null)

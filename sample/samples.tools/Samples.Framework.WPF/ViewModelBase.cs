@@ -8,7 +8,7 @@ namespace Samples.Framework.WPF
     public abstract class ViewModelBase : INotifyPropertyChanged
     {
         private PropertyChangedEventHandler? _PropertyChanged;
-        private readonly List<DelegateCommandBase> _commands = new List<DelegateCommandBase>();
+        private readonly List<DelegateCommandBase> _commands = new();
 
 
         #region DelegateCommand
@@ -32,9 +32,7 @@ namespace Samples.Framework.WPF
 
         protected void Notify([CallerMemberName] string? propertyName = null)
         {
-            var handler = _PropertyChanged;
-            if (handler != null)
-                handler(this, new PropertyChangedEventArgs(propertyName));
+            _PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
             OnPropertyChanged(propertyName);
         }
 

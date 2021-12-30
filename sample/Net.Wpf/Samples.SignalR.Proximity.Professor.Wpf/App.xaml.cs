@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Samples.Framework.WPF.Concepts.SampleStep;
 using SignalR.Proximity;
 using System;
 using System.IO;
@@ -55,10 +54,7 @@ namespace Samples.SignalR.Proximity.Professor.Wpf
 
             services.AddSingleton<MainWindow>();
             services.AddSingleton<GlobalViewModel>();
-            services.AddSingleton<SampleStepManager>();
-
             services.AddSingleton<ProfessorViewModel>();
-            services.AddTransient<ISampleStep, ProximityAppConfigurationStep>();
         }
 
 

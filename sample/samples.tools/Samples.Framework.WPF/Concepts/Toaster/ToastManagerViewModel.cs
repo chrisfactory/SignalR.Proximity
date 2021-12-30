@@ -9,10 +9,10 @@ namespace Samples.Framework.WPF.Concepts.Toaster
     public class ToastManagerViewModel : ViewModelBase, IToastableHost
     {
         public IReadOnlyCollection<ToastViewModel> _ReadOnlyToasts;
-        private readonly ObservableCollection<ToastViewModel> _writableToasts = new ObservableCollection<ToastViewModel>();
+        private readonly ObservableCollection<ToastViewModel> _writableToasts = new();
         private Visibility _ManagerVisibility;
         private Visibility _CloseAllVisibility;
-        private readonly object _sync = new object();
+        private readonly object _sync = new();
         public ToastManagerViewModel()
         {
             _ReadOnlyToasts = _writableToasts;
