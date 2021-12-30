@@ -11,14 +11,17 @@ namespace Samples.SignalR.Proximity
         public ProfessorViewModel(IProximityEndPointProvider endPointProvider)
         {
             Name = "Professor";
-            SendCommand = new DelegateCommand(SendAction);
+            SendToAllCommand = new DelegateCommand(SendToAllAction);
+            SendToOthersCommand = new DelegateCommand(SendToOthersAction);
+            SendToUsersCommand = new DelegateCommand(SendToUsersAction);
+            SendToGroupsCommand = new DelegateCommand(SendToGroupsAction);
 
             _SchoolMessageConnection = endPointProvider.Connect<ISchoolContract>(cnxOptions =>
              {
                  cnxOptions.Headers.Add("username", Name);//Don't do this in production. Used to simulate an implementation of user authentication. 
              });
 
-            _SchoolMessageConnection.Client.Attach(this);
+            _SchoolMessageConnection.Client.Attach(this);//register for receive callback
 
             _ = _SchoolMessageConnection.StartAsync();
 
@@ -26,13 +29,31 @@ namespace Samples.SignalR.Proximity
 
 
         public string Name { get; }
-        public DelegateCommand SendCommand { get; set; }
+        public DelegateCommand SendToAllCommand { get; set; }
+        public DelegateCommand SendToOthersCommand { get; set; }
+        public DelegateCommand SendToUsersCommand { get; set; }
+        public DelegateCommand SendToGroupsCommand { get; set; }
 
-        private async void SendAction()
+
+        private async void SendToAllAction()
         {
             await _SchoolMessageConnection.Notifier.ToAll().NotifyAsync(t => t.Send("hello", Name));
         }
 
+        private async void SendToOthersAction()
+        {
+            await _SchoolMessageConnection.Notifier.ToOthers().NotifyAsync(t => t.Send("hello", Name));
+        }
+
+        private async void SendToUsersAction()
+        {
+            await _SchoolMessageConnection.Notifier.ToUsers("...").NotifyAsync(t => t.Send("hello", Name));
+        }
+
+        private async void SendToGroupsAction()
+        {
+            await _SchoolMessageConnection.Notifier.ToGroups("...").NotifyAsync(t => t.Send("hello", Name));
+        }
 
         //Receive message (callback)
         public void Send(string message, string from)

@@ -3,15 +3,12 @@
 namespace Samples.SignalR.Proximity.Professor.Wpf
 {
     public class GlobalViewModel : ViewModelBase
-    {
-        private readonly ProfessorViewModel _ProfessorViewModel;
-        public GlobalViewModel(ProfessorViewModel pro)
+    { 
+        public GlobalViewModel(ProfessorViewModel professor)
         {
-            _ProfessorViewModel = pro;
-
-
+            Professor = professor;  
         }
 
-        public ProfessorViewModel Pro => this._ProfessorViewModel;
+        public ProfessorViewModel Professor { get; private set; }
     }
 }
