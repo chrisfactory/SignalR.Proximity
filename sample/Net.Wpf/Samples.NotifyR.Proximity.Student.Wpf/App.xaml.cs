@@ -52,9 +52,14 @@ namespace Samples.SignalR.Proximity.Student.Wpf
             services.AddSingleton<MainWindow>();
             services.AddSingleton<GlobalViewModel>();
 
-            services.AddSingleton(p => new StudentViewModel(p.GetRequiredService<IProximityEndPointProvider>(), "Chicken"));
-            services.AddSingleton(p => new StudentViewModel(p.GetRequiredService<IProximityEndPointProvider>(), "Zombie"));
-            services.AddSingleton(p => new StudentViewModel(p.GetRequiredService<IProximityEndPointProvider>(), "Butter Toast"));
+            services.AddSingleton(p => new StudentViewModel(p.GetRequiredService<IProximityEndPointProvider>(), "Berlin"));
+            services.AddSingleton(p => new StudentViewModel(p.GetRequiredService<IProximityEndPointProvider>(), "Denver"));
+            services.AddSingleton(p => new StudentViewModel(p.GetRequiredService<IProximityEndPointProvider>(), "Helsinki"));
+            services.AddSingleton(p => new StudentViewModel(p.GetRequiredService<IProximityEndPointProvider>(), "Moscou"));
+            services.AddSingleton(p => new StudentViewModel(p.GetRequiredService<IProximityEndPointProvider>(), "Nairobi"));
+            services.AddSingleton(p => new StudentViewModel(p.GetRequiredService<IProximityEndPointProvider>(), "Oslo"));
+            services.AddSingleton(p => new StudentViewModel(p.GetRequiredService<IProximityEndPointProvider>(), "Rio"));
+            services.AddSingleton(p => new StudentViewModel(p.GetRequiredService<IProximityEndPointProvider>(), "tokio"));
         }
 
 

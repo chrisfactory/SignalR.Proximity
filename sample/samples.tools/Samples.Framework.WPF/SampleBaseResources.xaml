@@ -2,8 +2,10 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:Samples.Framework.WPF">
-    
-    <BitmapImage x:Key="picto_professeur_Source" UriSource="./Images/professeur.jpg" />
+    <ResourceDictionary.MergedDictionaries>
+        <local:Generic/>
+    </ResourceDictionary.MergedDictionaries>
+    <local:UserNameToImageSourceConverter x:Key="NameToImage"/>
     <Style x:Key="FocusVisualStyle">
         <Setter Property="Control.Template">
             <Setter.Value>
@@ -40,5 +42,12 @@
                 <Setter Property="Background"  Value="#55FFFFFF"/> 
             </Trigger>
         </Style.Triggers>
+    </Style>
+
+    <Style TargetType="local:UserViewer">
+        <Style.Setters>
+            <Setter Property="UserName" Value="{Binding Name}"/>
+            <Setter Property="UserImageSource" Value="{Binding Name, Converter={StaticResource NameToImage}}"/> 
+        </Style.Setters>
     </Style>
 </ResourceDictionary>

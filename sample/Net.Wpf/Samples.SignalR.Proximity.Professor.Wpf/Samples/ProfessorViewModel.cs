@@ -28,11 +28,11 @@ namespace Samples.SignalR.Proximity
         }
 
 
-        public string Name { get; }
-        public DelegateCommand SendToAllCommand { get; set; }
-        public DelegateCommand SendToOthersCommand { get; set; }
-        public DelegateCommand SendToUsersCommand { get; set; }
-        public DelegateCommand SendToGroupsCommand { get; set; }
+        public string Name { get; set; }
+        public DelegateCommand SendToAllCommand { get;private set; }
+        public DelegateCommand SendToOthersCommand { get; private set; }
+        public DelegateCommand SendToUsersCommand { get; private set; }
+        public DelegateCommand SendToGroupsCommand { get; private set; }
 
 
         private async void SendToAllAction()
