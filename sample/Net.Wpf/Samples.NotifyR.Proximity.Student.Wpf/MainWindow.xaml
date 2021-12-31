@@ -6,9 +6,9 @@
         xmlns:local="clr-namespace:Samples.SignalR.Proximity.Student.Wpf"  
         xmlns:frwk="clr-namespace:Samples.Framework.WPF;assembly=Samples.Framework.WPF"
         mc:Ignorable="d"
-        Height="900" Width="800" Background="#30FFFFFF">
+        Height="940" Width="800" Background="#30FFFFFF">
 
-    <Grid>
+    <Grid Margin="10">
  
             <ListBox ItemsSource="{Binding Students}" HorizontalContentAlignment="Stretch"  Background="Transparent" BorderThickness="0" BorderBrush="Transparent">
                 <ListBox.ItemTemplate>
