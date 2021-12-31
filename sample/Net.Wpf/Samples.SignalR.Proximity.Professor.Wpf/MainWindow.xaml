@@ -3,54 +3,26 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:frwk="clr-namespace:Samples.Framework.WPF;assembly=Samples.Framework.WPF" 
+        xmlns:wpf="clr-namespace:Samples.SignalR.Proximity.Professor.Wpf"
+        d:DataContext="{d:DesignInstance Type=wpf:GlobalViewModel}"
         mc:Ignorable="d"
         Height="550" Width="800" Background="#30FFFFFF">
 
-    <Grid>
+    <Grid Margin="10">
 
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        
-        
-        <Border 
-            DataContext="{Binding Professor}"
-            Background="Black" 
-            Padding="5"  
-            VerticalAlignment="Top" 
-            Height="130" 
-            Margin="10">
-            <Grid >
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="35"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <Label Content="PROFESSOR" Foreground="CadetBlue"
-                       FontSize="15" HorizontalAlignment="Center" VerticalAlignment="Center"
-                       FontWeight="DemiBold"  >
-                    <Label.LayoutTransform>
-                        <RotateTransform Angle="-90" />
-                    </Label.LayoutTransform>
-                </Label>
-                <Image Grid.Column="1" Source="{StaticResource picto_professeur_Source}"  >
-                    <Image.Clip>
-                        <GeometryGroup>
-                            <EllipseGeometry RadiusX="59" RadiusY="59" Center="60,60"/>
-                        </GeometryGroup>
-                    </Image.Clip>
-                </Image>
-                <StackPanel Grid.Column="2" HorizontalAlignment="Left" Margin="10,0">
-                    <Button Content="Send to All" Command="{Binding SendToAllCommand}"/>
-                    <Button Content="Send to Others" Command="{Binding SendToOthersCommand}"/>
-                    <Button Content="Send to User" Command="{Binding SendToUsersCommand}"/>
-                    <Button Content="Send to Groupe" />
-                </StackPanel>
-            </Grid>
-        </Border>
-
-        
+        <frwk:UserViewer DataContext="{Binding Professor}" >
+            <StackPanel>
+                <Button Content="Send to All" Command="{Binding SendToAllCommand}"/>
+                <Button Content="Send to Others" Command="{Binding SendToOthersCommand}"/>
+                <Button Content="Send to User" Command="{Binding SendToUsersCommand}"/>
+                <!--<Button Content="Send to Groupe" />-->
+            </StackPanel>
+        </frwk:UserViewer>
     </Grid>
 </Window>

@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net6.0-windows</TargetFramework>
@@ -7,33 +7,27 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Images\741-figurine-funko-pop-la-casa-de-papel-tokio-masquee-chase.jpg" />
-    <None Remove="Images\741-figurine-funko-pop-la-casa-de-papel-tokio.jpg" />
-    <None Remove="Images\742-figurine-funko-pop-la-casa-de-papel-denver.jpg" />
-    <None Remove="Images\743-figurine-funko-pop-la-casa-de-papel-berlin-masque-chase.jpg" />
-    <None Remove="Images\743-figurine-funko-pop-la-casa-de-papel-berlin.jpg" />
-    <None Remove="Images\913-figurine-funko-pop-la-casa-de-papel-helsinki.jpg" />
-    <None Remove="Images\914-figurine-funko-pop-la-casa-de-papel-oslo.jpg" />
-    <None Remove="Images\915-figurine-funko-pop-la-casa-de-papel-le-professeur-en-clown.jpg" />
-    <None Remove="Images\916-figurine-funko-pop-la-casa-de-papel-nairobi.jpg" />
-    <None Remove="Images\917-figurine-funko-pop-la-casa-de-papel-rio.jpg" />
-    <None Remove="Images\918-figurine-funko-pop-la-casa-de-papel-moscou.jpg" />
-    <None Remove="Images\professeur.jpg" />
+    <None Remove="Images\berlin.jpg" />
+    <None Remove="Images\denver.jpg" />
+    <None Remove="Images\helsinki.jpg" />
+    <None Remove="Images\moscou.jpg" />
+    <None Remove="Images\nairobi.jpg" />
+    <None Remove="Images\oslo.jpg" />
+    <None Remove="Images\professor.jpg" />
+    <None Remove="Images\rio.jpg" />
+    <None Remove="Images\tokio.jpg" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Images\741-figurine-funko-pop-la-casa-de-papel-tokio-masquee-chase.jpg" />
-    <EmbeddedResource Include="Images\741-figurine-funko-pop-la-casa-de-papel-tokio.jpg" />
-    <EmbeddedResource Include="Images\742-figurine-funko-pop-la-casa-de-papel-denver.jpg" />
-    <EmbeddedResource Include="Images\743-figurine-funko-pop-la-casa-de-papel-berlin-masque-chase.jpg" />
-    <EmbeddedResource Include="Images\743-figurine-funko-pop-la-casa-de-papel-berlin.jpg" />
-    <EmbeddedResource Include="Images\913-figurine-funko-pop-la-casa-de-papel-helsinki.jpg" />
-    <EmbeddedResource Include="Images\914-figurine-funko-pop-la-casa-de-papel-oslo.jpg" />
-    <EmbeddedResource Include="Images\915-figurine-funko-pop-la-casa-de-papel-le-professeur-en-clown.jpg" />
-    <EmbeddedResource Include="Images\916-figurine-funko-pop-la-casa-de-papel-nairobi.jpg" />
-    <EmbeddedResource Include="Images\917-figurine-funko-pop-la-casa-de-papel-rio.jpg" />
-    <EmbeddedResource Include="Images\918-figurine-funko-pop-la-casa-de-papel-moscou.jpg" />
-    <Resource Include="Images\professeur.jpg" />
+    <Resource Include="Images\tokio.jpg" />
+    <Resource Include="Images\denver.jpg" />
+    <Resource Include="Images\berlin.jpg" />
+    <Resource Include="Images\helsinki.jpg" />
+    <Resource Include="Images\oslo.jpg" />
+    <Resource Include="Images\nairobi.jpg" />
+    <Resource Include="Images\rio.jpg" />
+    <Resource Include="Images\moscou.jpg" />
+    <Resource Include="Images\professor.jpg" />
   </ItemGroup>
 
   <ItemGroup>

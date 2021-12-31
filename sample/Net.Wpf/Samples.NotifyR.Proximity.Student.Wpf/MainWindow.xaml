@@ -4,31 +4,26 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Samples.SignalR.Proximity.Student.Wpf"  
+        xmlns:frwk="clr-namespace:Samples.Framework.WPF;assembly=Samples.Framework.WPF"
         mc:Ignorable="d"
-        Height="550" Width="800" Background="#30FFFFFF">
+        Height="940" Width="800" Background="#30FFFFFF">
 
-    <Grid>
-
-
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
+    <Grid Margin="10">
  
-        <Border Grid.Column="1" Background="#30FFFFFF"  CornerRadius="8" BorderBrush="LightBlue" BorderThickness="2" Margin="15">
-            <ListBox ItemsSource="{Binding Students}" HorizontalContentAlignment="Stretch" Background="Transparent" BorderThickness="0" BorderBrush="Transparent">
+            <ListBox ItemsSource="{Binding Students}" HorizontalContentAlignment="Stretch"  Background="Transparent" BorderThickness="0" BorderBrush="Transparent">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
-                        <Border Margin="5">
-                            <StackPanel Orientation="Horizontal"> 
-                                <Label Content="{Binding Name}" Foreground="Orange" FontStyle="Italic" FontWeight="Bold" FontSize="12"/>
-                                <Button Command="{Binding SendCommand}" Width="100" Content="Send"/>
+                        <frwk:UserViewer Margin="5">
+                            <StackPanel>
+                                <Button Content="Send to All" Command="{Binding SendToAllCommand}"/>
+                                <Button Content="Send to Others" Command="{Binding SendToOthersCommand}"/>
+                                <Button Content="Send to User" Command="{Binding SendToUsersCommand}"/>
+                                <!--<Button Content="Send to Groupe" />-->
                             </StackPanel>
-                        </Border>
+                        </frwk:UserViewer>
                     </DataTemplate>
                 </ListBox.ItemTemplate>
-            </ListBox>
-        </Border>
+            </ListBox> 
 
     </Grid>
 </Window>
