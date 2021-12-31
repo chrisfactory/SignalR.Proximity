@@ -21,7 +21,7 @@
                 <Button Content="Send to All" Command="{Binding SendToAllCommand}"/>
                 <Button Content="Send to Others" Command="{Binding SendToOthersCommand}"/>
                 <Button Content="Send to User" Command="{Binding SendToUsersCommand}"/>
-                <Button Content="Send to Groupe" />
+                <!--<Button Content="Send to Groupe" />-->
             </StackPanel>
         </frwk:UserViewer>
     </Grid>

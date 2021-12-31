@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:Samples.SignalR.Proximity.Student.Wpf"  
         xmlns:frwk="clr-namespace:Samples.Framework.WPF;assembly=Samples.Framework.WPF"
         mc:Ignorable="d"
-        Height="550" Width="800" Background="#30FFFFFF">
+        Height="900" Width="800" Background="#30FFFFFF">
 
     <Grid>
  
@@ -18,7 +18,7 @@
                                 <Button Content="Send to All" Command="{Binding SendToAllCommand}"/>
                                 <Button Content="Send to Others" Command="{Binding SendToOthersCommand}"/>
                                 <Button Content="Send to User" Command="{Binding SendToUsersCommand}"/>
-                                <Button Content="Send to Groupe" />
+                                <!--<Button Content="Send to Groupe" />-->
                             </StackPanel>
                         </frwk:UserViewer>
                     </DataTemplate>

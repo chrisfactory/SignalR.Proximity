@@ -8,14 +8,17 @@ namespace Samples.Framework.WPF
     {
         public static readonly DependencyProperty UserNameProperty;
         public static readonly DependencyProperty UserImageSourceProperty;
+        public static readonly DependencyProperty UserMessageProperty;
         static UserViewer()
         {
             var targetType = typeof(UserViewer);
             DefaultStyleKeyProperty.OverrideMetadata(typeof(UserViewer), new FrameworkPropertyMetadata(targetType));
             UserImageSourceProperty = DependencyProperty.Register(nameof(UserImageSource), typeof(ImageSource), targetType, new PropertyMetadata(null));
             UserNameProperty = DependencyProperty.Register(nameof(UserName), typeof(string), targetType, new PropertyMetadata(string.Empty));
+            UserMessageProperty = DependencyProperty.Register(nameof(UserMessage), typeof(UserMessageViewModel), targetType, new PropertyMetadata(null));
+
         }
-         
+
 
         public ImageSource UserImageSource
         {
@@ -28,5 +31,16 @@ namespace Samples.Framework.WPF
             get { return (string)GetValue(UserNameProperty); }
             set { SetValue(UserNameProperty, value); }
         }
+
+
+
+
+        public UserMessageViewModel UserMessage
+        {
+            get { return (UserMessageViewModel)GetValue(UserMessageProperty); }
+            set { SetValue(UserMessageProperty, value); }
+        }
+         
+
     }
 }

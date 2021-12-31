@@ -22,7 +22,9 @@
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="Auto"/>
                                     <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="Auto"/>
                                 </Grid.ColumnDefinitions>
+                                
                                 <TextBlock 
                                     Text="{TemplateBinding UserName}" 
                                     Foreground="White" 
@@ -36,14 +38,19 @@
                                         <RotateTransform Angle="-90" />
                                     </TextBlock.LayoutTransform>
                                 </TextBlock>
-                                <Image Grid.Column="1" Source="{TemplateBinding UserImageSource}" Height="100" Width="100"  VerticalAlignment="Center" >
+                                <Image Grid.Column="1" Source="{TemplateBinding UserImageSource}" Height="60" Width="60"  VerticalAlignment="Center" >
                                     <Image.Clip>
                                         <GeometryGroup>
-                                            <EllipseGeometry RadiusX="50" RadiusY="50" Center="50,50"/>
+                                            <EllipseGeometry RadiusX="30" RadiusY="30" Center="30,30"/>
                                         </GeometryGroup>
                                     </Image.Clip>
                                 </Image>
-                                <ContentControl Content="{TemplateBinding Content}"  Grid.Column="2" HorizontalAlignment="Left" Margin="10,0"/> 
+                                <ContentControl Content="{TemplateBinding Content}"  Grid.Column="2" HorizontalAlignment="Left" Margin="10,0"/>
+
+                                <Border DataContext="{TemplateBinding UserMessage}" Grid.Column="3">
+                                    <TextBlock Text="{Binding From}" Foreground="White"/>
+                                </Border>
+                                
                             </Grid>
                         </Border>
                     </ControlTemplate>

@@ -5,12 +5,11 @@ using SignalR.Proximity;
 
 namespace Samples.SignalR.Proximity
 {
-    public class ProfessorViewModel : ViewModelBase, ISchoolContract
+    public class ProfessorViewModel : UserViewModel, ISchoolContract
     {
         private readonly IConnection<ISchoolContract> _SchoolMessageConnection;
-        public ProfessorViewModel(IProximityEndPointProvider endPointProvider)
-        {
-            Name = "Professor";
+        public ProfessorViewModel(IProximityEndPointProvider endPointProvider):base("Professor")
+        { 
             SendToAllCommand = new DelegateCommand(SendToAllAction);
             SendToOthersCommand = new DelegateCommand(SendToOthersAction);
             SendToUsersCommand = new DelegateCommand(SendToUsersAction);
@@ -27,8 +26,7 @@ namespace Samples.SignalR.Proximity
 
         }
 
-
-        public string Name { get; set; }
+         
         public DelegateCommand SendToAllCommand { get;private set; }
         public DelegateCommand SendToOthersCommand { get; private set; }
         public DelegateCommand SendToUsersCommand { get; private set; }
@@ -58,7 +56,7 @@ namespace Samples.SignalR.Proximity
         //Receive message (callback)
         public void Send(string message, string from)
         {
-
+            base.SetMessage(message, from);
         }
     }
 }

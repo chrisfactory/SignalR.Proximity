@@ -47,7 +47,8 @@
     <Style TargetType="local:UserViewer">
         <Style.Setters>
             <Setter Property="UserName" Value="{Binding Name}"/>
-            <Setter Property="UserImageSource" Value="{Binding Name, Converter={StaticResource NameToImage}}"/> 
+            <Setter Property="UserImageSource" Value="{Binding Name, Converter={StaticResource NameToImage}}"/>
+            <Setter Property="UserMessage" Value="{Binding UserMessage}"/>
         </Style.Setters>
     </Style>
 </ResourceDictionary>
