@@ -41,6 +41,7 @@ namespace Samples.Framework.WPF
             base.OnPropertyChanged(propertyName);
             if (propertyName == nameof(UserMessage) && UserMessage != null)
             {
+                timer.Stop();
                 timer.Start();
             }
         }
