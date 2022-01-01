@@ -1,7 +1,0 @@
-<ResourceDictionary
-    x:Class="Samples.Framework.WPF.Generic"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="clr-namespace:Samples.Framework.WPF">
- 
-</ResourceDictionary>
