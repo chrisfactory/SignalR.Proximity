@@ -7,7 +7,7 @@
         xmlns:wpf="clr-namespace:Samples.SignalR.Proximity.Professor.Wpf"
         d:DataContext="{d:DesignInstance Type=wpf:GlobalViewModel}"
         mc:Ignorable="d"
-        Height="550" Width="800" Background="#30FFFFFF">
+        Height="170" Width="550" Background="#30FFFFFF">
 
     <Grid Margin="10">
 

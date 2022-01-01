@@ -12,7 +12,7 @@ namespace Samples.Framework.WPF
         static UserViewer()
         {
             var targetType = typeof(UserViewer);
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(UserViewer), new FrameworkPropertyMetadata(targetType));
+            DefaultStyleKeyProperty.OverrideMetadata(targetType, new FrameworkPropertyMetadata(targetType));
             UserImageSourceProperty = DependencyProperty.Register(nameof(UserImageSource), typeof(ImageSource), targetType, new PropertyMetadata(null));
             UserNameProperty = DependencyProperty.Register(nameof(UserName), typeof(string), targetType, new PropertyMetadata(string.Empty));
             UserMessageProperty = DependencyProperty.Register(nameof(UserMessage), typeof(UserMessageViewModel), targetType, new PropertyMetadata(null));
