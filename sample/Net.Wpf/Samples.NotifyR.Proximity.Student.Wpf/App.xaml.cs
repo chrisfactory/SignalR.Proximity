@@ -1,8 +1,10 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Samples.Framework.WPF;
 using SignalR.Proximity;
 using System;
 using System.IO;
+using System.Linq;
 using System.Windows;
 
 namespace Samples.SignalR.Proximity.Student.Wpf
@@ -51,15 +53,7 @@ namespace Samples.SignalR.Proximity.Student.Wpf
 
             services.AddSingleton<MainWindow>();
             services.AddSingleton<GlobalViewModel>();
-
-            services.AddSingleton(p => new StudentViewModel(p.GetRequiredService<IProximityEndPointProvider>(), "Berlin"));
-            services.AddSingleton(p => new StudentViewModel(p.GetRequiredService<IProximityEndPointProvider>(), "Denver"));
-            services.AddSingleton(p => new StudentViewModel(p.GetRequiredService<IProximityEndPointProvider>(), "Helsinki"));
-            services.AddSingleton(p => new StudentViewModel(p.GetRequiredService<IProximityEndPointProvider>(), "Moscou"));
-            services.AddSingleton(p => new StudentViewModel(p.GetRequiredService<IProximityEndPointProvider>(), "Nairobi"));
-            services.AddSingleton(p => new StudentViewModel(p.GetRequiredService<IProximityEndPointProvider>(), "Oslo"));
-            services.AddSingleton(p => new StudentViewModel(p.GetRequiredService<IProximityEndPointProvider>(), "Rio"));
-            services.AddSingleton(p => new StudentViewModel(p.GetRequiredService<IProximityEndPointProvider>(), "tokio"));
+            services.AddSingleton(p => UsersProvider.Users.Where(u => !u.IsProfessor).Select(user => new StudentViewModel(p.GetRequiredService<IProximityEndPointProvider>(), user)));
         }
 
 

@@ -8,9 +8,9 @@ namespace Samples.SignalR.Proximity
     public class StudentViewModel : UserViewModel, ISchoolContract
     {
         private readonly IConnection<ISchoolContract> _SchoolMessageConnection;
-        public StudentViewModel(IProximityEndPointProvider endPointProvider, string name) : base(name)
+        public StudentViewModel(IProximityEndPointProvider endPointProvider, User user) : base(user)
         {
-            SendCommand = new DelegateCommand(SendAction);
+            SendToUsersCommand = new DelegateCommand(SendToUsersAction);
 
 
             _SchoolMessageConnection = endPointProvider.Connect<ISchoolContract>(cnxOptions =>
@@ -23,11 +23,11 @@ namespace Samples.SignalR.Proximity
         }
 
 
-        public DelegateCommand SendCommand { get; set; }
+        public DelegateCommand SendToUsersCommand { get; set; }
 
 
 
-        private async void SendAction()
+        private async void SendToUsersAction()
         {
             await _SchoolMessageConnection.Notifier.ToUsers("Professor").NotifyAsync(t => t.Send("hello", Name));
         }

@@ -1,6 +1,4 @@
 ﻿using System.Windows;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;  
 
 namespace Samples.SignalR.Proximity.Student.Wpf
 {
@@ -10,6 +8,8 @@ namespace Samples.SignalR.Proximity.Student.Wpf
         public MainWindow(GlobalViewModel globalViewModel)
         {
             InitializeComponent();
+            this.Left = SystemParameters.PrimaryScreenWidth - this.Width;
+            this.Top = SystemParameters.PrimaryScreenHeight - this.Height -50;
             DataContext = globalViewModel;
         }
     }

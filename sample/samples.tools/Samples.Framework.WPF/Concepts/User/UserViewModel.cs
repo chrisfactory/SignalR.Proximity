@@ -6,9 +6,9 @@ namespace Samples.Framework.WPF
     public class UserViewModel : ViewModelBase
     {
         private readonly DispatcherTimer timer = new();
-        public UserViewModel(string name)
+        public UserViewModel(User user)
         {
-            Name = name; 
+            Name = user.Name; 
             timer.Interval = TimeSpan.FromSeconds(5);
             timer.Tick += Tick;
         }
