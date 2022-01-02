@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Samples.SignalR.Proximity.Student.Wpf"  
+        WindowStartupLocation="Manual"
         xmlns:frwk="clr-namespace:Samples.Framework.WPF;assembly=Samples.Framework.WPF"
         mc:Ignorable="d"
         Height="490" Width="840" Background="#30FFFFFF">

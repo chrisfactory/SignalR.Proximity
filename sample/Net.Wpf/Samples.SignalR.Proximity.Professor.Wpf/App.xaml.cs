@@ -1,8 +1,10 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Samples.Framework.WPF;
 using SignalR.Proximity;
 using System;
 using System.IO;
+using System.Linq;
 using System.Windows;
 
 namespace Samples.SignalR.Proximity.Professor.Wpf
@@ -54,6 +56,7 @@ namespace Samples.SignalR.Proximity.Professor.Wpf
 
             services.AddSingleton<MainWindow>();
             services.AddSingleton<GlobalViewModel>();
+            services.AddSingleton(UsersProvider.Users.Single(u => u.IsProfessor));
             services.AddSingleton<ProfessorViewModel>();
         }
 

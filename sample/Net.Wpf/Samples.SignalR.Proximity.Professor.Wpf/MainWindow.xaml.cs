@@ -10,6 +10,8 @@ namespace Samples.SignalR.Proximity.Professor.Wpf
         public MainWindow(GlobalViewModel globalViewModel)
         {
             InitializeComponent();
+            this.Left = 50;
+            this.Top = 0;
             DataContext = globalViewModel;
         }
     }

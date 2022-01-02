@@ -2,18 +2,23 @@
 using Sample.SignalR.Proximity.Toaster;
 using Samples.Framework.WPF;
 using SignalR.Proximity;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace Samples.SignalR.Proximity
 {
     public class ProfessorViewModel : UserViewModel, ISchoolContract
     {
         private readonly IConnection<ISchoolContract> _SchoolMessageConnection;
-        public ProfessorViewModel(IProximityEndPointProvider endPointProvider):base("Professor")
-        { 
+        public ProfessorViewModel(IProximityEndPointProvider endPointProvider, User user) : base(user)
+        {
             SendToAllCommand = new DelegateCommand(SendToAllAction);
             SendToOthersCommand = new DelegateCommand(SendToOthersAction);
             SendToUsersCommand = new DelegateCommand(SendToUsersAction);
             SendToGroupsCommand = new DelegateCommand(SendToGroupsAction);
+            TargetUsers = UsersProvider.Users.Select(u => new SelectedItem(u.Name, u)).ToList();
+
 
             _SchoolMessageConnection = endPointProvider.Connect<ISchoolContract>(cnxOptions =>
              {
@@ -26,12 +31,12 @@ namespace Samples.SignalR.Proximity
 
         }
 
-         
-        public DelegateCommand SendToAllCommand { get;private set; }
+
+        public DelegateCommand SendToAllCommand { get; private set; }
         public DelegateCommand SendToOthersCommand { get; private set; }
         public DelegateCommand SendToUsersCommand { get; private set; }
         public DelegateCommand SendToGroupsCommand { get; private set; }
-
+        public List<SelectedItem> TargetUsers { get; private set; }
 
         private async void SendToAllAction()
         {
@@ -45,7 +50,8 @@ namespace Samples.SignalR.Proximity
 
         private async void SendToUsersAction()
         {
-            await _SchoolMessageConnection.Notifier.ToUsers("...").NotifyAsync(t => t.Send("hello", Name));
+            var targetUsers = TargetUsers.Where(u => u.IsSelected).Select(u => u.Name).ToArray();
+            await _SchoolMessageConnection.Notifier.ToUsers(targetUsers).NotifyAsync(t => t.Send("hello", Name));
         }
 
         private async void SendToGroupsAction()
