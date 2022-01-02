@@ -136,7 +136,7 @@
             <Setter Property="Background" Value="#25FFFFFF"/>
             <Setter Property="Height" Value="20"/>
             <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisualStyle}"/>
-            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Margin" Value="5,5,0,5"/>
             <Setter Property="Width" Value="100"/>
             <Setter Property="Template">
                 <Setter.Value>
@@ -162,16 +162,17 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="CheckBox">
-                        <Border x:Name="bdr" Background="#24FFFFFF" Padding="2,0" TextBlock.FontSize="10">
+                        <Border x:Name="bdr" Background="Black" Padding="2,0" TextBlock.FontSize="10">
                             <ContentControl Content="{TemplateBinding Content}" VerticalAlignment="Center" VerticalContentAlignment="Center"/>
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsChecked" Value="True">
                                 <Setter Property="Background" Value="LightBlue" TargetName="bdr"/>
                                 <Setter Property="TextBlock.Foreground" Value="Black" TargetName="bdr"/>
+                                <Setter Property="TextBlock.FontWeight" Value="SemiBold" TargetName="bdr"/>
                             </Trigger>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter Property="Background" Value="DarkSlateBlue" TargetName="bdr"/>
+                                <Setter Property="Opacity" Value="0.7" TargetName="bdr"/>
                             </Trigger>
                         </ControlTemplate.Triggers>
 
@@ -194,53 +195,68 @@
                             </Grid.ColumnDefinitions>
 
                             <Button Command="{TemplateBinding Command}" Content="{TemplateBinding Content}" Grid.RowSpan="2"/>
-                            <StackPanel Grid.Column="1" VerticalAlignment="Center"> 
-                                <StackPanel Orientation="Horizontal" Visibility="{TemplateBinding TargetGroupsItemsSources,Converter={StaticResource NullToVisibility}}" >
-                                    <TextBlock Text="Groups:" Foreground="Orange" Margin="0,0,4,0"/>
-                                    <ItemsControl  Background="Transparent" FontSize="10" ItemsSource="{TemplateBinding TargetGroupsItemsSources}">
-                                        <ItemsControl.ItemsPanel>
-                                            <ItemsPanelTemplate>
-                                                <StackPanel Orientation="Horizontal"/>
-                                            </ItemsPanelTemplate>
-                                        </ItemsControl.ItemsPanel>
-                                        <ItemsControl.ItemTemplate>
-                                            <DataTemplate>
-                                                <Grid>
-                                                    <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="Auto"/>
-                                                        <ColumnDefinition Width="Auto"/>
-                                                    </Grid.ColumnDefinitions>
-                                                    <CheckBox Style="{StaticResource selectCB}"
-                                                IsChecked="{Binding IsSelected}" 
-                                                Background="Transparent"
-                                                BorderBrush="Gray" Margin="0,0,3,0"/>
-                                                    <TextBlock VerticalAlignment="Center" Text="{Binding Name}" Grid.Column="1" Foreground="LightBlue"/>
-                                                </Grid>
-                                            </DataTemplate>
-                                        </ItemsControl.ItemTemplate>
-                                    </ItemsControl>
-                                </StackPanel>
-                                <StackPanel Orientation="Horizontal" Visibility="{TemplateBinding TargetUsersItemsSources,Converter={StaticResource NullToVisibility}}">
-                                    <TextBlock Text="Users:" Foreground="Orange" Margin="0,0,4,0"/>
-                                    <ItemsControl Background="Transparent" FontSize="10" ItemsSource="{TemplateBinding TargetUsersItemsSources}">
-                                        <ItemsControl.ItemsPanel>
-                                            <ItemsPanelTemplate>
-                                                <StackPanel Orientation="Horizontal"/>
-                                            </ItemsPanelTemplate>
-                                        </ItemsControl.ItemsPanel>
-                                        <ItemsControl.ItemTemplate>
-                                            <DataTemplate>
-                                                <CheckBox Style="{StaticResource selectCB}"
-                                                IsChecked="{Binding IsSelected}" 
-                                                Content="{Binding Name}"
-                                                Background="Transparent"
-                                                Foreground="LightBlue" VerticalContentAlignment="Center"
-                                                BorderBrush="Gray" Margin="0,0,3,0"/>
-                                            </DataTemplate>
-                                        </ItemsControl.ItemTemplate>
-                                    </ItemsControl>
-                                </StackPanel>
-                            </StackPanel> 
+                            <Grid Grid.Column="1">
+                                <ToggleButton x:Name="ToggleButton" Visibility="{TemplateBinding OptionsVisibility}" Content="Options:" Foreground="Orange" Background="#40FFFFFF"
+                                                  Focusable="false" ClickMode="Press" Margin="0,5" Width="60" BorderThickness="0"
+                                                  IsChecked="{Binding IsDropDownOpen, Mode=TwoWay,RelativeSource={RelativeSource TemplatedParent}}"/>
+                                <Popup x:Name="Popup"
+                                         Placement="Bottom"  Height="50" Width="550"
+                                         IsOpen="{Binding IsDropDownOpen, Mode=TwoWay,RelativeSource={RelativeSource TemplatedParent}}"
+                                         Focusable="False"
+                                         PopupAnimation="Slide">
+                                    <Border Padding="10" Background="Gray" BorderBrush="Orange" BorderThickness="2">
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
+                                            <ItemsControl 
+                                                    Visibility="{TemplateBinding TargetUsersItemsSources,Converter={StaticResource NullToVisibility}}"
+                                                    ItemsSource="{TemplateBinding TargetUsersItemsSources}"
+                                                    Background="Transparent" FontSize="10">
+                                                <ItemsControl.ItemsPanel>
+                                                    <ItemsPanelTemplate>
+                                                        <StackPanel Orientation="Horizontal"/>
+                                                    </ItemsPanelTemplate>
+                                                </ItemsControl.ItemsPanel>
+                                                <ItemsControl.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <CheckBox Style="{StaticResource selectCB}" Width="50" Height="25"
+                                                        IsChecked="{Binding IsSelected}" 
+                                                        Content="{Binding Name}" 
+                                                        Foreground="Gray" 
+                                                        TextBlock.TextAlignment="Center"
+                                                        VerticalContentAlignment="Center" 
+                                                        Margin="0,0,3,0"/>
+                                                    </DataTemplate>
+                                                </ItemsControl.ItemTemplate>
+                                            </ItemsControl>
+                                            <ItemsControl 
+                                                    Grid.Row="1"
+                                                    Visibility="{TemplateBinding TargetGroupsItemsSources,Converter={StaticResource NullToVisibility}}"
+                                                    ItemsSource="{TemplateBinding TargetGroupsItemsSources}"
+                                                    Background="Transparent" FontSize="10">
+                                                <ItemsControl.ItemsPanel>
+                                                    <ItemsPanelTemplate>
+                                                        <StackPanel Orientation="Horizontal"/>
+                                                    </ItemsPanelTemplate>
+                                                </ItemsControl.ItemsPanel>
+                                                <ItemsControl.ItemTemplate>
+                                                    <DataTemplate>
+                                                        <CheckBox Style="{StaticResource selectCB}" Width="50" Height="25"
+                                                        IsChecked="{Binding IsSelected}" 
+                                                        Content="{Binding Name}" 
+                                                        Foreground="Gray" 
+                                                        TextBlock.TextAlignment="Center"
+                                                        VerticalContentAlignment="Center" 
+                                                        Margin="0,0,3,0"/>
+                                                    </DataTemplate>
+                                                </ItemsControl.ItemTemplate>
+                                            </ItemsControl>
+                                        </Grid>
+                                    </Border>
+                                </Popup>
+                            </Grid>
                         </Grid>
                     </Border>
                 </ControlTemplate>

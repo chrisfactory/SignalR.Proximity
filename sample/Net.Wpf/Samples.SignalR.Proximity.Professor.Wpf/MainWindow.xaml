@@ -18,11 +18,17 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <frwk:UserViewer DataContext="{Binding Professor}" >
-            <StackPanel>
-                <frwk:ProximityAction Content="Send to All"  Command="{Binding SendToAllCommand}"/>
-                <frwk:ProximityAction Content="Send to Others" Command="{Binding SendToOthersCommand}"/>
-                <frwk:ProximityAction Content="Send to Users" Command="{Binding SendToUsersCommand}" TargetUsersItemsSources="{Binding TargetUsers}"/>
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                <StackPanel>
+                    <frwk:ProximityAction Content="Send to All"  Command="{Binding SendToAllCommand}"/>
+                    <frwk:ProximityAction Content="Send to Users" Command="{Binding SendToUsersCommand}" OptionsVisibility="Visible" TargetUsersItemsSources="{Binding TargetUsers}"/>
+                </StackPanel>
+                <StackPanel Margin="10,0"> 
+                    <frwk:ProximityAction Content="Send to Others" Command="{Binding SendToOthersCommand}"/>
+                    <frwk:ProximityAction Content="Send to Groups"  Command="{Binding SendToGroupsCommand}"  OptionsVisibility="Visible" TargetGroupsItemsSources="{Binding TargetGroups}"/>
+                </StackPanel>
             </StackPanel>
+
         </frwk:UserViewer>
     </Grid>
 </Window>

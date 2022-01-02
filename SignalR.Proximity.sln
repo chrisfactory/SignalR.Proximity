@@ -27,6 +27,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Samples.Framework.WPF", "sa
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Samples.SignalR.Proximity.Contracts", "sample\Net.Wpf\Samples.SignalR.Proximity.Contracts\Samples.SignalR.Proximity.Contracts.csproj", "{8185D123-8598-4FF3-AE20-36B572C4FA64}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8EE9ED46-6D3C-487E-A5EB-8583B253FB80}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
