@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Globalization;
 using System.Windows.Data;
-using System.Windows.Media.Imaging;
 
 namespace Samples.Framework.WPF
 {
@@ -11,7 +10,7 @@ namespace Samples.Framework.WPF
         {
             if (value is string name)
             {
-               return $"/{typeof(UserNameToImageSourceConverter).Namespace};component/Images/{name.ToLower()}.jpg";
+                return $"/{typeof(UserNameToImageSourceConverter).Namespace};component/Images/{name.ToLower()}.jpg";
             }
             return value;
         }

@@ -8,7 +8,6 @@
 
  
     <PackageId>SignalR.Proximity</PackageId>
-    <Version>1.0.6</Version>
     <Authors>Christophe Ohl</Authors>
     <Company>Chrisfactory</Company>
     <PackageDescription>.Net SignalR Without Hub Implementations!</PackageDescription>
@@ -17,12 +16,18 @@
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PublishRepositoryUrl>true</PublishRepositoryUrl>
     <EmbedUntrackedSources>true</EmbedUntrackedSources>
-    <IncludeSymbols>true</IncludeSymbols> 
+    <IncludeSymbols>true</IncludeSymbols>
+    <PackageIcon>proximity-128.png</PackageIcon>
+    <PackageProjectUrl>https://www.nuget.org/packages/SignalR.Proximity/</PackageProjectUrl>
+    <RepositoryType>nuget.org</RepositoryType>
+    <EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
+    <EnableNETAnalyzers>True</EnableNETAnalyzers>
+    <AnalysisLevel>6.0</AnalysisLevel> 
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.SignalR.Common" Version="6.0.1" />
-    <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="6.0.1" /> 
-    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="6.0.0" /> 
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Common" Version="7.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="7.0.0" /> 
+    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="7.0.0" /> 
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -33,6 +38,10 @@
     <ProjectReference Include="..\SignalR.Proximity.Core\SignalR.Proximity.Core.csproj" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="..\..\proximity-128.png">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
     <None Include="..\..\README.md" Pack="true" PackagePath="\" />
   </ItemGroup>
 </Project>

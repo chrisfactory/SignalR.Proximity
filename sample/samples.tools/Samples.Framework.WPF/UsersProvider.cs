@@ -18,7 +18,7 @@ namespace Samples.Framework.WPF
                 new User("Rio"),
                 new User("Tokio"),
                 new User("Professor","Foundry"),
-            }.OrderByDescending(u => u.Name).ToList();
+            }.OrderBy(u=>u.IsProfessor).ThenByDescending(u => u.Name).ToList();
         }
         public static IEnumerable<User> Users { get; }
     }
