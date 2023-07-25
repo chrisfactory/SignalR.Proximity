@@ -1,6 +1,6 @@
 {
   "Proximity": {
     "UrlBase": "https://localhost:5011",
-    "PatternBase": "/samples"
+    //"PatternBase": "/samples"
   }
 }

@@ -34,7 +34,13 @@ namespace SignalR.Proximity
             if (_configs.PatternMachineNamePostfix)
                 urlPostFixPath += $".{Environment.MachineName}";
 
-            return $"{_configs.PatternBase}/{contractType.FullName}{urlPostFixPath}".ToLower();
+
+            var basePattern = string.Empty;
+
+            if (_configs.PatternBase != null && !string.IsNullOrEmpty(_configs.PatternBase)) 
+                basePattern = _configs.PatternBase.StartsWith("/") ? _configs.PatternBase : $"/{_configs.PatternBase}";
+             
+            return $"{basePattern}/{contractType.FullName}{urlPostFixPath}".ToLower();
         }
     }
 }

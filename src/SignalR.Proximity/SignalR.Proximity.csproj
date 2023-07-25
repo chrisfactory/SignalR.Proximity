@@ -25,8 +25,8 @@
     <AnalysisLevel>6.0</AnalysisLevel> 
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.SignalR.Common" Version="7.0.3" />
-    <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="7.0.3" /> 
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Common" Version="7.0.9" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="7.0.9" /> 
     <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="7.0.0" /> 
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1">
       <PrivateAssets>all</PrivateAssets>
