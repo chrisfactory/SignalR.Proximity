@@ -36,8 +36,8 @@ app.UseAuthorization();
 app.MapRazorPages();
 app.UseEndpoints(endpoints =>
 {
-    endpoints.MapProximity<IToastNotificationsContract>("/samples");
-    endpoints.MapProximity<ISchoolContract>("/samples");
+    endpoints.MapProximity<IToastNotificationsContract>();
+    endpoints.MapProximity<ISchoolContract>();
 });
 
 
