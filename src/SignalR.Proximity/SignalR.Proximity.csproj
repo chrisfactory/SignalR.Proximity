@@ -1,9 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net472;net5.0;netcoreapp3.1</TargetFrameworks>
-    <SignAssembly>True</SignAssembly>
+    <TargetFrameworks>net9.0</TargetFrameworks>
+    <SignAssembly>False</SignAssembly>
     <nullable>enable</nullable>
-    <LangVersion>8.0</LangVersion>
+    <LangVersion>latest</LangVersion>
     <AssemblyOriginatorKeyFile>..\..\Key.snk</AssemblyOriginatorKeyFile>
 
  
@@ -22,12 +22,12 @@
     <RepositoryType>nuget.org</RepositoryType>
     <EnforceCodeStyleInBuild>True</EnforceCodeStyleInBuild>
     <EnableNETAnalyzers>True</EnableNETAnalyzers>
-    <AnalysisLevel>6.0</AnalysisLevel> 
+    <AnalysisLevel>latest</AnalysisLevel> 
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.SignalR.Common" Version="7.0.9" />
-    <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="7.0.9" /> 
-    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="7.0.0" /> 
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Common" Version="9.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="9.0.0" /> 
+    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="9.0.0" /> 
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
