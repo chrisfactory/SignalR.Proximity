@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net9.0</TargetFrameworks>
+    <TargetFrameworks>net10.0</TargetFrameworks>
     <SignAssembly>False</SignAssembly>
     <nullable>enable</nullable>
     <LangVersion>latest</LangVersion>
@@ -25,14 +25,14 @@
     <AnalysisLevel>latest</AnalysisLevel> 
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.SignalR.Common" Version="9.0.0" />
-    <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="9.0.0" /> 
-    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="9.0.0" /> 
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.1.1">
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Common" Version="10.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR.Client" Version="10.0.1" /> 
+    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="10.0.1" /> 
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference> 
-    <PackageReference Include="System.Reflection.DispatchProxy" Version="4.7.1" />
+    <PackageReference Include="System.Reflection.DispatchProxy" Version="4.8.2" />
   </ItemGroup>
   <ItemGroup> 
     <ProjectReference Include="..\SignalR.Proximity.Core\SignalR.Proximity.Core.csproj" />

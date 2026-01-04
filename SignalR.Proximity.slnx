@@ -1,0 +1,23 @@
+<Solution>
+  <Folder Name="/samples/">
+    <Project Path="sample/Samples.Host/Samples.Host.csproj" />
+  </Folder>
+  <Folder Name="/samples/samples.tools/">
+    <Project Path="sample/samples.tools/Samples.Framework.WPF/Samples.Framework.WPF.csproj" />
+  </Folder>
+  <Folder Name="/samples/Wpf/">
+    <Project Path="sample/Net.Wpf/Samples.NotifyR.Proximity.Student.Wpf/Samples.SignalR.Proximity.Student.Wpf.csproj" />
+    <Project Path="sample/Net.Wpf/Samples.SignalR.Proximity.Contracts/Samples.SignalR.Proximity.Contracts.csproj" />
+    <Project Path="sample/Net.Wpf/Samples.SignalR.Proximity.Professor.Wpf/Samples.SignalR.Proximity.Professor.Wpf.csproj" />
+  </Folder>
+  <Folder Name="/src/">
+    <Project Path="src/SignalR.Proximity.Core/SignalR.Proximity.Core.csproj" />
+    <Project Path="src/SignalR.Proximity.Hosting/SignalR.Proximity.Hosting.csproj" />
+    <Project Path="src/SignalR.Proximity/SignalR.Proximity.csproj" />
+  </Folder>
+  <Folder Name="/Éléments de solution/">
+    <File Path=".github/codeql-config.yml" />
+    <File Path=".github/workflows/ci-build-analysis.yml" />
+    <File Path=".github/workflows/release.yml" />
+  </Folder>
+</Solution>
