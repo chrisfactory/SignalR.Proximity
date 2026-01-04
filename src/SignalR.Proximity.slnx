@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="SignalR.Proximity.Core/SignalR.Proximity.Core.csproj" />
+  <Project Path="SignalR.Proximity.Hosting/SignalR.Proximity.Hosting.csproj" />
+  <Project Path="SignalR.Proximity/SignalR.Proximity.csproj" />
+</Solution>
