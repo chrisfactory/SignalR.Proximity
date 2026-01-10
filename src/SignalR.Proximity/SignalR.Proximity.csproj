@@ -31,8 +31,7 @@
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference> 
-    <PackageReference Include="System.Reflection.DispatchProxy" Version="4.8.2" />
+    </PackageReference>  
   </ItemGroup>
   <ItemGroup> 
     <ProjectReference Include="..\SignalR.Proximity.Core\SignalR.Proximity.Core.csproj" />

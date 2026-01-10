@@ -6,7 +6,7 @@ namespace SignalR.Proximity
 {
     public static partial class IServiceCollectionExtensions
     {
-        public static IServiceCollection UseProximity(this IServiceCollection source, Action<IProximityBuilder> configure)
+        public static IServiceCollection AddProximity(this IServiceCollection source, Action<IServiceProvider, IProximityBuilder> configure)
         {
             source.TryAddSingleton<IProximityBuilder, ProximityBuilder>();
             source.TryAddSingleton(p => p.GetRequiredService(configure).Build());

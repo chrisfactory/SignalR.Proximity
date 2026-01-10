@@ -29,7 +29,7 @@ namespace Samples.SignalR.Proximity.Student.Wpf
 
         private static void ConfigureServices(IServiceCollection services, IConfigurationRoot rootConfig)
         {
-            services.UseProximity(proximity =>
+            services.AddProximity((p,proximity) =>
             {
                 proximity.AddEndPoint(rootConfig.GetSection("Proximity"));
             });

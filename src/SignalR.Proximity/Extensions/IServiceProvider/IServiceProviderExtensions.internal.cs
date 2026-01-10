@@ -5,14 +5,14 @@ namespace Microsoft.Extensions.DependencyInjection
 {
     internal static partial class ServiceProviderExtensions
     {
-        internal static T GetRequiredService<T>(this IServiceProvider provider, Action<T>? configure)
+        internal static T GetRequiredService<T>(this IServiceProvider provider, Action<IServiceProvider, T>? configure)
             where T : notnull
         {
             if (provider == null)
                 throw new ArgumentNullException(nameof(provider));
 
             var result = provider.GetRequiredService<T>();
-            configure?.Invoke(result);
+            configure?.Invoke(provider, result);
             return result;
         }
 

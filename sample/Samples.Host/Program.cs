@@ -29,16 +29,17 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 
-app.UseRouting();
-
-app.UseAuthorization();
-
-app.MapRazorPages();
-app.UseEndpoints(endpoints =>
+app.UseRouting()
+    .UseEndpoints(endpoints =>
 {
     endpoints.MapProximity<IToastNotificationsContract>();
     endpoints.MapProximity<ISchoolContract>();
 });
+
+app.UseAuthorization();
+
+app.MapRazorPages();
+ 
 
 
 app.Run();
