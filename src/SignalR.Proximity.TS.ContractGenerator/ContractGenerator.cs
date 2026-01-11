@@ -1,12 +1,10 @@
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.CodeAnalysis.Text;
-using System.Collections.Immutable;
 
 namespace SignalR.Proximity.TS.ContractGenerator
 {
@@ -67,32 +65,38 @@ namespace SignalR.Proximity
 
         private class ContractInfo
         {
+            public ContractInfo(INamedTypeSymbol interfaceSymbol,string  targetPath,string interfaceName,string ns,string? projectDirectory)
+            {
+                InterfaceSymbol = interfaceSymbol;
+                TargetPath = targetPath;
+                InterfaceName = interfaceName;
+                Namespace = ns;
+                ProjectDirectory = projectDirectory;
+            }
             public INamedTypeSymbol InterfaceSymbol;
             public string TargetPath;
             public string InterfaceName;
             public string Namespace;
-            public string ProjectDirectory;
+            public string? ProjectDirectory;
         }
 
-        private ContractInfo GetContractInfo(GeneratorAttributeSyntaxContext context)
+        private ContractInfo? GetContractInfo(GeneratorAttributeSyntaxContext context)
         {
             var folder = GetProjectDirectory(context.SemanticModel.SyntaxTree);
             var att = context.Attributes.FirstOrDefault(a => a.AttributeClass?.ToDisplayString() == AttributeName);
             if (att == null) return null;
 
-            var targetPath = att.ConstructorArguments[0].Value?.ToString();
+            var targetPath = att.ConstructorArguments[0].Value?.ToString()!;
 
-            return new ContractInfo
-            {
-                InterfaceSymbol = (INamedTypeSymbol)context.TargetSymbol,
-                TargetPath = targetPath,
-                InterfaceName = context.TargetSymbol.Name,
-                Namespace = context.TargetSymbol.ContainingNamespace.ToDisplayString(),
-                ProjectDirectory = folder
-            };
+            return new ContractInfo(
+                (INamedTypeSymbol)context.TargetSymbol, 
+                targetPath, context.TargetSymbol.Name,
+                context.TargetSymbol.ContainingNamespace.ToDisplayString(), 
+                folder);
+;
         }
 
-        private string GetProjectDirectory(SyntaxTree tree)
+        private string? GetProjectDirectory(SyntaxTree tree)
         {
             // Simple heuristic: get directory of the source file
             var path = tree.FilePath;
@@ -104,7 +108,7 @@ namespace SignalR.Proximity
         {
             if (string.IsNullOrEmpty(info.ProjectDirectory)) return;
 
-            var fullPath = Path.Combine(info.ProjectDirectory, info.TargetPath);
+            var fullPath = Path.Combine(info.ProjectDirectory, info.TargetPath)!;
             var content = GenerateTypeScript(info.InterfaceSymbol);
 
             // Writing to disk (Side Effect!)
@@ -116,8 +120,9 @@ namespace SignalR.Proximity
             }
 
             // Determine directory
-            var dir = Path.GetDirectoryName(fullPath);
-            if (!Directory.Exists(dir)) Directory.CreateDirectory(dir);
+            var dir = Path.GetDirectoryName(fullPath)!;
+            if (!Directory.Exists(dir))
+                Directory.CreateDirectory(dir);
 
             File.WriteAllText(fullPath, content);
         }

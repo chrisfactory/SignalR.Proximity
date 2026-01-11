@@ -4,8 +4,17 @@ using System;
 
 namespace SignalR.Proximity
 {
+    /// <summary>
+    /// Extensions for <see cref="IServiceCollection"/>.
+    /// </summary>
     public static partial class IServiceCollectionExtensions
     {
+        /// <summary>
+        /// Adds Proximity services to the collection.
+        /// </summary>
+        /// <param name="source">The service collection.</param>
+        /// <param name="configure">Configuration action.</param>
+        /// <returns>The service collection.</returns>
         public static IServiceCollection AddProximity(this IServiceCollection source, Action<IServiceProvider, IProximityBuilder> configure)
         {
             source.TryAddSingleton<IProximityBuilder, ProximityBuilder>();
