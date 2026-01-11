@@ -5,7 +5,7 @@ using SignalR.Proximity;
 using SignalR.Proximity.Hosting;
 var builder = WebApplication.CreateBuilder(args);
 
- 
+
 
 // Add services to the container.
 builder.Services.AddRazorPages();
@@ -13,6 +13,17 @@ builder.Services.AddRazorPages();
 builder.Services.AddSignalR();//  <--------------
 builder.Services.AddSingleton<IUserIdProvider, NoSecureUserIdProvider>();
 builder.Services.AddProximity();//  <--------------
+
+builder.Services.AddCors(options =>
+{
+    options.AddDefaultPolicy(builder =>
+    {
+        builder.WithOrigins("http://localhost:5173")
+               .AllowAnyHeader()
+               .AllowAnyMethod()
+               .AllowCredentials();
+    });
+});
 
 var app = builder.Build();
 
@@ -27,6 +38,7 @@ if (!app.Environment.IsDevelopment())
 
 
 app.UseHttpsRedirection();
+app.UseCors();
 app.UseStaticFiles();
 
 app.UseRouting()
@@ -39,9 +51,8 @@ app.UseRouting()
 app.UseAuthorization();
 
 app.MapRazorPages();
- 
+
 
 
 app.Run();
 
- 

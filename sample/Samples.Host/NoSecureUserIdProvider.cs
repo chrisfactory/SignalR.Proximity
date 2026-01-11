@@ -18,6 +18,10 @@ namespace Samples.Host
                     var fakeUserName = request.Headers["username"].ToString();
                     return fakeUserName;
                 }
+                if (request.Query.ContainsKey("username"))
+                {
+                    return request.Query["username"];
+                }
             }
             return null;
         }

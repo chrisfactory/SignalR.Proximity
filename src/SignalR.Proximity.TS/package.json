@@ -1,0 +1,26 @@
+{
+  "name": "@signalr-proximity/client",
+  "version": "1.0.0",
+  "description": "SignalR Proximity Client for TypeScript/JavaScript",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "signalr",
+    "proximity",
+    "proxy",
+    "typescript"
+  ],
+  "author": "",
+  "license": "MIT",
+  "peerDependencies": {
+    "@microsoft/signalr": "^8.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.3.3",
+    "@microsoft/signalr": "^8.0.0"
+  }
+}
