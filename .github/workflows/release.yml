@@ -42,7 +42,29 @@ jobs:
         name: SignalR.Proximity.Hosting
         path: ./src/SignalR.Proximity.Hosting/bin/Release/SignalR.Proximity.Hosting.${{ github.event.release.tag_name }}.symbols.nupkg
 
+    - name: Archive SignalR.Proximity.TS.ContractGenerator NuGet Package
+      uses: actions/upload-artifact@v4
+      with:
+        name: SignalR.Proximity.TS.ContractGenerator
+        path: ./src/SignalR.Proximity.TS.ContractGenerator/bin/Release/SignalR.Proximity.TS.ContractGenerator.${{ github.event.release.tag_name }}.symbols.nupkg
+
     - name: Publish Nuget Package
       run: dotnet nuget push **/*.symbols.nupkg --api-key ${{ secrets.SIGNALR_PROXIMITY_NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json 
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20.x'
+        registry-url: 'https://registry.npmjs.org'
+
+    - name: Publish NPM Package
+      working-directory: ./src/SignalR.Proximity.TS
+      run: |
+        npm install
+        npm version ${{ github.event.release.tag_name }} --no-git-tag-version
+        npm run build
+        npm publish --access public
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }} 
 
       

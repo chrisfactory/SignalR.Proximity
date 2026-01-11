@@ -29,6 +29,26 @@ export interface ISchoolContract {
 }
 ```
 
+### 1.1 Automate with Contract Generator (Recommended)
+
+Instead of manually creating these files, use the `SignalR.Proximity.TS.ContractGenerator` NuGet package.
+
+1.  Install the package in your **Contracts** project:
+    ```
+    PM> Install-Package SignalR.Proximity.TS.ContractGenerator
+    ```
+2.  Add the `[ProximityTypeScriptCodeSync]` attribute to your interface:
+    ```csharp
+    using SignalR.Proximity;
+
+    [ProximityTypeScriptCodeSync("../../my-react-app/src/contracts.ISchoolContract.ts")]
+    public interface ISchoolContract
+    {
+        void Send(string message, string from);
+    }
+    ```
+3.  Build your .NET project. The TypeScript file (interface + signature map + path constant) will be generated automatically.
+
 ### 2. Configure the Connection
 
 Use `ProximityBuilder` to setup the connection. You can use the fluent API to construct the endpoint URL and identifying information.
@@ -53,13 +73,11 @@ To send messages, create a notifier proxy.
 **Crucial**: You must provide a "Signature Map" to match the .NET server's method keys.
 
 ```typescript
-// Map method names to .NET signatures (ToString() of MethodInfo)
-const schoolSignatures = {
-    Send: "Void Send(System.String, System.String)"
-};
+// Use generated signature maps!
+import { schoolContractSignatures } from './contracts.ISchoolContract';
 
 // Create a proxy
-const proxy = connection.createNotifier<ISchoolContract>(schoolSignatures);
+const proxy = connection.createNotifier<ISchoolContract>(schoolContractSignatures);
 
 // Send a message (broadcast to All by default)
 await proxy.Send("Hello World", "John");
@@ -101,4 +119,4 @@ connection.attachClient(new SchoolHandler(), schoolSignatures);
 
 ## Why Signature Maps?
 
-`SignalR.Proximity` uses the full string representation of the .NET method signature (e.g., `Void Send(System.String, System.String)`) as the event key. Since TypeScript interfaces don't exist at runtime, you must explicitly provide this mapping so the client knows which event string to specific for `Send`.
+`SignalR.Proximity` uses the full string representation of the .NET method signature (e.g., `Void Send(System.String, System.String)`) as the event key. Since TypeScript interfaces don't exist at runtime, you must explicitly provide this mapping so the client knows which event string to specific for `Send`. The **Contract Generator** automates this by exporting a `Signatures` constant for each contract.

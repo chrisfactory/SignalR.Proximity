@@ -53,6 +53,15 @@ PM> Install-Package SignalR.Proximity
 ```	 
 PM> Install-Package SignalR.Proximity.Hosting
 ```
+[![Nuget.org TS Generator](http://img.shields.io/nuget/v/SignalR.Proximity.TS.ContractGenerator.svg)](https://www.nuget.org/packages/SignalR.Proximity.TS.ContractGenerator/)
+```
+PM> Install-Package SignalR.Proximity.TS.ContractGenerator
+```
+For TypeScript/React clients:
+[![npm version](https://img.shields.io/npm/v/@signalr-proximity/client)](https://www.npmjs.com/package/@signalr-proximity/client)
+```bash
+npm install @signalr-proximity/client
+```
 ## Status
 [![CI status](https://github.com/chrisfactory/SignalR.Proximity/workflows/CI/badge.svg)](https://github.com/chrisfactory/SignalR.Proximity/actions/workflows/ci-build-analysis.yml?query=branch%3Amaster)
 

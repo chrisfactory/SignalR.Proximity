@@ -4,4 +4,9 @@
     <TargetFramework>net10.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\src\SignalR.Proximity.TS.ContractGenerator\SignalR.Proximity.TS.ContractGenerator.csproj" OutputItemType="Analyzer" />
+    <ProjectReference Include="..\..\..\src\SignalR.Proximity\SignalR.Proximity.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -6,7 +6,7 @@ export interface ISchoolContract {
 }
 
 export const schoolContractSignatures = {
-    Send: "Void Send(System.String, System.String)"
+    Send: "Void Send(string, string)"
 };
 
 export const schoolContractPath = "sample.signalr.proximity.toaster.ischoolcontract";

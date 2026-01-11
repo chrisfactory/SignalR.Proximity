@@ -3,9 +3,9 @@ import './App.css'
 import { ProximityBuilder, ProximityConnection } from '@signalr-proximity/client'
 import type { ScopeDefinition } from '@signalr-proximity/client'
 import type { ISchoolContract } from './contracts.ISchoolContract'
-import { schoolSignatures, schoolPath } from './contracts.ISchoolContract'
+import { schoolContractSignatures, schoolContractPath } from './contracts.ISchoolContract'
 import type { IToastNotificationsContract, ToasterRequest } from './contracts.IToastNotificationsContract'
-import { toastSignatures, toastPath } from './contracts.IToastNotificationsContract'
+import { toastNotificationsContractSignatures, toastNotificationsContractPath } from './contracts.IToastNotificationsContract'
 
 // --- Data ---
 const ALL_USERS = [
@@ -59,14 +59,14 @@ function App() {
 
     const schoolCnx = new ProximityBuilder()
       .withBaseUrl(baseUrl)
-      .withPath(schoolPath)
+      .withPath(schoolContractPath)
       .withUserName(CURRENT_USER)
       .withAutomaticReconnect()
       .build();
 
     const toastCnx = new ProximityBuilder()
       .withBaseUrl(baseUrl)
-      .withPath(toastPath)
+      .withPath(toastNotificationsContractPath)
       .withUserName(CURRENT_USER)
       .withAutomaticReconnect()
       .build();
@@ -74,8 +74,8 @@ function App() {
     const connect = async () => {
       try {
         // Attach handlers
-        schoolCnx.attachClient(new SchoolHandler(), schoolSignatures);
-        toastCnx.attachClient(new ToastNotificationsHandler(), toastSignatures);
+        schoolCnx.attachClient(new SchoolHandler(), schoolContractSignatures);
+        toastCnx.attachClient(new ToastNotificationsHandler(), toastNotificationsContractSignatures);
 
         await schoolCnx.start();
         if (mounted) {
@@ -108,7 +108,7 @@ function App() {
   const send = async (scope: ScopeDefinition, suffixDesc: string) => {
     if (!schoolConnection) return;
     try {
-      const proxy = schoolConnection.createNotifier<ISchoolContract>(schoolSignatures, scope);
+      const proxy = schoolConnection.createNotifier<ISchoolContract>(schoolContractSignatures, scope);
       await proxy.Send(`${message} (${suffixDesc})`, CURRENT_USER);
       addLog(`Sent to ${suffixDesc}`, 'info');
     } catch (e) {

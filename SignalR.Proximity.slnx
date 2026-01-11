@@ -13,6 +13,7 @@
   <Folder Name="/src/">
     <Project Path="src/SignalR.Proximity.Core/SignalR.Proximity.Core.csproj" />
     <Project Path="src/SignalR.Proximity.Hosting/SignalR.Proximity.Hosting.csproj" />
+    <Project Path="src/SignalR.Proximity.TS.ContractGenerator/SignalR.Proximity.TS.ContractGenerator.csproj" />
     <Project Path="src/SignalR.Proximity/SignalR.Proximity.csproj" />
   </Folder>
   <Folder Name="/Éléments de solution/">
