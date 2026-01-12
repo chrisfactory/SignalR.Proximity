@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Routing;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SignalR.Proximity.Core;
 using SignalR.Proximity.Hosting;
@@ -26,11 +27,11 @@ namespace Microsoft.AspNetCore.Builder
         /// </summary>
         /// <typeparam name="TContract">The contract type.</typeparam>
         /// <param name="builder">The route builder.</param>
-        /// <param name="pattern">The route pattern.</param>
+        /// <param name="config">The configuration.</param>
         /// <returns>The route builder.</returns>
-        public static IEndpointRouteBuilder MapProximity<TContract>(this IEndpointRouteBuilder builder, string pattern)
+        public static IEndpointRouteBuilder MapProximity<TContract>(this IEndpointRouteBuilder builder, IConfiguration config)
         {
-            return builder.InnerMapProximity<ProximityHub<TContract>, TContract>(pattern, null);
+            return builder.InnerMapProximity<ProximityHub<TContract>, TContract>(config, null);
         }
         /// <summary>
         /// Maps a Proximity hub with configuration.
@@ -48,12 +49,12 @@ namespace Microsoft.AspNetCore.Builder
         /// </summary>
         /// <typeparam name="TContract">The contract type.</typeparam>
         /// <param name="builder">The route builder.</param>
-        /// <param name="pattern">The route pattern.</param>
+        /// <param name="config">The configuration.</param>
         /// <param name="configureOptions">The configuration action.</param>
         /// <returns>The route builder.</returns>
-        public static IEndpointRouteBuilder MapProximity<TContract>(this IEndpointRouteBuilder builder, string pattern, Action<IProximityHubBuilder> configureOptions)
+        public static IEndpointRouteBuilder MapProximity<TContract>(this IEndpointRouteBuilder builder, IConfiguration config, Action<IProximityHubBuilder> configureOptions)
         {
-            return builder.InnerMapProximity<ProximityHub<TContract>, TContract>(pattern, configureOptions);
+            return builder.InnerMapProximity<ProximityHub<TContract>, TContract>(config, configureOptions);
         }
 
 
@@ -75,12 +76,12 @@ namespace Microsoft.AspNetCore.Builder
         /// <typeparam name="TProximityHub">The hub type.</typeparam>
         /// <typeparam name="TContract">The contract type.</typeparam>
         /// <param name="builder">The route builder.</param>
-        /// <param name="pattern">The route pattern.</param>
+        /// <param name="config">The configuration.</param>
         /// <returns>The route builder.</returns>
-        public static IEndpointRouteBuilder MapProximity<TProximityHub, TContract>(this IEndpointRouteBuilder builder, string? pattern = null)
+        public static IEndpointRouteBuilder MapProximity<TProximityHub, TContract>(this IEndpointRouteBuilder builder, IConfiguration config)
           where TProximityHub : ProximityHub<TContract>
         {
-            return builder.InnerMapProximity<TProximityHub, TContract>(pattern, null);
+            return builder.InnerMapProximity<TProximityHub, TContract>(config, null);
         }
         /// <summary>
         /// Maps a custom Proximity hub with configuration.
@@ -101,25 +102,24 @@ namespace Microsoft.AspNetCore.Builder
         /// <typeparam name="TProximityHub">The hub type.</typeparam>
         /// <typeparam name="TContract">The contract type.</typeparam>
         /// <param name="builder">The route builder.</param>
-        /// <param name="pattern">The route pattern.</param>
+        /// <param name="config">The configuration.</param>
         /// <param name="configureOptions">The configuration action.</param>
         /// <returns>The route builder.</returns>
-        public static IEndpointRouteBuilder MapProximity<TProximityHub, TContract>(this IEndpointRouteBuilder builder, string pattern, Action<IProximityHubBuilder> configureOptions)
+        public static IEndpointRouteBuilder MapProximity<TProximityHub, TContract>(this IEndpointRouteBuilder builder, IConfiguration config, Action<IProximityHubBuilder> configureOptions)
              where TProximityHub : ProximityHub<TContract>
         {
-            return builder.InnerMapProximity<TProximityHub, TContract>(pattern, configureOptions);
+            return builder.InnerMapProximity<TProximityHub, TContract>(config, configureOptions);
         }
-        private static IEndpointRouteBuilder InnerMapProximity<TProximityHub, TContract>(this IEndpointRouteBuilder builder, string? pattern, Action<IProximityHubBuilder>? configureOptions)
+        private static IEndpointRouteBuilder InnerMapProximity<TProximityHub, TContract>(this IEndpointRouteBuilder builder, IConfiguration? config, Action<IProximityHubBuilder>? configureOptions)
         where TProximityHub : ProximityHub<TContract>
         {
             var proximityBuilder = builder.ServiceProvider.GetRequiredService<IProximityHubBuilder<TProximityHub, TContract>>();
             proximityBuilder.UseEndpointRouteBuilder(builder);
-            proximityBuilder.Services.Configure<ProximityConfigurationCore>(config =>
-            {
-                if (pattern != null && !string.IsNullOrEmpty(pattern))
-                    config.PatternBase = pattern;
+            if (config != null) 
+                proximityBuilder.Services.Configure<ProximityConfigurationCore>(config); 
+            else 
+                proximityBuilder.Services.Configure<ProximityConfigurationCore>(options => { });
 
-            });
             configureOptions?.Invoke(proximityBuilder);
             proximityBuilder.Build();
 
