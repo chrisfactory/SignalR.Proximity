@@ -5,6 +5,8 @@ using SignalR.Proximity;
 using System;
 using System.IO;
 using System.Linq;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Windows;
 
 namespace Samples.SignalR.Proximity.Student.Wpf
@@ -30,8 +32,25 @@ namespace Samples.SignalR.Proximity.Student.Wpf
         private static void ConfigureServices(IServiceCollection services, IConfigurationRoot rootConfig)
         {
             services.AddProximity((p,proximity) =>
-            {
-                proximity.AddEndPoint(rootConfig.GetSection("Proximity"));
+            { 
+                proximity.AddEndPoint(rootConfig.GetSection("Proximity"), b =>
+                {
+                    b.ConfigureHubConnectionBuilder(b =>
+                    {
+                        b.AddJsonProtocol(o =>
+                        {
+                            o.PayloadSerializerOptions = new JsonSerializerOptions
+                            {
+                                PropertyNamingPolicy = null,
+                                Converters =
+                                    {
+                                        new JsonStringEnumConverter()
+                                    }
+                            };
+                        });
+                    });
+
+                });
             });
         }
 

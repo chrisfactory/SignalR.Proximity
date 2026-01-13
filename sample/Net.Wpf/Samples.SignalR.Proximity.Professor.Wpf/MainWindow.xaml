@@ -27,6 +27,9 @@
                     <frwk:ProximityAction Content="Send to Others" Command="{Binding SendToOthersCommand}"/>
                     <frwk:ProximityAction Content="Send to Groups"  Command="{Binding SendToGroupsCommand}"  OptionsVisibility="Visible" TargetGroupsItemsSources="{Binding TargetGroups}"/>
                 </StackPanel>
+                <StackPanel Margin="10,0">
+                    <frwk:ProximityAction Content="Send WorkflowProgess" Command="{Binding SendWorkflowProgessCommand}"/> 
+                </StackPanel>
             </StackPanel>
 
         </frwk:UserViewer>

@@ -65,7 +65,7 @@ namespace SignalR.Proximity
 
         private class ContractInfo
         {
-            public ContractInfo(INamedTypeSymbol interfaceSymbol,string  targetPath,string interfaceName,string ns,string? projectDirectory)
+            public ContractInfo(INamedTypeSymbol interfaceSymbol, string targetPath, string interfaceName, string ns, string? projectDirectory)
             {
                 InterfaceSymbol = interfaceSymbol;
                 TargetPath = targetPath;
@@ -89,11 +89,11 @@ namespace SignalR.Proximity
             var targetPath = att.ConstructorArguments[0].Value?.ToString()!;
 
             return new ContractInfo(
-                (INamedTypeSymbol)context.TargetSymbol, 
+                (INamedTypeSymbol)context.TargetSymbol,
                 targetPath, context.TargetSymbol.Name,
-                context.TargetSymbol.ContainingNamespace.ToDisplayString(), 
+                context.TargetSymbol.ContainingNamespace.ToDisplayString(),
                 folder);
-;
+            ;
         }
 
         private string? GetProjectDirectory(SyntaxTree tree)
@@ -135,17 +135,26 @@ namespace SignalR.Proximity
             sb.AppendLine("");
 
             // 1. Collect Dependent Types (DTOs)
-            var typeCollector = new HashSet<INamedTypeSymbol>(SymbolEqualityComparer.Default);
-            CollectTypes(symbol, typeCollector);
+            var typeCollectorSet = new HashSet<INamedTypeSymbol>(SymbolEqualityComparer.Default);
+            var typeCollectorList = new List<INamedTypeSymbol>();
 
-            // 2. Generate DTOs
-            foreach (var type in typeCollector)
+            CollectTypes(symbol, typeCollectorList, typeCollectorSet);
+
+            // Remove the contract itself if added (it shouldn't be generated as DTO)
+            if (typeCollectorSet.Contains(symbol))
             {
-                GenerateInterface(sb, type, isContract: false);
+                typeCollectorList.Remove(symbol);
+                typeCollectorSet.Remove(symbol);
+            }
+
+            // 2. Generate DTOs & Enums
+            foreach (var type in typeCollectorList)
+            {
+                GenerateTypeDefinition(sb, type, isContract: false);
             }
 
             // 3. Generate Contract Interface
-            GenerateInterface(sb, symbol, isContract: true);
+            GenerateTypeDefinition(sb, symbol, isContract: true);
 
             // 4. Generate Signatures
             GenerateSignatures(sb, symbol);
@@ -163,30 +172,73 @@ namespace SignalR.Proximity
             return sb.ToString();
         }
 
-        private void CollectTypes(INamedTypeSymbol symbol, HashSet<INamedTypeSymbol> collector)
+        private void CollectTypes(ITypeSymbol typeSymbol, List<INamedTypeSymbol> orderedList, HashSet<INamedTypeSymbol> uniqueSet)
         {
-            foreach (var member in symbol.GetMembers())
+            if (typeSymbol is IArrayTypeSymbol arrayType)
             {
-                if (member is IMethodSymbol method)
+                CollectTypes(arrayType.ElementType, orderedList, uniqueSet);
+                return;
+            }
+
+            if (typeSymbol is INamedTypeSymbol named)
+            {
+                if (named.SpecialType != SpecialType.None) return; // Ignore System types like int, string
+
+                // Handle Generics (List<T>, IEnumerable<T>)
+                if (named.IsGenericType)
                 {
-                    foreach (var arg in method.Parameters)
+                    foreach (var arg in named.TypeArguments)
                     {
-                        if (arg.Type is INamedTypeSymbol named && named.SpecialType == SpecialType.None && named.TypeKind == TypeKind.Class)
+                        CollectTypes(arg, orderedList, uniqueSet);
+                    }
+                }
+
+                // If it's a class or struct (NOT ENUM anymore), and not already collected
+                if (named.TypeKind == TypeKind.Class || named.TypeKind == TypeKind.Struct || named.TypeKind == TypeKind.Interface)
+                {
+                    // Filter out System namespaces loosely if needed, or rely on SpecialType check above
+                    if (named.ContainingNamespace.ToDisplayString().StartsWith("System")) return;
+
+                    if (!uniqueSet.Contains(named))
+                    {
+                        uniqueSet.Add(named);
+
+                        // Recurse into members
+                        foreach (var member in named.GetMembers())
                         {
-                            if (!collector.Contains(named))
+                            if (member is IMethodSymbol method)
                             {
-                                collector.Add(named);
-                                CollectTypes(named, collector); // Recurse
+                                foreach (var arg in method.Parameters)
+                                {
+                                    CollectTypes(arg.Type, orderedList, uniqueSet);
+                                }
+                                if (!method.ReturnsVoid)
+                                {
+                                    CollectTypes(method.ReturnType, orderedList, uniqueSet);
+                                }
+                            }
+                            else if (member is IPropertySymbol prop)
+                            {
+                                CollectTypes(prop.Type, orderedList, uniqueSet);
                             }
                         }
+
+                        orderedList.Add(named);
                     }
                 }
             }
         }
 
-        private void GenerateInterface(StringBuilder sb, INamedTypeSymbol symbol, bool isContract)
+        private void GenerateTypeDefinition(StringBuilder sb, INamedTypeSymbol symbol, bool isContract)
         {
-            sb.Append($"export interface {symbol.Name} ");
+            // Determine if it should be a class or interface
+            // Contracts are always interfaces
+            // DTOs: if Class/Struct -> Class, if Interface -> Interface
+
+            bool isClass = !isContract && (symbol.TypeKind == TypeKind.Class || symbol.TypeKind == TypeKind.Struct);
+            string keyword = isClass ? "class" : "interface";
+
+            sb.Append($"export {keyword} {symbol.Name} ");
             sb.AppendLine("{");
 
             if (isContract)
@@ -203,7 +255,9 @@ namespace SignalR.Proximity
                 // DTO Mode (Properties)
                 foreach (var member in symbol.GetMembers().OfType<IPropertySymbol>())
                 {
-                    sb.AppendLine($"    {member.Name}: {ToTsType(member.Type)};");
+                    string access = isClass ? "public " : "";
+                    string assertion = isClass ? "!" : "";
+                    sb.AppendLine($"    {access}{member.Name}{assertion}: {ToTsType(member.Type)};");
                 }
             }
 
@@ -251,6 +305,8 @@ namespace SignalR.Proximity
 
         private string ToTsType(ITypeSymbol type)
         {
+            if (type.TypeKind == TypeKind.Enum) return "string";
+
             switch (type.SpecialType)
             {
                 case SpecialType.System_String: return "string";
@@ -262,7 +318,42 @@ namespace SignalR.Proximity
                 case SpecialType.System_DateTime: return "string"; // simplistic
                 case SpecialType.System_Void: return "void";
             }
+
+            // Primitive-ish types that map to string
+            if (type.ContainingNamespace?.Name == "System" && (type.Name == "Guid" || type.Name == "DateTimeOffset" || type.Name == "TimeSpan"))
+            {
+                return "string";
+            }
+
             if (type.TypeKind == TypeKind.Array) return ToTsType(((IArrayTypeSymbol)type).ElementType) + "[]";
+
+            // Handle IEnumerable<T>, List<T> -> T[]
+            // Handle Dictionary<K, V> -> Record<K, V>
+            if (type is INamedTypeSymbol named && named.IsGenericType)
+            {
+                var name = named.Name;
+
+                // Dictionary Support
+                if (name == "Dictionary" || name == "IDictionary" || name == "IReadOnlyDictionary")
+                {
+                    if (named.TypeArguments.Length == 2)
+                    {
+                        var keyType = named.TypeArguments[0];
+                        var valueType = named.TypeArguments[1];
+                        return $"Record<{ToTsType(keyType)}, {ToTsType(valueType)}>";
+                    }
+                }
+
+                // Array/List Support
+                if (name == "List" || name == "IEnumerable" || name == "ICollection" || name == "IList" || name == "IReadOnlyList" || name == "IReadOnlyCollection")
+                {
+                    var arg = named.TypeArguments.FirstOrDefault();
+                    if (arg != null)
+                    {
+                        return ToTsType(arg) + "[]";
+                    }
+                }
+            }
 
             return type.Name; // Hope matches the DTO interface name
         }

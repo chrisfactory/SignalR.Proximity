@@ -4,6 +4,9 @@ using Samples.Framework.WPF;
 using SignalR.Proximity;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using System.Windows;
 
 namespace Samples.SignalR.Proximity
 {
@@ -12,7 +15,7 @@ namespace Samples.SignalR.Proximity
         private readonly IConnection<ISchoolContract> _SchoolMessageConnection;
         public StudentViewModel(IProximityEndPointProvider endPointProvider, User user) : base(user)
         {
-            InitializeSample(); 
+            InitializeSample();
 
             _SchoolMessageConnection = endPointProvider.Connect<ISchoolContract>(cnxOptions =>
             {
@@ -68,6 +71,20 @@ namespace Samples.SignalR.Proximity
             foreach (SelectedItem usr in TargetUsers.Take(2))
                 usr.IsSelected = true;
             TargetGroups = (new string[] { "group1", "group2" }).Select(u => new SelectedItem(u, u)).ToList();
+        }
+
+        public void OnWorkflowProgess(WorkflowProgess progresss)
+        {
+            var options = new JsonSerializerOptions
+            {
+                PropertyNamingPolicy = null,
+                Converters =
+                                    {
+                                        new JsonStringEnumConverter()
+                                    }
+            };
+            var json = JsonSerializer.Serialize(progresss, options);
+            MessageBox.Show($"Exemple progress:{json}");
         }
 
         public DelegateCommand SendToAllCommand { get; private set; }

@@ -43,6 +43,12 @@ function App() {
       console.log("SCHOOL MSG", message, from);
       addLog(`[SCHOOL] From ${from}: ${message}`, 'school');
     }
+
+    OnWorkflowProgess(progress: import('./contracts.ISchoolContract').WorkflowProgess): void {
+      console.log("SCHOOL PROGRESS", progress);
+
+      addLog(`[PROGRESS] ${JSON.stringify(progress)}`, 'school');
+    }
   }
 
   class ToastNotificationsHandler implements IToastNotificationsContract {

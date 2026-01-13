@@ -5,6 +5,8 @@ using SignalR.Proximity;
 using System;
 using System.IO;
 using System.Linq;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Windows;
 
 namespace Samples.SignalR.Proximity.Professor.Wpf
@@ -23,16 +25,32 @@ namespace Samples.SignalR.Proximity.Professor.Wpf
 
 
             ConfigureSampleAppServices(services);
-            _provider= services.BuildServiceProvider();
+            _provider = services.BuildServiceProvider();
         }
 
 
         private static void ConfigureServices(IServiceCollection services, IConfigurationRoot rootConfig)
         {
-            services.AddProximity((p,proximity) =>
+          
+
+            services.AddProximity((p, proximity) =>
             {
                 proximity.AddEndPoint(rootConfig.GetSection("Proximity"), b =>
                 {
+                    b.ConfigureHubConnectionBuilder(b =>
+                    {
+                        b.AddJsonProtocol(o =>
+                         {
+                             o.PayloadSerializerOptions = new JsonSerializerOptions
+                             {
+                                 PropertyNamingPolicy = null,  
+                                 Converters =
+                                    {
+                                        new JsonStringEnumConverter()  
+                                    }
+                             };
+                         });
+                    });
                     b.ConfigureHttpConnection(cnxOptions => cnxOptions.Headers.Add("username", "anonymous"));
                 });
             });
@@ -43,7 +61,7 @@ namespace Samples.SignalR.Proximity.Professor.Wpf
         private static IServiceCollection CreateServices(out IConfigurationRoot config)
         {
             var services = new ServiceCollection();
-            config =new ConfigurationBuilder()
+            config = new ConfigurationBuilder()
                         .SetBasePath(Directory.GetCurrentDirectory())
                         .AddJsonFile("Config.json", optional: false, reloadOnChange: false)
                         //.AddXmlFile("Config.xml", optional: false, reloadOnChange: false)
@@ -64,11 +82,11 @@ namespace Samples.SignalR.Proximity.Professor.Wpf
         protected override void OnStartup(StartupEventArgs e)
         {
             base.OnStartup(e);
-            this.MainWindow =this._provider.GetRequiredService<MainWindow>();
+            this.MainWindow = this._provider.GetRequiredService<MainWindow>();
             this.MainWindow.Show();
         }
         #endregion 
 
     }
-     
+
 }

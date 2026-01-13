@@ -9,7 +9,7 @@ namespace Sample.SignalR.Proximity.Toaster
         public string FromUser { get; set; }
     } 
 
-    [ProximityTypeScriptCodeSync("../../sample-react/src/contracts.IToastNotificationsContract.ts")]
+    [ProximityTypeScriptCodeSync($"../../sample-react/src/contracts.{nameof(IToastNotificationsContract)}.ts")]
     public interface IToastNotificationsContract
     {
         void ShowInformation(ToasterRequest request);

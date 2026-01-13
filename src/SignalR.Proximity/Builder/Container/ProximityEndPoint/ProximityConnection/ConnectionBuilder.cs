@@ -40,25 +40,29 @@ namespace SignalR.Proximity
         private readonly IRetryPolicy _retryPolicy;
         private readonly IPatternProvider _urlProvider;
         private readonly Action<HttpConnectionOptions> _configureHttpConnection;
+        private readonly Action<IHubConnectionBuilder>? _customConfigHub;
         public HubConnectionBuilderConfigure(
+            IServiceProvider serviceProvider,
             IOptions<ProximityEndPointConfig> configOptions,
             IRetryPolicy retryPolicy,
             IPatternProvider urlProvider,
             Action<HttpConnectionOptions> configureHttpConnection)
         {
+            _customConfigHub = serviceProvider.GetService<Action<IHubConnectionBuilder>>();
             _config = configOptions.Value;
             _retryPolicy = retryPolicy;
             _urlProvider = urlProvider;
-            _configureHttpConnection = configureHttpConnection; 
+            _configureHttpConnection = configureHttpConnection;
         }
 
         public IHubConnectionBuilder Configure(IHubConnectionBuilder builder)
         {
-            var hubUri = GetHubUrl(_config.UrlBase, _urlProvider.GetPattern()); 
+            var hubUri = GetHubUrl(_config.UrlBase, _urlProvider.GetPattern());
             _ = builder
                 .WithAutomaticReconnect(_retryPolicy)
                 .WithUrl(hubUri, _configureHttpConnection);
-
+            if (_customConfigHub != null)
+                _customConfigHub(builder);
             return builder;
         }
 
