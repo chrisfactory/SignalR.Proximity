@@ -333,6 +333,16 @@ namespace SignalR.Proximity
             {
                 var name = named.Name;
 
+                // Nullable Support
+                if (name == "Nullable")
+                {
+                    var arg = named.TypeArguments.FirstOrDefault();
+                    if (arg != null)
+                    {
+                        return ToTsType(arg) + " | null";
+                    }
+                }
+
                 // Dictionary Support
                 if (name == "Dictionary" || name == "IDictionary" || name == "IReadOnlyDictionary")
                 {

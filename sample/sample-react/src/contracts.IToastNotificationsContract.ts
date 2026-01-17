@@ -2,6 +2,7 @@
 // Do not edit manually.
 
 export class ToasterRequest {
+    public CorrelationKey!: string | null;
     public Title!: string;
     public Message!: string;
     public FromUser!: string;
